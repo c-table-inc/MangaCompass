@@ -76,14 +76,13 @@ export function addAffiliateTag(url: string, tag: string = AFFILIATE_TAG): strin
 }
 
 /**
- * Amazon商品画像URLを生成
+ * Amazon商品画像URLを生成（複数パターン対応）
  */
 export function generateAmazonImageUrl(asin: string, size: 'S' | 'M' | 'L' = 'M'): string {
   if (!asin || typeof asin !== 'string') {
     throw new Error('Valid ASIN is required for image URL generation');
   }
   
-  // Amazon商品画像の標準URL形式
   // サイズ: S=75px, M=160px, L=500px
   const sizeMap = {
     'S': '75',
@@ -91,7 +90,41 @@ export function generateAmazonImageUrl(asin: string, size: 'S' | 'M' | 'L' = 'M'
     'L': '500'
   };
   
-  return `https://images-na.ssl-images-amazon.com/images/P/${asin}.01._SL${sizeMap[size]}_.jpg`;
+  // 主要なパターン（最も一般的）
+  return `https://m.media-amazon.com/images/P/${asin}.01._SL${sizeMap[size]}_.jpg`;
+}
+
+/**
+ * Amazon画像の代替URLパターンを生成
+ */
+export function getAmazonImageUrls(asin: string, size: 'S' | 'M' | 'L' = 'M'): string[] {
+  if (!asin || typeof asin !== 'string') {
+    return [];
+  }
+  
+  const sizeMap = {
+    'S': '75',
+    'M': '160', 
+    'L': '500'
+  };
+  
+  const sizeCode = sizeMap[size];
+  
+  // 複数のAmazon画像URLパターンを試す
+  return [
+    // パターン1: m.media-amazon.com (最新)
+    `https://m.media-amazon.com/images/P/${asin}.01._SL${sizeCode}_.jpg`,
+    // パターン2: images-na.ssl-images-amazon.com (従来)
+    `https://images-na.ssl-images-amazon.com/images/P/${asin}.01._SL${sizeCode}_.jpg`,
+    // パターン3: images.amazon.com (基本)
+    `https://images.amazon.com/images/P/${asin}.01._SL${sizeCode}_.jpg`,
+    // パターン4: 拡張子なし
+    `https://m.media-amazon.com/images/P/${asin}.01._SL${sizeCode}_`,
+    // パターン5: 異なるサイズコード
+    `https://m.media-amazon.com/images/P/${asin}.01.L.jpg`,
+    // パターン6: AC形式
+    `https://m.media-amazon.com/images/P/${asin}.01._AC_SL${sizeCode}_.jpg`
+  ];
 }
 
 /**

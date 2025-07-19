@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Star, BookOpen, ExternalLink } from 'lucide-react';
 import { Manga } from '@/lib/types';
 import { Card, Badge, Button } from '@/components/ui';
-import { generateAmazonImageUrl } from '@/utils/affiliate';
+import { generateAmazonImageUrl, getAmazonImageUrls } from '@/utils/affiliate';
 
 interface MangaCardProps {
   manga: Manga;
@@ -20,13 +20,27 @@ export const MangaCard: React.FC<MangaCardProps> = ({
   onClick
 }) => {
   const [imageError, setImageError] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-  // Amazon画像URLを優先的に使用
-  const getImageUrl = () => {
-    if (manga.asin && !imageError) {
-      return generateAmazonImageUrl(manga.asin, 'M');
+  // Amazon画像URLの複数パターンを取得
+  const getImageUrls = () => {
+    if (manga.asin) {
+      const amazonUrls = getAmazonImageUrls(manga.asin, 'M');
+      return manga.coverImage ? [...amazonUrls, manga.coverImage] : amazonUrls;
     }
-    return manga.coverImage;
+    return manga.coverImage ? [manga.coverImage] : [];
+  };
+
+  const imageUrls = getImageUrls();
+  const currentImageUrl = imageUrls[currentImageIndex];
+
+  // 画像エラー時に次のURLを試す
+  const handleImageError = () => {
+    if (currentImageIndex < imageUrls.length - 1) {
+      setCurrentImageIndex(prev => prev + 1);
+    } else {
+      setImageError(true);
+    }
   };
 
   const getStatusColor = (status: string) => {
@@ -65,21 +79,22 @@ export const MangaCard: React.FC<MangaCardProps> = ({
     >
       {/* Cover Image */}
       <div className="relative aspect-[3/4] bg-gray-200">
-        {getImageUrl() ? (
+        {currentImageUrl && !imageError ? (
           <Image
-            src={getImageUrl()!}
+            src={currentImageUrl}
             alt={`${manga.title} cover`}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-            onError={() => setImageError(true)}
+            onError={handleImageError}
             priority={false}
+            unoptimized={currentImageUrl.includes('amazon')} // Amazon画像の最適化を無効化
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-100">
             <BookOpen className="h-12 w-12 text-gray-400" />
             <div className="absolute bottom-2 left-2 right-2">
-              <p className="text-xs text-gray-500 text-center">{manga.title}</p>
+              <p className="text-xs text-gray-500 text-center line-clamp-2">{manga.title}</p>
             </div>
           </div>
         )}
