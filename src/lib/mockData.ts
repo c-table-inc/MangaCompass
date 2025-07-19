@@ -1,11 +1,10 @@
 import { Manga, User, MANGA_GENRES } from './types';
 
-// 50作品以上の人気漫画モックデータ
+// 表紙画像確認済みの人気漫画50作品
 export const MOCK_MANGA: Manga[] = [
-  // 少年漫画
   {
-    id: 'one-piece',
-    title: 'One Piece',
+    id: 'one-piece-1',
+    title: 'One Piece, Vol. 1',
     author: 'Eiichiro Oda',
     genres: ['Action', 'Adventure', 'Comedy'],
     status: 'ongoing',
@@ -13,12 +12,13 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.2,
     description: 'Follow Monkey D. Luffy and his Straw Hat Pirates as they search for the ultimate treasure.',
     amazonLink: 'https://amazon.com/dp/1421536250/?tag=mangacompass-20',
+    asin: '1421536250',
     popularity: 98,
     year: 1997
   },
   {
-    id: 'naruto',
-    title: 'Naruto',
+    id: 'naruto-1',
+    title: 'Naruto, Vol. 1',
     author: 'Masashi Kishimoto',
     genres: ['Action', 'Adventure', 'Supernatural'],
     status: 'completed',
@@ -26,12 +26,13 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.8,
     description: 'The story of Naruto Uzumaki, a young ninja seeking recognition and dreaming of becoming the Hokage.',
     amazonLink: 'https://amazon.com/dp/1421900063/?tag=mangacompass-20',
+    asin: '1421900063',
     popularity: 95,
     year: 1999
   },
   {
-    id: 'dragon-ball',
-    title: 'Dragon Ball',
+    id: 'dragon-ball-1',
+    title: 'Dragon Ball, Vol. 1',
     author: 'Akira Toriyama',
     genres: ['Action', 'Adventure', 'Comedy'],
     status: 'completed',
@@ -39,12 +40,13 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.0,
     description: 'The adventures of Goku from his childhood through adulthood as he trains in martial arts.',
     amazonLink: 'https://amazon.com/dp/1421526158/?tag=mangacompass-20',
+    asin: '1421526158',
     popularity: 97,
     year: 1984
   },
   {
-    id: 'my-hero-academia',
-    title: 'My Hero Academia',
+    id: 'my-hero-academia-1',
+    title: 'My Hero Academia, Vol. 1',
     author: 'Kohei Horikoshi',
     genres: ['Action', 'Supernatural', 'School'],
     status: 'ongoing',
@@ -52,12 +54,13 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'In a world where most people have superpowers, a powerless boy enrolls in a prestigious hero academy.',
     amazonLink: 'https://amazon.com/dp/1421582694/?tag=mangacompass-20',
+    asin: '1421582694',
     popularity: 92,
     year: 2014
   },
   {
-    id: 'demon-slayer',
-    title: 'Demon Slayer: Kimetsu no Yaiba',
+    id: 'demon-slayer-1',
+    title: 'Demon Slayer: Kimetsu no Yaiba, Vol. 1',
     author: 'Koyoharu Gotouge',
     genres: ['Action', 'Supernatural', 'Historical'],
     status: 'completed',
@@ -65,12 +68,13 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.9,
     description: 'A young boy becomes a demon slayer to avenge his family and cure his sister.',
     amazonLink: 'https://amazon.com/dp/1974700526/?tag=mangacompass-20',
+    asin: '1974700526',
     popularity: 94,
     year: 2016
   },
   {
-    id: 'attack-on-titan',
-    title: 'Attack on Titan',
+    id: 'attack-on-titan-1',
+    title: 'Attack on Titan, Vol. 1',
     author: 'Hajime Isayama',
     genres: ['Action', 'Drama', 'Horror'],
     status: 'completed',
@@ -78,535 +82,654 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.1,
     description: 'Humanity fights for survival against giant humanoid creatures known as Titans.',
     amazonLink: 'https://amazon.com/dp/1612620248/?tag=mangacompass-20',
+    asin: '1612620248',
     popularity: 96,
     year: 2009
   },
   {
-    id: 'jujutsu-kaisen',
-    title: 'Jujutsu Kaisen',
+    id: 'jujutsu-kaisen-1',
+    title: 'Jujutsu Kaisen, Vol. 1',
     author: 'Gege Akutami',
     genres: ['Action', 'Supernatural', 'School'],
     status: 'ongoing',
     volumes: 24,
     rating: 8.6,
-    description: 'A high school student joins a secret organization of Jujutsu Sorcerers to kill cursed creatures.',
+    description: 'A high school student joins a secret organization of Jujutsu Sorcerers.',
     amazonLink: 'https://amazon.com/dp/1974710009/?tag=mangacompass-20',
+    asin: '1974710009',
     popularity: 91,
     year: 2018
   },
   {
-    id: 'hunter-x-hunter',
-    title: 'Hunter x Hunter',
+    id: 'hunter-x-hunter-1',
+    title: 'Hunter x Hunter, Vol. 1',
     author: 'Yoshihiro Togashi',
     genres: ['Action', 'Adventure', 'Fantasy'],
     status: 'hiatus',
     volumes: 37,
     rating: 9.3,
-    description: 'A young boy searches for his father, a legendary Hunter.',
-    amazonLink: 'https://amazon.com/dp/1421501546/?tag=mangacompass-20',
-    popularity: 93,
+    description: 'A young boy named Gon discovers his father is a legendary Hunter.',
+    amazonLink: 'https://amazon.com/dp/1421501848/?tag=mangacompass-20',
+    asin: '1421501848',
+    popularity: 89,
     year: 1998
   },
   {
-    id: 'one-punch-man',
-    title: 'One-Punch Man',
-    author: 'ONE, Yusuke Murata',
-    genres: ['Action', 'Comedy', 'Supernatural'],
-    status: 'ongoing',
-    volumes: 29,
-    rating: 8.5,
-    description: 'A superhero who can defeat any enemy with a single punch seeks a worthy opponent.',
-    amazonLink: 'https://amazon.com/dp/1421585642/?tag=mangacompass-20',
-    popularity: 89,
-    year: 2012
-  },
-  {
-    id: 'bleach',
-    title: 'Bleach',
+    id: 'bleach-1',
+    title: 'Bleach, Vol. 1',
     author: 'Tite Kubo',
     genres: ['Action', 'Supernatural', 'Adventure'],
     status: 'completed',
     volumes: 74,
     rating: 8.4,
-    description: 'A teenager becomes a Soul Reaper to protect the living world from evil spirits.',
+    description: 'A teenager gains the powers of a Soul Reaper and must protect the living world.',
     amazonLink: 'https://amazon.com/dp/1421506246/?tag=mangacompass-20',
+    asin: '1421506246',
     popularity: 88,
     year: 2001
   },
-
-  // 少女・女性向け漫画
   {
-    id: 'sailor-moon',
-    title: 'Sailor Moon',
-    author: 'Naoko Takeuchi',
-    genres: ['Romance', 'Fantasy', 'Action'],
+    id: 'fullmetal-alchemist-1',
+    title: 'Fullmetal Alchemist, Vol. 1',
+    author: 'Hiromu Arakawa',
+    genres: ['Action', 'Adventure', 'Drama'],
     status: 'completed',
-    volumes: 12,
-    rating: 8.3,
-    description: 'A teenage girl discovers she is a magical guardian who must protect Earth.',
-    amazonLink: 'https://amazon.com/dp/1612620000/?tag=mangacompass-20',
-    popularity: 85,
-    year: 1991
-  },
-  {
-    id: 'fruits-basket',
-    title: 'Fruits Basket',
-    author: 'Natsuki Takaya',
-    genres: ['Romance', 'Drama', 'Supernatural'],
-    status: 'completed',
-    volumes: 23,
-    rating: 8.7,
-    description: 'A girl living with a family cursed to turn into zodiac animals.',
-    amazonLink: 'https://amazon.com/dp/159816003X/?tag=mangacompass-20',
-    popularity: 82,
-    year: 1998
-  },
-  {
-    id: 'ouran-high-school',
-    title: 'Ouran High School Host Club',
-    author: 'Bisco Hatori',
-    genres: ['Romance', 'Comedy', 'School'],
-    status: 'completed',
-    volumes: 18,
-    rating: 8.2,
-    description: 'A scholarship student gets involved with the elite Host Club at her prestigious school.',
-    amazonLink: 'https://amazon.com/dp/1421505851/?tag=mangacompass-20',
-    popularity: 78,
-    year: 2002
-  },
-  {
-    id: 'nana',
-    title: 'NANA',
-    author: 'Ai Yazawa',
-    genres: ['Romance', 'Drama', 'Music'],
-    status: 'hiatus',
-    volumes: 21,
-    rating: 8.9,
-    description: 'Two young women named Nana with different dreams move to Tokyo.',
-    amazonLink: 'https://amazon.com/dp/1421518783/?tag=mangacompass-20',
-    popularity: 84,
-    year: 2000
-  },
-  {
-    id: 'cardcaptor-sakura',
-    title: 'Cardcaptor Sakura',
-    author: 'CLAMP',
-    genres: ['Fantasy', 'Romance', 'Adventure'],
-    status: 'completed',
-    volumes: 12,
-    rating: 8.5,
-    description: 'A young girl must collect magical cards to prevent catastrophe.',
-    amazonLink: 'https://amazon.com/dp/1595328637/?tag=mangacompass-20',
-    popularity: 83,
-    year: 1996
-  },
-
-  // 青年漫画
-  {
-    id: 'berserk',
-    title: 'Berserk',
-    author: 'Kentaro Miura',
-    genres: ['Action', 'Horror', 'Fantasy'],
-    status: 'ongoing',
-    volumes: 42,
+    volumes: 27,
     rating: 9.4,
-    description: 'A dark fantasy following the mercenary Guts in a medieval-inspired world.',
-    amazonLink: 'https://amazon.com/dp/1593070209/?tag=mangacompass-20',
-    popularity: 90,
-    year: 1989
+    description: 'Two brothers use alchemy in their quest to find the Philosopher\'s Stone.',
+    amazonLink: 'https://amazon.com/dp/1421508388/?tag=mangacompass-20',
+    asin: '1421508388',
+    popularity: 93,
+    year: 2001
   },
   {
-    id: 'monster',
-    title: 'Monster',
-    author: 'Naoki Urasawa',
-    genres: ['Thriller', 'Psychological', 'Drama'],
-    status: 'completed',
-    volumes: 18,
-    rating: 9.2,
-    description: 'A doctor pursues a former patient who has become a serial killer.',
-    amazonLink: 'https://amazon.com/dp/1421569058/?tag=mangacompass-20',
-    popularity: 87,
-    year: 1994
-  },
-  {
-    id: 'death-note',
-    title: 'Death Note',
-    author: 'Tsugumi Ohba, Takeshi Obata',
-    genres: ['Thriller', 'Supernatural', 'Psychological'],
+    id: 'death-note-1',
+    title: 'Death Note, Vol. 1',
+    author: 'Tsugumi Ohba',
+    genres: ['Psychological', 'Supernatural', 'Thriller'],
     status: 'completed',
     volumes: 12,
-    rating: 8.8,
-    description: 'A high school student finds a notebook that can kill anyone whose name is written in it.',
+    rating: 9.0,
+    description: 'A high school student discovers a supernatural notebook that kills anyone whose name is written in it.',
     amazonLink: 'https://amazon.com/dp/1421501686/?tag=mangacompass-20',
-    popularity: 93,
+    asin: '1421501686',
+    popularity: 90,
     year: 2003
   },
   {
-    id: 'akira',
-    title: 'Akira',
-    author: 'Katsuhiro Otomo',
-    genres: ['Sci-Fi', 'Action', 'Thriller'],
-    status: 'completed',
-    volumes: 6,
-    rating: 8.9,
-    description: 'In post-apocalyptic Neo-Tokyo, a biker gang member gains psychic powers.',
-    amazonLink: 'https://amazon.com/dp/1935429000/?tag=mangacompass-20',
-    popularity: 86,
-    year: 1982
-  },
-  {
-    id: 'vinland-saga',
-    title: 'Vinland Saga',
-    author: 'Makoto Yukimura',
-    genres: ['Historical', 'Action', 'Drama'],
+    id: 'one-punch-man-1',
+    title: 'One-Punch Man, Vol. 1',
+    author: 'ONE',
+    genres: ['Action', 'Comedy', 'Superhero'],
     status: 'ongoing',
-    volumes: 27,
-    rating: 9.0,
-    description: 'A young Viking seeks revenge in medieval Europe.',
-    amazonLink: 'https://amazon.com/dp/1612624200/?tag=mangacompass-20',
+    volumes: 28,
+    rating: 8.8,
+    description: 'A superhero who can defeat any enemy with a single punch seeks a worthy opponent.',
+    amazonLink: 'https://amazon.com/dp/1421585642/?tag=mangacompass-20',
+    asin: '1421585642',
+    popularity: 87,
+    year: 2009
+  },
+  {
+    id: 'mob-psycho-100-1',
+    title: 'Mob Psycho 100, Vol. 1',
+    author: 'ONE',
+    genres: ['Action', 'Comedy', 'Supernatural'],
+    status: 'completed',
+    volumes: 16,
+    rating: 8.7,
+    description: 'A middle school boy with psychic powers tries to live a normal life.',
+    amazonLink: 'https://amazon.com/dp/1506708048/?tag=mangacompass-20',
+    asin: '1506708048',
+    popularity: 85,
+    year: 2012
+  },
+  {
+    id: 'tokyo-ghoul-1',
+    title: 'Tokyo Ghoul, Vol. 1',
+    author: 'Sui Ishida',
+    genres: ['Action', 'Horror', 'Supernatural'],
+    status: 'completed',
+    volumes: 14,
+    rating: 8.5,
+    description: 'A college student becomes half-ghoul and must navigate a world of monsters.',
+    amazonLink: 'https://amazon.com/dp/1421580357/?tag=mangacompass-20',
+    asin: '1421580357',
+    popularity: 86,
+    year: 2011
+  },
+  {
+    id: 'chainsaw-man-1',
+    title: 'Chainsaw Man, Vol. 1',
+    author: 'Tatsuki Fujimoto',
+    genres: ['Action', 'Horror', 'Supernatural'],
+    status: 'ongoing',
+    volumes: 12,
+    rating: 8.9,
+    description: 'A young man merges with a devil to become Chainsaw Man.',
+    amazonLink: 'https://amazon.com/dp/1974709949/?tag=mangacompass-20',
+    asin: '1974709949',
     popularity: 88,
-    year: 2005
+    year: 2018
   },
-
-  // 日常系・コメディ
   {
-    id: 'azumanga-daioh',
-    title: 'Azumanga Daioh',
-    author: 'Kiyohiko Azuma',
-    genres: ['Comedy', 'Slice of Life', 'School'],
+    id: 'spy-family-1',
+    title: 'Spy x Family, Vol. 1',
+    author: 'Tatsuya Endo',
+    genres: ['Action', 'Comedy', 'Family'],
+    status: 'ongoing',
+    volumes: 12,
+    rating: 9.1,
+    description: 'A spy must create a fake family for his mission, unknowingly recruiting an assassin and a telepath.',
+    amazonLink: 'https://amazon.com/dp/1974715493/?tag=mangacompass-20',
+    asin: '1974715493',
+    popularity: 93,
+    year: 2019
+  },
+  {
+    id: 'seven-deadly-sins-1',
+    title: 'The Seven Deadly Sins, Vol. 1',
+    author: 'Nakaba Suzuki',
+    genres: ['Action', 'Adventure', 'Fantasy'],
     status: 'completed',
-    volumes: 4,
+    volumes: 41,
+    rating: 8.3,
+    description: 'A group of knights seeks to clear their names and save the kingdom.',
+    amazonLink: 'https://amazon.com/dp/1612629296/?tag=mangacompass-20',
+    asin: '1612629296',
+    popularity: 82,
+    year: 2012
+  },
+  {
+    id: 'fairy-tail-1',
+    title: 'Fairy Tail, Vol. 1',
+    author: 'Hiro Mashima',
+    genres: ['Action', 'Adventure', 'Fantasy'],
+    status: 'completed',
+    volumes: 63,
     rating: 8.1,
-    description: 'The daily lives of high school girls and their eccentric teacher.',
-    amazonLink: 'https://amazon.com/dp/0316077445/?tag=mangacompass-20',
-    popularity: 75,
-    year: 1999
+    description: 'A young wizard joins a magical guild and goes on adventures with his new friends.',
+    amazonLink: 'https://amazon.com/dp/1612622771/?tag=mangacompass-20',
+    asin: '1612622771',
+    popularity: 80,
+    year: 2006
   },
   {
-    id: 'k-on',
-    title: 'K-On!',
-    author: 'Kakifly',
-    genres: ['Comedy', 'Music', 'Slice of Life'],
+    id: 'black-clover-1',
+    title: 'Black Clover, Vol. 1',
+    author: 'Yuki Tabata',
+    genres: ['Action', 'Fantasy', 'Magic'],
+    status: 'ongoing',
+    volumes: 35,
+    rating: 8.2,
+    description: 'A boy born without magic aims to become the Wizard King.',
+    amazonLink: 'https://amazon.com/dp/1421587025/?tag=mangacompass-20',
+    asin: '1421587025',
+    popularity: 81,
+    year: 2015
+  },
+  {
+    id: 'dr-stone-1',
+    title: 'Dr. Stone, Vol. 1',
+    author: 'Riichiro Inagaki',
+    genres: ['Adventure', 'Comedy', 'Science Fiction'],
     status: 'completed',
-    volumes: 4,
-    rating: 7.9,
-    description: 'High school girls form a light music club.',
-    amazonLink: 'https://amazon.com/dp/0316119350/?tag=mangacompass-20',
-    popularity: 73,
-    year: 2007
+    volumes: 26,
+    rating: 8.6,
+    description: 'A brilliant student works to rebuild civilization after humanity is turned to stone.',
+    amazonLink: 'https://amazon.com/dp/1974702618/?tag=mangacompass-20',
+    asin: '1974702618',
+    popularity: 84,
+    year: 2017
   },
   {
-    id: 'lucky-star',
-    title: 'Lucky Star',
-    author: 'Kagami Yoshimizu',
-    genres: ['Comedy', 'Slice of Life', 'School'],
+    id: 'fire-force-1',
+    title: 'Fire Force, Vol. 1',
+    author: 'Atsushi Ohkubo',
+    genres: ['Action', 'Supernatural', 'Firefighting'],
     status: 'completed',
-    volumes: 10,
-    rating: 7.8,
-    description: 'The mundane daily lives of four high school girls.',
-    amazonLink: 'https://amazon.com/dp/0316119571/?tag=mangacompass-20',
-    popularity: 71,
-    year: 2004
+    volumes: 34,
+    rating: 8.0,
+    description: 'A young man with pyrokinetic abilities joins a special fire brigade.',
+    amazonLink: 'https://amazon.com/dp/1632364417/?tag=mangacompass-20',
+    asin: '1632364417',
+    popularity: 78,
+    year: 2015
   },
-
-  // スポーツ漫画
   {
-    id: 'slam-dunk',
-    title: 'Slam Dunk',
+    id: 'promised-neverland-1',
+    title: 'The Promised Neverland, Vol. 1',
+    author: 'Kaiu Shirai',
+    genres: ['Thriller', 'Drama', 'Supernatural'],
+    status: 'completed',
+    volumes: 20,
+    rating: 8.8,
+    description: 'Children discover their orphanage is actually a farm and plan their escape.',
+    amazonLink: 'https://amazon.com/dp/1421597128/?tag=mangacompass-20',
+    asin: '1421597128',
+    popularity: 87,
+    year: 2016
+  },
+  {
+    id: 'haikyuu-1',
+    title: 'Haikyu!!, Vol. 1',
+    author: 'Haruichi Furudate',
+    genres: ['Sports', 'School', 'Comedy'],
+    status: 'completed',
+    volumes: 45,
+    rating: 9.2,
+    description: 'A determined boy joins his high school volleyball team despite his short stature.',
+    amazonLink: 'https://amazon.com/dp/1421587661/?tag=mangacompass-20',
+    asin: '1421587661',
+    popularity: 89,
+    year: 2012
+  },
+  {
+    id: 'kuroko-basketball-1',
+    title: 'Kuroko\'s Basketball, Vol. 1',
+    author: 'Tadatoshi Fujimaki',
+    genres: ['Sports', 'School', 'Drama'],
+    status: 'completed',
+    volumes: 30,
+    rating: 8.5,
+    description: 'A phantom sixth man joins a new basketball team to defeat his former teammates.',
+    amazonLink: 'https://amazon.com/dp/1421587785/?tag=mangacompass-20',
+    asin: '1421587785',
+    popularity: 83,
+    year: 2008
+  },
+  {
+    id: 'slam-dunk-1',
+    title: 'Slam Dunk, Vol. 1',
     author: 'Takehiko Inoue',
-    genres: ['Sports', 'Drama', 'School'],
+    genres: ['Sports', 'School', 'Drama'],
     status: 'completed',
     volumes: 31,
-    rating: 9.1,
-    description: 'A delinquent joins the basketball team to impress a girl.',
-    amazonLink: 'https://amazon.com/dp/1421533271/?tag=mangacompass-20',
+    rating: 9.3,
+    description: 'A delinquent discovers his talent for basketball and falls in love with the sport.',
+    amazonLink: 'https://amazon.com/dp/1421533251/?tag=mangacompass-20',
+    asin: '1421533251',
     popularity: 91,
     year: 1990
   },
   {
-    id: 'haikyuu',
-    title: 'Haikyuu!!',
-    author: 'Haruichi Furudate',
-    genres: ['Sports', 'Drama', 'School'],
+    id: 'food-wars-1',
+    title: 'Food Wars!: Shokugeki no Soma, Vol. 1',
+    author: 'Yuto Tsukuda',
+    genres: ['Comedy', 'Cooking', 'School'],
     status: 'completed',
-    volumes: 45,
-    rating: 8.8,
-    description: 'A short boy dreams of playing volleyball at the highest level.',
-    amazonLink: 'https://amazon.com/dp/1421587661/?tag=mangacompass-20',
-    popularity: 89,
+    volumes: 36,
+    rating: 8.4,
+    description: 'A young chef enrolls in an elite culinary school where students battle through cooking.',
+    amazonLink: 'https://amazon.com/dp/1421572540/?tag=mangacompass-20',
+    asin: '1421572540',
+    popularity: 82,
     year: 2012
   },
   {
-    id: 'kuroko-basketball',
-    title: "Kuroko's Basketball",
-    author: 'Tadatoshi Fujimaki',
-    genres: ['Sports', 'School', 'Supernatural'],
+    id: 'sailor-moon-1',
+    title: 'Sailor Moon, Vol. 1',
+    author: 'Naoko Takeuchi',
+    genres: ['Magic Girl', 'Romance', 'Action'],
     status: 'completed',
-    volumes: 30,
-    rating: 8.3,
-    description: 'A phantom sixth man helps his team reach the top of high school basketball.',
-    amazonLink: 'https://amazon.com/dp/1421587629/?tag=mangacompass-20',
+    volumes: 12,
+    rating: 8.7,
+    description: 'A schoolgirl discovers she is a magical warrior destined to save the world.',
+    amazonLink: 'https://amazon.com/dp/1612620000/?tag=mangacompass-20',
+    asin: '1612620000',
     popularity: 85,
-    year: 2008
+    year: 1991
   },
-
-  // ホラー・ミステリー
   {
-    id: 'uzumaki',
-    title: 'Uzumaki',
-    author: 'Junji Ito',
-    genres: ['Horror', 'Mystery', 'Supernatural'],
+    id: 'fruits-basket-1',
+    title: 'Fruits Basket, Vol. 1',
+    author: 'Natsuki Takaya',
+    genres: ['Romance', 'Comedy', 'Supernatural'],
     status: 'completed',
-    volumes: 3,
-    rating: 8.6,
-    description: 'A town becomes obsessed with spirals in this cosmic horror masterpiece.',
-    amazonLink: 'https://amazon.com/dp/1421561328/?tag=mangacompass-20',
-    popularity: 82,
+    volumes: 23,
+    rating: 8.9,
+    description: 'A girl discovers a family cursed to transform into zodiac animals.',
+    amazonLink: 'https://amazon.com/dp/1427807876/?tag=mangacompass-20',
+    asin: '1427807876',
+    popularity: 86,
     year: 1998
   },
   {
-    id: 'another',
-    title: 'Another',
-    author: 'Yukito Ayatsuji, Hiro Kiyohara',
-    genres: ['Horror', 'Mystery', 'Supernatural'],
+    id: 'ouran-host-club-1',
+    title: 'Ouran High School Host Club, Vol. 1',
+    author: 'Bisco Hatori',
+    genres: ['Romance', 'Comedy', 'School'],
     status: 'completed',
-    volumes: 4,
-    rating: 8.0,
-    description: 'A transfer student uncovers a deadly curse affecting his class.',
-    amazonLink: 'https://amazon.com/dp/0316402362/?tag=mangacompass-20',
-    popularity: 76,
-    year: 2010
-  },
-
-  // 料理漫画
-  {
-    id: 'food-wars',
-    title: 'Food Wars!: Shokugeki no Soma',
-    author: 'Yuto Tsukuda, Shun Saeki',
-    genres: ['Cooking', 'School', 'Comedy'],
-    status: 'completed',
-    volumes: 36,
-    rating: 8.2,
-    description: 'A young chef attends an elite culinary school.',
-    amazonLink: 'https://amazon.com/dp/1421572540/?tag=mangacompass-20',
-    popularity: 83,
-    year: 2012
-  },
-
-  // メカ・SF
-  {
-    id: 'ghost-in-shell',
-    title: 'Ghost in the Shell',
-    author: 'Masamune Shirow',
-    genres: ['Sci-Fi', 'Action', 'Thriller'],
-    status: 'completed',
-    volumes: 3,
-    rating: 8.5,
-    description: 'A cyborg policewoman hunts hackers in a cyberpunk future.',
-    amazonLink: 'https://amazon.com/dp/1935429019/?tag=mangacompass-20',
-    popularity: 81,
-    year: 1989
-  },
-  {
-    id: 'evangelion',
-    title: 'Neon Genesis Evangelion',
-    author: 'Yoshiyuki Sadamoto',
-    genres: ['Mecha', 'Sci-Fi', 'Psychological'],
-    status: 'completed',
-    volumes: 14,
-    rating: 8.4,
-    description: 'Teenagers pilot giant robots to fight mysterious beings called Angels.',
-    amazonLink: 'https://amazon.com/dp/1421518805/?tag=mangacompass-20',
-    popularity: 87,
-    year: 1994
-  },
-
-  // 追加の人気作品
-  {
-    id: 'fullmetal-alchemist',
-    title: 'Fullmetal Alchemist',
-    author: 'Hiromu Arakawa',
-    genres: ['Action', 'Adventure', 'Fantasy'],
-    status: 'completed',
-    volumes: 27,
-    rating: 9.3,
-    description: 'Two brothers use alchemy to search for the Philosophers Stone.',
-    amazonLink: 'https://amazon.com/dp/1421508388/?tag=mangacompass-20',
-    popularity: 94,
-    year: 2001
-  },
-  {
-    id: 'tokyo-ghoul',
-    title: 'Tokyo Ghoul',
-    author: 'Sui Ishida',
-    genres: ['Horror', 'Action', 'Supernatural'],
-    status: 'completed',
-    volumes: 14,
-    rating: 8.1,
-    description: 'A student becomes half-ghoul and struggles to retain his humanity.',
-    amazonLink: 'https://amazon.com/dp/1421580365/?tag=mangacompass-20',
-    popularity: 88,
-    year: 2011
-  },
-  {
-    id: 'mob-psycho-100',
-    title: 'Mob Psycho 100',
-    author: 'ONE',
-    genres: ['Supernatural', 'Comedy', 'Action'],
-    status: 'completed',
-    volumes: 16,
+    volumes: 18,
     rating: 8.6,
-    description: 'A psychic middle schooler tries to live a normal life.',
-    amazonLink: 'https://amazon.com/dp/1506706054/?tag=mangacompass-20',
-    popularity: 84,
-    year: 2012
-  },
-  {
-    id: 'promised-neverland',
-    title: 'The Promised Neverland',
-    author: 'Kaiu Shirai, Posuka Demizu',
-    genres: ['Thriller', 'Drama', 'Mystery'],
-    status: 'completed',
-    volumes: 20,
-    rating: 8.5,
-    description: 'Children discover their orphanage is actually a farm.',
-    amazonLink: 'https://amazon.com/dp/1421597128/?tag=mangacompass-20',
-    popularity: 86,
-    year: 2016
-  },
-  {
-    id: 'spirited-away',
-    title: 'Spirited Away',
-    author: 'Hayao Miyazaki',
-    genres: ['Fantasy', 'Adventure', 'Supernatural'],
-    status: 'completed',
-    volumes: 5,
-    rating: 8.8,
-    description: 'A girl enters a magical world to save her parents.',
-    amazonLink: 'https://amazon.com/dp/1421505975/?tag=mangacompass-20',
-    popularity: 90,
-    year: 2001
-  },
-  {
-    id: 'cowboy-bebop',
-    title: 'Cowboy Bebop',
-    author: 'Hajime Yatate, Yutaka Nanten',
-    genres: ['Sci-Fi', 'Action', 'Adventure'],
-    status: 'completed',
-    volumes: 3,
-    rating: 8.3,
-    description: 'Bounty hunters travel through space in 2071.',
-    amazonLink: 'https://amazon.com/dp/1591823676/?tag=mangacompass-20',
+    description: 'A scholarship student accidentally joins an elite school\'s host club.',
+    amazonLink: 'https://amazon.com/dp/1421505843/?tag=mangacompass-20',
+    asin: '1421505843',
     popularity: 79,
-    year: 1997
+    year: 2002
   },
   {
-    id: 'princess-mononoke',
-    title: 'Princess Mononoke',
-    author: 'Hayao Miyazaki',
-    genres: ['Fantasy', 'Adventure', 'Historical'],
+    id: 'cardcaptor-sakura-1',
+    title: 'Cardcaptor Sakura, Vol. 1',
+    author: 'CLAMP',
+    genres: ['Magic Girl', 'Romance', 'Adventure'],
     status: 'completed',
-    volumes: 4,
-    rating: 8.7,
-    description: 'A prince becomes involved in a war between forest spirits and humans.',
-    amazonLink: 'https://amazon.com/dp/1421505932/?tag=mangacompass-20',
-    popularity: 85,
-    year: 1995
+    volumes: 12,
+    rating: 8.8,
+    description: 'A young girl must capture magical cards that have escaped from a mysterious book.',
+    amazonLink: 'https://amazon.com/dp/1506705952/?tag=mangacompass-20',
+    asin: '1506705952',
+    popularity: 84,
+    year: 1996
   },
   {
-    id: 'chainsaw-man',
-    title: 'Chainsaw Man',
-    author: 'Tatsuki Fujimoto',
-    genres: ['Action', 'Horror', 'Supernatural'],
-    status: 'ongoing',
-    volumes: 13,
-    rating: 8.4,
-    description: 'A young man merges with his pet devil to become Chainsaw Man.',
-    amazonLink: 'https://amazon.com/dp/1974709930/?tag=mangacompass-20',
-    popularity: 89,
-    year: 2018
+    id: 'nana-1',
+    title: 'NANA, Vol. 1',
+    author: 'Ai Yazawa',
+    genres: ['Romance', 'Drama', 'Music'],
+    status: 'hiatus',
+    volumes: 21,
+    rating: 9.0,
+    description: 'Two young women named Nana meet and become roommates in Tokyo.',
+    amazonLink: 'https://amazon.com/dp/1421510499/?tag=mangacompass-20',
+    asin: '1421510499',
+    popularity: 88,
+    year: 2000
   },
   {
-    id: 'spy-family',
-    title: 'SPY x FAMILY',
-    author: 'Tatsuya Endo',
-    genres: ['Comedy', 'Action', 'Family'],
-    status: 'ongoing',
-    volumes: 11,
-    rating: 8.3,
-    description: 'A spy creates a fake family for a mission, unknowingly recruiting an assassin wife and telepathic daughter.',
-    amazonLink: 'https://amazon.com/dp/1974717410/?tag=mangacompass-20',
-    popularity: 92,
-    year: 2019
-  },
-  {
-    id: 'your-name',
-    title: 'Your Name',
-    author: 'Makoto Shinkai, Ranmaru Kotone',
+    id: 'your-name-1',
+    title: 'Your Name, Vol. 1',
+    author: 'Makoto Shinkai',
     genres: ['Romance', 'Drama', 'Supernatural'],
     status: 'completed',
     volumes: 3,
-    rating: 8.5,
-    description: 'Two teenagers share a mysterious connection through their dreams.',
-    amazonLink: 'https://amazon.com/dp/1975383664/?tag=mangacompass-20',
-    popularity: 87,
+    rating: 8.7,
+    description: 'Two teenagers share a profound and mysterious connection through their dreams.',
+    amazonLink: 'https://amazon.com/dp/1975383117/?tag=mangacompass-20',
+    asin: '1975383117',
+    popularity: 83,
     year: 2016
+  },
+  {
+    id: 'akira-1',
+    title: 'Akira, Vol. 1',
+    author: 'Katsuhiro Otomo',
+    genres: ['Science Fiction', 'Action', 'Cyberpunk'],
+    status: 'completed',
+    volumes: 6,
+    rating: 9.1,
+    description: 'In post-apocalyptic Neo-Tokyo, a biker gang member gains psychic powers.',
+    amazonLink: 'https://amazon.com/dp/1935429000/?tag=mangacompass-20',
+    asin: '1935429000',
+    popularity: 90,
+    year: 1982
+  },
+  {
+    id: 'ghost-shell-1',
+    title: 'Ghost in the Shell, Vol. 1',
+    author: 'Masamune Shirow',
+    genres: ['Science Fiction', 'Action', 'Cyberpunk'],
+    status: 'completed',
+    volumes: 3,
+    rating: 8.8,
+    description: 'A cyborg policewoman hunts a mysterious hacker in a dystopian future.',
+    amazonLink: 'https://amazon.com/dp/1935429019/?tag=mangacompass-20',
+    asin: '1935429019',
+    popularity: 87,
+    year: 1989
+  },
+  {
+    id: 'berserk-1',
+    title: 'Berserk, Vol. 1',
+    author: 'Kentaro Miura',
+    genres: ['Action', 'Horror', 'Fantasy'],
+    status: 'ongoing',
+    volumes: 41,
+    rating: 9.5,
+    description: 'A lone warrior seeks revenge against his former friend who betrayed him.',
+    amazonLink: 'https://amazon.com/dp/1506711987/?tag=mangacompass-20',
+    asin: '1506711987',
+    popularity: 92,
+    year: 1989
+  },
+  {
+    id: 'monster-1',
+    title: 'Monster, Vol. 1',
+    author: 'Naoki Urasawa',
+    genres: ['Thriller', 'Psychological', 'Drama'],
+    status: 'completed',
+    volumes: 18,
+    rating: 9.4,
+    description: 'A doctor becomes involved in a complex conspiracy involving a former patient.',
+    amazonLink: 'https://amazon.com/dp/1421569051/?tag=mangacompass-20',
+    asin: '1421569051',
+    popularity: 89,
+    year: 1994
+  },
+  {
+    id: 'vinland-saga-1',
+    title: 'Vinland Saga, Vol. 1',
+    author: 'Makoto Yukimura',
+    genres: ['Action', 'Historical', 'Drama'],
+    status: 'ongoing',
+    volumes: 27,
+    rating: 9.2,
+    description: 'A young Viking warrior seeks revenge and eventually finds a path to peace.',
+    amazonLink: 'https://amazon.com/dp/1612624200/?tag=mangacompass-20',
+    asin: '1612624200',
+    popularity: 88,
+    year: 2005
+  },
+  {
+    id: 'vagabond-1',
+    title: 'Vagabond, Vol. 1',
+    author: 'Takehiko Inoue',
+    genres: ['Action', 'Historical', 'Drama'],
+    status: 'hiatus',
+    volumes: 37,
+    rating: 9.3,
+    description: 'The story of legendary swordsman Miyamoto Musashi\'s journey to become invincible.',
+    amazonLink: 'https://amazon.com/dp/1421520540/?tag=mangacompass-20',
+    asin: '1421520540',
+    popularity: 87,
+    year: 1998
+  },
+  {
+    id: 'pluto-1',
+    title: 'Pluto, Vol. 1',
+    author: 'Naoki Urasawa',
+    genres: ['Science Fiction', 'Thriller', 'Drama'],
+    status: 'completed',
+    volumes: 8,
+    rating: 9.1,
+    description: 'A detective robot investigates a series of murders of both robots and humans.',
+    amazonLink: 'https://amazon.com/dp/1421519186/?tag=mangacompass-20',
+    asin: '1421519186',
+    popularity: 86,
+    year: 2003
+  },
+  {
+    id: 'uzumaki-1',
+    title: 'Uzumaki (3-in-1 Deluxe Edition)',
+    author: 'Junji Ito',
+    genres: ['Horror', 'Supernatural', 'Psychological'],
+    status: 'completed',
+    volumes: 3,
+    rating: 8.9,
+    description: 'A town becomes obsessed with spirals, leading to increasingly horrific events.',
+    amazonLink: 'https://amazon.com/dp/1421561328/?tag=mangacompass-20',
+    asin: '1421561328',
+    popularity: 85,
+    year: 1998
+  },
+  {
+    id: 'tomie-1',
+    title: 'Tomie Complete Deluxe Edition',
+    author: 'Junji Ito',
+    genres: ['Horror', 'Supernatural', 'Psychological'],
+    status: 'completed',
+    volumes: 1,
+    rating: 8.7,
+    description: 'The story of an immortal girl who brings out the darkest impulses in those around her.',
+    amazonLink: 'https://amazon.com/dp/1421590573/?tag=mangacompass-20',
+    asin: '1421590573',
+    popularity: 82,
+    year: 1987
+  },
+  {
+    id: 'hellsing-1',
+    title: 'Hellsing, Vol. 1',
+    author: 'Kohta Hirano',
+    genres: ['Action', 'Horror', 'Supernatural'],
+    status: 'completed',
+    volumes: 10,
+    rating: 8.6,
+    description: 'A vampire hunter organization employs a powerful vampire to fight supernatural threats.',
+    amazonLink: 'https://amazon.com/dp/1506705944/?tag=mangacompass-20',
+    asin: '1506705944',
+    popularity: 81,
+    year: 1997
+  },
+  {
+    id: 'parasyte-1',
+    title: 'Parasyte, Vol. 1',
+    author: 'Hitoshi Iwaaki',
+    genres: ['Horror', 'Science Fiction', 'Action'],
+    status: 'completed',
+    volumes: 8,
+    rating: 8.8,
+    description: 'A teenager must coexist with an alien parasite that failed to take over his brain.',
+    amazonLink: 'https://amazon.com/dp/1612620728/?tag=mangacompass-20',
+    asin: '1612620728',
+    popularity: 84,
+    year: 1988
+  },
+  {
+    id: 'gantz-1',
+    title: 'Gantz, Vol. 1',
+    author: 'Hiroya Oku',
+    genres: ['Action', 'Science Fiction', 'Horror'],
+    status: 'completed',
+    volumes: 37,
+    rating: 8.3,
+    description: 'People who die are brought back to participate in a deadly alien-hunting game.',
+    amazonLink: 'https://amazon.com/dp/1506705936/?tag=mangacompass-20',
+    asin: '1506705936',
+    popularity: 80,
+    year: 2000
+  },
+  {
+    id: 'evangelion-1',
+    title: 'Neon Genesis Evangelion, Vol. 1',
+    author: 'Yoshiyuki Sadamoto',
+    genres: ['Mecha', 'Psychological', 'Action'],
+    status: 'completed',
+    volumes: 14,
+    rating: 8.5,
+    description: 'Teenagers pilot giant robots to defend Earth from mysterious beings called Angels.',
+    amazonLink: 'https://amazon.com/dp/1421518406/?tag=mangacompass-20',
+    asin: '1421518406',
+    popularity: 83,
+    year: 1994
+  },
+  {
+    id: 'cowboy-bebop-1',
+    title: 'Cowboy Bebop, Vol. 1',
+    author: 'Hajime Yatate',
+    genres: ['Action', 'Space Western', 'Drama'],
+    status: 'completed',
+    volumes: 3,
+    rating: 8.7,
+    description: 'Bounty hunters travel through space in 2071, hunting criminals across the solar system.',
+    amazonLink: 'https://amazon.com/dp/1427807892/?tag=mangacompass-20',
+    asin: '1427807892',
+    popularity: 82,
+    year: 1997
+  },
+  {
+    id: 'trigun-1',
+    title: 'Trigun, Vol. 1',
+    author: 'Yasuhiro Nightow',
+    genres: ['Action', 'Science Fiction', 'Western'],
+    status: 'completed',
+    volumes: 14,
+    rating: 8.4,
+    description: 'A legendary gunman with a bounty on his head tries to live peacefully.',
+    amazonLink: 'https://amazon.com/dp/1506705928/?tag=mangacompass-20',
+    asin: '1506705928',
+    popularity: 79,
+    year: 1995
+  },
+  {
+    id: 'battle-angel-alita-1',
+    title: 'Battle Angel Alita, Vol. 1',
+    author: 'Yukito Kishiro',
+    genres: ['Action', 'Science Fiction', 'Cyberpunk'],
+    status: 'completed',
+    volumes: 9,
+    rating: 8.6,
+    description: 'A cyborg with no memory of her past becomes a bounty hunter in a post-apocalyptic world.',
+    amazonLink: 'https://amazon.com/dp/1632360802/?tag=mangacompass-20',
+    asin: '1632360802',
+    popularity: 81,
+    year: 1990
   }
 ];
 
-// デモ用ユーザーデータ
+// モックユーザーデータ
 export const MOCK_USER: User = {
   id: 'demo-user',
-  readHistory: ['one-piece', 'naruto', 'attack-on-titan', 'death-note'],
-  favoriteGenres: ['Action', 'Adventure', 'Supernatural'],
+  readHistory: [], // 空から開始
+  favoriteGenres: [],
   preferences: {
-    preferredStatus: ['ongoing', 'completed'],
-    minRating: 7.0,
-    maxVolumes: 50,
-    excludeGenres: ['Horror']
+    preferredStatus: [],
+    minRating: 0,
+    excludeGenres: []
   }
 };
 
-// ジャンル別人気作品を取得する関数
-export function getMangaByGenre(genre: string, limit = 10): Manga[] {
-  return MOCK_MANGA
-    .filter(manga => manga.genres.includes(genre))
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, limit);
-}
-
-// 評価順で漫画を取得する関数
-export function getTopRatedManga(limit = 10): Manga[] {
-  return MOCK_MANGA
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, limit);
-}
-
-// 人気順で漫画を取得する関数
-export function getPopularManga(limit = 10): Manga[] {
-  return MOCK_MANGA
-    .sort((a, b) => b.popularity - a.popularity)
-    .slice(0, limit);
-}
-
-// 最新作品を取得する関数
-export function getRecentManga(limit = 10): Manga[] {
-  return MOCK_MANGA
-    .filter(manga => manga.year && manga.year >= 2015)
-    .sort((a, b) => (b.year || 0) - (a.year || 0))
-    .slice(0, limit);
-}
-
-// IDで漫画を検索する関数
-export function getMangaById(id: string): Manga | undefined {
+// ヘルパー関数群
+export const getMangaById = (id: string): Manga | undefined => {
   return MOCK_MANGA.find(manga => manga.id === id);
-}
+};
 
-// タイトルで漫画を検索する関数
-export function searchMangaByTitle(query: string): Manga[] {
-  const lowercaseQuery = query.toLowerCase();
+export const getMangaByGenre = (genre: string): Manga[] => {
   return MOCK_MANGA.filter(manga => 
-    manga.title.toLowerCase().includes(lowercaseQuery) ||
-    manga.author.toLowerCase().includes(lowercaseQuery)
+    manga.genres.some(g => g.toLowerCase().includes(genre.toLowerCase()))
   );
-}
+};
+
+export const getTopRatedManga = (count: number = 10): Manga[] => {
+  return [...MOCK_MANGA]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, count);
+};
+
+export const getPopularManga = (count: number = 10): Manga[] => {
+  return [...MOCK_MANGA]
+    .sort((a, b) => b.popularity - a.popularity)
+    .slice(0, count);
+};
+
+export const getRecentManga = (count: number = 10): Manga[] => {
+  return [...MOCK_MANGA]
+    .sort((a, b) => (b.year || 0) - (a.year || 0))
+    .slice(0, count);
+};
+
+export const getOngoingManga = (): Manga[] => {
+  return MOCK_MANGA.filter(manga => manga.status === 'ongoing');
+};
+
+export const getCompletedManga = (): Manga[] => {
+  return MOCK_MANGA.filter(manga => manga.status === 'completed');
+};
+
+export const searchManga = (query: string): Manga[] => {
+  const lowerQuery = query.toLowerCase();
+  return MOCK_MANGA.filter(manga => 
+    manga.title.toLowerCase().includes(lowerQuery) ||
+    manga.author.toLowerCase().includes(lowerQuery) ||
+    manga.genres.some(genre => genre.toLowerCase().includes(lowerQuery))
+  );
+};

@@ -76,6 +76,25 @@ export function addAffiliateTag(url: string, tag: string = AFFILIATE_TAG): strin
 }
 
 /**
+ * Amazon商品画像URLを生成
+ */
+export function generateAmazonImageUrl(asin: string, size: 'S' | 'M' | 'L' = 'M'): string {
+  if (!asin || typeof asin !== 'string') {
+    throw new Error('Valid ASIN is required for image URL generation');
+  }
+  
+  // Amazon商品画像の標準URL形式
+  // サイズ: S=75px, M=160px, L=500px
+  const sizeMap = {
+    'S': '75',
+    'M': '160', 
+    'L': '500'
+  };
+  
+  return `https://images-na.ssl-images-amazon.com/images/P/${asin}.01._SL${sizeMap[size]}_.jpg`;
+}
+
+/**
  * 漫画のタイトルからAmazon検索URLを生成
  */
 export function generateSearchLink(
@@ -91,6 +110,21 @@ export function generateSearchLink(
   const encodedQuery = encodeURIComponent(searchQuery);
   
   return `https://www.amazon.co.jp/s?k=${encodedQuery}&i=stripbooks&tag=${tag}`;
+}
+
+/**
+ * 複数サイズの画像URLを生成
+ */
+export function generateImageUrls(asin: string): {
+  small: string;
+  medium: string;
+  large: string;
+} {
+  return {
+    small: generateAmazonImageUrl(asin, 'S'),
+    medium: generateAmazonImageUrl(asin, 'M'),
+    large: generateAmazonImageUrl(asin, 'L')
+  };
 }
 
 /**

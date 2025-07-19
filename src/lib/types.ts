@@ -11,6 +11,7 @@ export interface Manga {
   description?: string;
   coverImage?: string;
   amazonLink: string;
+  asin?: string; // Amazon商品識別子
   popularity: number; // 1-100スケール
   year?: number;
 }

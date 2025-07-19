@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Star, BookOpen, ExternalLink } from 'lucide-react';
 import { Manga } from '@/lib/types';
 import { Card, Badge, Button } from '@/components/ui';
+import { generateAmazonImageUrl } from '@/utils/affiliate';
 
 interface MangaCardProps {
   manga: Manga;
@@ -18,6 +19,16 @@ export const MangaCard: React.FC<MangaCardProps> = ({
   showAmazonLink = true,
   onClick
 }) => {
+  const [imageError, setImageError] = useState(false);
+  
+  // Amazon画像URLを優先的に使用
+  const getImageUrl = () => {
+    if (manga.asin && !imageError) {
+      return generateAmazonImageUrl(manga.asin, 'M');
+    }
+    return manga.coverImage;
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'ongoing':
@@ -54,17 +65,22 @@ export const MangaCard: React.FC<MangaCardProps> = ({
     >
       {/* Cover Image */}
       <div className="relative aspect-[3/4] bg-gray-200">
-        {manga.coverImage ? (
+        {getImageUrl() ? (
           <Image
-            src={manga.coverImage}
+            src={getImageUrl()!}
             alt={`${manga.title} cover`}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            onError={() => setImageError(true)}
+            priority={false}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-100">
             <BookOpen className="h-12 w-12 text-gray-400" />
+            <div className="absolute bottom-2 left-2 right-2">
+              <p className="text-xs text-gray-500 text-center">{manga.title}</p>
+            </div>
           </div>
         )}
         
