@@ -30,19 +30,19 @@ export const Header: React.FC<HeaderProps> = ({ onMobileMenuToggle }) => {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50" role="banner">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <BookOpen className="h-8 w-8 text-blue-600" />
+            <Link href="/" className="flex items-center space-x-2" aria-label="MangaCompass Home">
+              <BookOpen className="h-8 w-8 text-blue-600" aria-hidden="true" />
               <span className="text-xl font-bold text-gray-900">MangaCompass</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Main navigation">
             {navigation.map((item) => {
               const isActive = isActiveLink(item.href);
               return (
@@ -56,8 +56,9 @@ export const Header: React.FC<HeaderProps> = ({ onMobileMenuToggle }) => {
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }
                   `}
+                  aria-current={isActive ? 'page' : undefined}
                 >
-                  <item.icon className="h-4 w-4" />
+                  <item.icon className="h-4 w-4" aria-hidden="true" />
                   <span>{item.name}</span>
                 </Link>
               );
@@ -78,14 +79,17 @@ export const Header: React.FC<HeaderProps> = ({ onMobileMenuToggle }) => {
               size="sm"
               onClick={toggleMobileMenu}
               icon={isMobileMenuOpen ? X : Menu}
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             />
           </div>
         </div>
 
         {/* Mobile menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200">
+          <div className="md:hidden" id="mobile-menu">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200" role="navigation" aria-label="Mobile navigation">
               {navigation.map((item) => {
                 const isActive = isActiveLink(item.href);
                 return (
@@ -100,8 +104,9 @@ export const Header: React.FC<HeaderProps> = ({ onMobileMenuToggle }) => {
                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                       }
                     `}
+                    aria-current={isActive ? 'page' : undefined}
                   >
-                    <item.icon className="h-5 w-5" />
+                    <item.icon className="h-5 w-5" aria-hidden="true" />
                     <span>{item.name}</span>
                   </Link>
                 );

@@ -40,6 +40,14 @@ export const Card: React.FC<CardProps> = ({
         ${hoverClasses}
         ${className}
       `}
+      role={hover ? 'button' : undefined}
+      tabIndex={hover ? 0 : undefined}
+      onKeyDown={hover && props.onClick ? (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          props.onClick?.(e as any);
+        }
+      } : undefined}
       {...props}
     >
       {children}

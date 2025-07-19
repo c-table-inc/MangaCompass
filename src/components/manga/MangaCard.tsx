@@ -13,7 +13,7 @@ interface MangaCardProps {
   onClick?: () => void;
 }
 
-export const MangaCard: React.FC<MangaCardProps> = ({
+const MangaCardComponent: React.FC<MangaCardProps> = ({
   manga,
   showDescription = false,
   showAmazonLink = true,
@@ -87,8 +87,8 @@ export const MangaCard: React.FC<MangaCardProps> = ({
             className="object-cover object-center"
             sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
             onError={handleImageError}
-            priority={false}
-            unoptimized={true} // Amazon画像の最適化を完全に無効化
+            loading="lazy"
+            unoptimized={true}
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           />
@@ -178,3 +178,7 @@ export const MangaCard: React.FC<MangaCardProps> = ({
     </Card>
   );
 };
+
+MangaCardComponent.displayName = 'MangaCard';
+
+export const MangaCard = React.memo(MangaCardComponent);

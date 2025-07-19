@@ -15,5 +15,8 @@
       "Bash(pkill:*)"
     ],
     "deny": []
-  }
+  },
+  "enabledMcpjsonServers": [
+    "playwright"
+  ]
 }
