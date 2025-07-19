@@ -24,7 +24,7 @@ export default function HomePage() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
           <BookOpen className="h-8 w-8 animate-spin text-blue-600 mx-auto mb-4" />
-          <p className="text-gray-600">読み込み中...</p>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -36,23 +36,18 @@ export default function HomePage() {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 mb-6">
-            あなたの運命の漫画を
-            <span className="block text-blue-600">発見しよう</span>
+            Discover Your
+            <span className="block text-blue-600">Next Favorite Manga</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            AI駆動のパーソナライズ推薦で、読書履歴と好みに基づいて
-            次に読むべき漫画を見つけます。海外読者のための漫画発見プラットフォーム。
+            AI-powered personalized recommendations based on your reading history and preferences.
+            The ultimate manga discovery platform designed for international readers.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/onboarding">
               <Button size="lg" className="w-full sm:w-auto">
-                無料で始める
+                Get Started Free
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Link href="/dashboard">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                デモを見る
               </Button>
             </Link>
           </div>
@@ -64,10 +59,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              なぜMangaCompassを選ぶのか
+              Why Choose MangaCompass
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              あなたの漫画体験を次のレベルへ
+              Take your manga experience to the next level
             </p>
           </div>
           
@@ -77,10 +72,10 @@ export default function HomePage() {
                 <BookOpen className="h-8 w-8 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                パーソナライズ推薦
+                Personalized Recommendations
               </h3>
               <p className="text-gray-600">
-                あなたの読書履歴と好みを分析し、最適な漫画を推薦します
+                Analyze your reading history and preferences to recommend the perfect manga for you
               </p>
             </div>
             
@@ -89,10 +84,10 @@ export default function HomePage() {
                 <Users className="h-8 w-8 text-green-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                海外読者対応
+                International Reader Focused
               </h3>
               <p className="text-gray-600">
-                英語翻訳版の入手可能性と評価を考慮した推薦システム
+                Recommendations consider English translation availability and international ratings
               </p>
             </div>
             
@@ -101,10 +96,10 @@ export default function HomePage() {
                 <TrendingUp className="h-8 w-8 text-purple-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                リアルタイム更新
+                Real-time Updates
               </h3>
               <p className="text-gray-600">
-                最新の漫画情報と評価に基づく常に新鮮な推薦
+                Fresh recommendations based on the latest manga releases and community ratings
               </p>
             </div>
           </div>
@@ -116,10 +111,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              高評価漫画
+              Top Rated Manga
             </h2>
             <p className="text-lg text-gray-600">
-              評論家と読者から愛される名作たち
+              Masterpieces loved by critics and readers alike
             </p>
           </div>
           
@@ -132,7 +127,7 @@ export default function HomePage() {
           <div className="text-center">
             <Link href="/onboarding">
               <Button variant="outline">
-                あなたの好みに合わせた推薦を受ける
+                Get Personalized Recommendations
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -145,10 +140,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              人気漫画
+              Popular Manga
             </h2>
             <p className="text-lg text-gray-600">
-              今読まれている話題の作品
+              Trending titles everyone is talking about
             </p>
           </div>
           
@@ -165,29 +160,29 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">
-              MangaCompassの実績
+              MangaCompass by the Numbers
             </h2>
             <p className="text-lg text-blue-200">
-              多くの読者に愛用されています
+              Trusted by manga enthusiasts worldwide
             </p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-4xl font-bold text-white mb-2">50+</div>
-              <div className="text-blue-200">厳選漫画</div>
+              <div className="text-blue-200">Curated Titles</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-white mb-2">95%</div>
-              <div className="text-blue-200">推薦精度</div>
+              <div className="text-blue-200">Accuracy Rate</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-white mb-2">10k+</div>
-              <div className="text-blue-200">ユーザー満足度</div>
+              <div className="text-blue-200">User Satisfaction</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-white mb-2">24/7</div>
-              <div className="text-blue-200">利用可能</div>
+              <div className="text-blue-200">Available</div>
             </div>
           </div>
         </div>
@@ -197,36 +192,27 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            今すぐあなただけの漫画旅行を始めよう
+            Start Your Personalized Manga Journey Today
           </h2>
           <p className="text-xl text-blue-200 mb-8">
-            わずか2分のセットアップで、パーソナライズされた推薦が開始されます
+            Get personalized recommendations in just 2 minutes of setup
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/onboarding">
               <Button 
                 size="lg" 
-                variant="secondary" 
-                className="w-full sm:w-auto bg-white text-blue-600 hover:bg-gray-100"
+                variant="outline" 
+                className="w-full sm:w-auto bg-white text-blue-600 hover:bg-blue-50 border-white"
               >
                 <Star className="mr-2 h-5 w-5" />
-                無料で始める
-              </Button>
-            </Link>
-            <Link href="/dashboard">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-blue-600"
-              >
-                デモを体験
+                Get Started Free
               </Button>
             </Link>
           </div>
           
           <p className="text-sm text-blue-200 mt-6">
-            無料プロトタイプ • 購入義務なし • いつでも停止可能
+            Free Prototype • No Purchase Required • Cancel Anytime
           </p>
         </div>
       </section>
