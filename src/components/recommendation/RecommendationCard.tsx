@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star, TrendingUp, Target, ExternalLink } from 'lucide-react';
+import { Star, TrendingUp, Target, ExternalLink, BookOpen } from 'lucide-react';
 import { Recommendation } from '@/lib/types';
 import { Card, Badge, Button } from '@/components/ui';
+import { getAmazonImageUrls } from '@/utils/affiliate';
 
 interface RecommendationCardProps {
   recommendation: Recommendation;
@@ -19,6 +20,29 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
   variant = 'default'
 }) => {
   const { manga, score, reason, matchPercentage, factors } = recommendation;
+  const [imageError, setImageError] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Amazon画像URLの複数パターンを取得
+  const getImageUrls = () => {
+    if (manga.asin) {
+      const amazonUrls = getAmazonImageUrls(manga.asin, 'L');
+      return manga.coverImage ? [...amazonUrls, manga.coverImage] : amazonUrls;
+    }
+    return manga.coverImage ? [manga.coverImage] : [];
+  };
+
+  const imageUrls = getImageUrls();
+  const currentImageUrl = imageUrls[currentImageIndex];
+
+  // 画像エラー時に次のURLを試す
+  const handleImageError = () => {
+    if (currentImageIndex < imageUrls.length - 1) {
+      setCurrentImageIndex(prev => prev + 1);
+    } else {
+      setImageError(true);
+    }
+  };
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-600 bg-green-100';
@@ -38,18 +62,20 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
     return (
       <Card variant="outline" padding="sm" className="flex items-center space-x-3">
         {/* Cover Image */}
-        <div className="relative w-12 h-16 bg-gray-200 rounded flex-shrink-0">
-          {manga.coverImage ? (
+        <div className="relative w-16 h-20 bg-gray-200 rounded flex-shrink-0 overflow-hidden">
+          {currentImageUrl && !imageError ? (
             <Image
-              src={manga.coverImage}
+              src={currentImageUrl}
               alt={`${manga.title} cover`}
               fill
               className="object-cover rounded"
-              sizes="48px"
+              sizes="64px"
+              onError={handleImageError}
+              unoptimized={true}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded">
-              <Star className="h-4 w-4 text-gray-400" />
+              <BookOpen className="h-4 w-4 text-gray-400" />
             </div>
           )}
         </div>
@@ -93,18 +119,23 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
         </div>
         
         {/* Cover Image */}
-        <div className="relative aspect-[3/2] bg-gray-200">
-          {manga.coverImage ? (
+        <div className="relative aspect-[3/4] bg-gray-200 overflow-hidden">
+          {currentImageUrl && !imageError ? (
             <Image
-              src={manga.coverImage}
+              src={currentImageUrl}
               alt={`${manga.title} cover`}
               fill
-              className="object-cover"
+              className="object-cover object-center"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onError={handleImageError}
+              unoptimized={true}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gray-100">
-              <Star className="h-12 w-12 text-gray-400" />
+            <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100">
+              <BookOpen className="h-12 w-12 text-gray-400 mb-2" />
+              <p className="text-xs text-gray-500 text-center px-2 line-clamp-2">{manga.title}</p>
             </div>
           )}
           
@@ -155,17 +186,17 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
         </div>
 
         {/* Recommendation Reason */}
-        <div className="mb-4">
-          <p className="text-sm text-gray-700 bg-blue-50 p-3 rounded-lg border-l-3 border-blue-400">
+        <div className="mb-3">
+          <p className="text-xs text-gray-700 bg-blue-50 p-2 rounded border-l-2 border-blue-400">
             <strong>Why recommended:</strong> {reason}
           </p>
         </div>
 
         {/* Recommendation Factors */}
         {showFactors && (
-          <div className="mb-4 space-y-2">
-            <h4 className="text-sm font-medium text-gray-900">Match Factors:</h4>
-            <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="mb-3 space-y-1">
+            <h4 className="text-xs font-medium text-gray-900">Match Factors:</h4>
+            <div className="grid grid-cols-2 gap-1 text-xs">
               <div className="flex justify-between">
                 <span>Genre Match:</span>
                 <span className="font-medium">{factors.genreMatch}%</span>

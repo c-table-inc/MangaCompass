@@ -25,7 +25,7 @@ export const MangaCard: React.FC<MangaCardProps> = ({
   // Amazon画像URLの複数パターンを取得
   const getImageUrls = () => {
     if (manga.asin) {
-      const amazonUrls = getAmazonImageUrls(manga.asin, 'M');
+      const amazonUrls = getAmazonImageUrls(manga.asin, 'L'); // Lサイズ(500px)に変更
       return manga.coverImage ? [...amazonUrls, manga.coverImage] : amazonUrls;
     }
     return manga.coverImage ? [manga.coverImage] : [];
@@ -78,24 +78,24 @@ export const MangaCard: React.FC<MangaCardProps> = ({
       className="overflow-hidden h-full flex flex-col"
     >
       {/* Cover Image */}
-      <div className="relative aspect-[3/4] bg-gray-200">
+      <div className="relative aspect-[2/3] bg-gray-200 overflow-hidden">
         {currentImageUrl && !imageError ? (
           <Image
             src={currentImageUrl}
             alt={`${manga.title} cover`}
             fill
-            className="object-cover"
-            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            className="object-cover object-center"
+            sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
             onError={handleImageError}
             priority={false}
-            unoptimized={currentImageUrl.includes('amazon')} // Amazon画像の最適化を無効化
+            unoptimized={true} // Amazon画像の最適化を完全に無効化
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-100">
-            <BookOpen className="h-12 w-12 text-gray-400" />
-            <div className="absolute bottom-2 left-2 right-2">
-              <p className="text-xs text-gray-500 text-center line-clamp-2">{manga.title}</p>
-            </div>
+          <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100">
+            <BookOpen className="h-16 w-16 text-gray-400 mb-2" />
+            <p className="text-xs text-gray-500 text-center px-2 line-clamp-2">{manga.title}</p>
           </div>
         )}
         

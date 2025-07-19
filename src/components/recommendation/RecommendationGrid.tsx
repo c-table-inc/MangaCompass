@@ -33,7 +33,7 @@ export const RecommendationGrid: React.FC<RecommendationGridProps> = ({
 
   const gridClass = variant === 'compact' 
     ? 'space-y-3'
-    : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+    : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4';
 
   return (
     <div className={`${gridClass} ${className}`}>
