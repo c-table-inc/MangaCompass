@@ -10,6 +10,7 @@ interface MangaCardProps {
   manga: Manga;
   showDescription?: boolean;
   showAmazonLink?: boolean;
+  showGenres?: boolean;
   onClick?: () => void;
 }
 
@@ -17,6 +18,7 @@ const MangaCardComponent: React.FC<MangaCardProps> = ({
   manga,
   showDescription = false,
   showAmazonLink = true,
+  showGenres = true,
   onClick
 }) => {
   const [imageError, setImageError] = useState(false);
@@ -126,20 +128,22 @@ const MangaCardComponent: React.FC<MangaCardProps> = ({
         </div>
 
         {/* Genres */}
-        <div className="mb-3">
-          <div className="flex flex-wrap gap-1">
-            {manga.genres.slice(0, 3).map((genre) => (
-              <Badge key={genre} variant="secondary" size="sm" className="text-xs">
-                {genre}
-              </Badge>
-            ))}
-            {manga.genres.length > 3 && (
-              <Badge variant="secondary" size="sm" className="text-xs">
-                +{manga.genres.length - 3}
-              </Badge>
-            )}
+        {showGenres && (
+          <div className="mb-3">
+            <div className="flex flex-wrap gap-1">
+              {manga.genres.slice(0, 3).map((genre) => (
+                <Badge key={genre} variant="secondary" size="sm" className="text-xs">
+                  {genre}
+                </Badge>
+              ))}
+              {manga.genres.length > 3 && (
+                <Badge variant="secondary" size="sm" className="text-xs">
+                  +{manga.genres.length - 3}
+                </Badge>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Volume Count */}
         <div className="mb-3 text-xs text-gray-600">

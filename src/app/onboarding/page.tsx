@@ -12,22 +12,22 @@ import { ArrowLeft, ArrowRight, Check, BookOpen } from 'lucide-react';
 const ONBOARDING_STEPS = [
   {
     id: 'manga-selection',
-    title: '読んだことのある漫画を選択してください',
-    description: '最低3つ、最大10つまで選択できます。これらの情報を基にあなたの好みを分析します。',
+    title: 'Select manga you have read',
+    description: 'Choose 3-10 manga titles. We\'ll analyze your preferences based on these selections.',
     minSelection: 3,
     maxSelection: 10
   },
   {
     id: 'genre-preferences',
-    title: 'お気に入りのジャンルを選択してください',
-    description: '興味のあるジャンルを選んでください。推薦の精度が向上します。',
+    title: 'Choose your favorite genres',
+    description: 'Select genres you enjoy. This will improve our recommendation accuracy.',
     minSelection: 1,
     maxSelection: 8
   },
   {
     id: 'preferences',
-    title: '読書設定を選択してください',
-    description: '読書スタイルに関する設定を行います。',
+    title: 'Set your reading preferences',
+    description: 'Configure settings related to your reading style.',
     minSelection: 0,
     maxSelection: 0
   }
@@ -56,6 +56,26 @@ export default function OnboardingPage() {
   const goToNextStep = () => {
     if (currentStep < ONBOARDING_STEPS.length - 1) {
       const nextStep = currentStep + 1;
+      
+      // Auto-populate genres when moving from manga selection to genre preferences
+      if (currentStep === 0 && nextStep === 1) {
+        const selectedMangaObjects = MOCK_MANGA.filter(manga => 
+          onboardingData.selectedManga.includes(manga.id)
+        );
+        
+        // Extract unique genres from selected manga
+        const genresFromSelectedManga = new Set<string>();
+        selectedMangaObjects.forEach(manga => {
+          manga.genres.forEach(genre => genresFromSelectedManga.add(genre));
+        });
+        
+        // Update favorite genres with extracted genres
+        setOnboardingData(prev => ({
+          ...prev,
+          favoriteGenres: Array.from(genresFromSelectedManga)
+        }));
+      }
+      
       setCurrentStep(nextStep);
       trackOnboardingStep(nextStep.toString(), { stepId: ONBOARDING_STEPS[nextStep].id });
     }
@@ -143,7 +163,7 @@ export default function OnboardingPage() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center" role="status" aria-label="Loading">
           <BookOpen className="h-12 w-12 text-blue-600 animate-pulse mx-auto mb-4" />
-          <p className="text-gray-600">Loading...</p>
+          <p className="text-gray-600">Setting up your preferences...</p>
         </div>
       </div>
     );
@@ -373,6 +393,22 @@ export default function OnboardingPage() {
           </div>
         </div>
       </main>
+
+      {/* Floating Next Button */}
+      {currentStep === 0 && onboardingData.selectedManga.length >= 3 && (
+        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={goToNextStep}
+            className="shadow-lg bg-blue-600 hover:bg-blue-700 px-8 py-3"
+            icon={ArrowRight}
+            iconPosition="right"
+          >
+            Continue ({onboardingData.selectedManga.length} selected)
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

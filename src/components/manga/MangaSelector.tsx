@@ -23,13 +23,6 @@ export const MangaSelector: React.FC<MangaSelectorProps> = ({
   title = "Select Manga",
   description
 }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredManga = manga.filter(item =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.genres.some(genre => genre.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
 
   const handleMangaToggle = (mangaId: string) => {
     const isSelected = selectedManga.includes(mangaId);
@@ -73,20 +66,9 @@ export const MangaSelector: React.FC<MangaSelectorProps> = ({
         </div>
       </div>
 
-      {/* Search */}
-      <div className="max-w-md mx-auto">
-        <input
-          type="text"
-          placeholder="Search manga, author, or genre..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-      </div>
-
       {/* Manga Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-        {filteredManga.map((item) => {
+        {manga.map((item) => {
           const isSelected = selectedManga.includes(item.id);
           const canSelect = !maxSelections || selectedManga.length < maxSelections || isSelected;
 
@@ -99,6 +81,7 @@ export const MangaSelector: React.FC<MangaSelectorProps> = ({
               <MangaCard
                 manga={item}
                 showAmazonLink={false}
+                showGenres={false}
               />
               
               {/* Selection Overlay */}
@@ -110,28 +93,11 @@ export const MangaSelector: React.FC<MangaSelectorProps> = ({
                 </div>
               )}
               
-              {/* Selection Button */}
-              <div className="absolute bottom-2 left-2 right-2">
-                <Button
-                  variant={isSelected ? 'primary' : 'outline'}
-                  size="sm"
-                  fullWidth
-                  disabled={!canSelect}
-                >
-                  {isSelected ? 'Selected' : 'Select'}
-                </Button>
-              </div>
             </div>
           );
         })}
       </div>
 
-      {/* Empty State */}
-      {filteredManga.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-600">No manga found matching "{searchTerm}"</p>
-        </div>
-      )}
 
       {/* Validation Message */}
       {!isSelectionValid && minSelections > 0 && (
