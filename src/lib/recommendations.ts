@@ -158,41 +158,41 @@ export class RecommendationEngine {
         user.favoriteGenres.includes(genre)
       );
       if (commonGenres.length > 0) {
-        reasons.push(`好きなジャンル「${commonGenres.slice(0, 2).join('、')}」と一致`);
+        reasons.push(`Matches favorite genres: ${commonGenres.slice(0, 2).join(', ')}`);
       }
     }
 
     // 高評価
     if (factors.ratingScore >= 80) {
-      reasons.push(`高評価作品（★${manga.rating.toFixed(1)}）`);
+      reasons.push(`Highly rated (★${manga.rating.toFixed(1)})`);
     }
 
     // 人気作品
     if (factors.popularityScore >= 80) {
-      reasons.push('人気の高い作品');
+      reasons.push('Popular title');
     }
 
     // ステータス一致
     if (factors.statusMatch >= 90) {
-      const statusText = manga.status === 'completed' ? '完結済み' : '連載中';
-      reasons.push(`${statusText}作品を希望`);
+      const statusText = manga.status === 'completed' ? 'completed' : 'ongoing';
+      reasons.push(`Preferred ${statusText} series`);
     }
 
     // 特別な推薦理由
     if (manga.volumes >= 20) {
-      reasons.push('長期シリーズ');
+      reasons.push('Long-running series');
     }
 
     // 作品が新しい場合（ID番号で判定 - 実際の実装では出版年を使用）
     if (parseInt(manga.id) > 40) {
-      reasons.push('最新作品');
+      reasons.push('Recent release');
     }
 
     if (reasons.length === 0) {
-      reasons.push('あなたの好みに合いそうな作品');
+      reasons.push('Matches your preferences');
     }
 
-    return reasons.slice(0, 3).join('、'); // 最大3つの理由
+    return reasons.slice(0, 3).join(', '); // Max 3 reasons
   }
 
   /**
@@ -215,7 +215,7 @@ export class RecommendationEngine {
         .map(manga => ({
           manga,
           score: Math.round(manga.rating * 20), // 評価ベーススコア
-          reason: `${genre}ジャンルの高評価作品`,
+          reason: `Top rated ${genre} manga`,
           matchPercentage: Math.round(manga.rating * 20),
           factors: {
             genreMatch: 100,
@@ -305,23 +305,23 @@ export class RecommendationEngine {
     );
 
     if (commonGenres.length > 0) {
-      reasons.push(`同じジャンル（${commonGenres.slice(0, 2).join('、')}）`);
+      reasons.push(`Same genres (${commonGenres.slice(0, 2).join(', ')})`);
     }
 
     if (targetManga.author === similarManga.author) {
-      reasons.push('同じ作者');
+      reasons.push('Same author');
     }
 
     const ratingDiff = Math.abs(targetManga.rating - similarManga.rating);
     if (ratingDiff <= 0.5) {
-      reasons.push('同程度の評価');
+      reasons.push('Similar rating');
     }
 
     if (reasons.length === 0) {
-      reasons.push('類似した作品');
+      reasons.push('Similar title');
     }
 
-    return `「${targetManga.title}」に似た作品：${reasons.join('、')}`;
+    return `Similar to "${targetManga.title}": ${reasons.join(', ')}`;
   }
 }
 

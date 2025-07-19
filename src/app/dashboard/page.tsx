@@ -31,7 +31,7 @@ export default function DashboardPage() {
   const [similarRecommendations, setSimilarRecommendations] = useState<Recommendation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedGenre, setSelectedGenre] = useState<string>('');
-  const [showStats, setShowStats] = useState(false);
+  const [showStats, setShowStats] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function DashboardPage() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <RefreshCw className="h-8 w-8 animate-spin text-blue-600 mx-auto mb-4" />
-          <p className="text-gray-600">推薦を生成中...</p>
+          <p className="text-gray-600">Generating recommendations...</p>
         </div>
       </div>
     );
@@ -111,14 +111,14 @@ export default function DashboardPage() {
         <div className="text-center max-w-md">
           <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            ようこそMangaCompassへ
+            Welcome to MangaCompass
           </h2>
           <p className="text-gray-600 mb-6">
-            パーソナライズされた推薦を受けるには、まず好みを設定しましょう。
+            To receive personalized recommendations, please set up your preferences first.
           </p>
           <Link href="/onboarding">
             <Button size="lg">
-              設定を開始
+              Start Setup
             </Button>
           </Link>
         </div>
@@ -133,50 +133,37 @@ export default function DashboardPage() {
   const revenueData = generateDemoRevenueData();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
-        {/* ヘッダー */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                おすすめ漫画
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      {/* Header */}
+      <header className="bg-white shadow-sm" role="banner">
+        <div className="max-w-4xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <h1 className="text-xl font-bold text-gray-900">
+                MangaCompass Dashboard
               </h1>
-              <p className="text-gray-600">
-                {hasReadHistory 
-                  ? 'あなたの読書履歴と好みに基づいた推薦です'
-                  : '人気・高評価の漫画をご紹介します'
-                }
-              </p>
-            </div>
-            <div className="flex items-center space-x-3 mt-4 md:mt-0">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowStats(!showStats)}
-              >
-                <BarChart3 className="h-4 w-4 mr-2" />
-                統計
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleRefreshRecommendations}
-              >
-                <RefreshCw className="h-4 w-4 mr-2" />
-                更新
-              </Button>
-              <Link href="/onboarding">
-                <Button variant="outline" size="sm">
-                  <Settings className="h-4 w-4 mr-2" />
-                  設定
-                </Button>
-              </Link>
+              <Badge variant="primary" size="sm">
+                {hasReadHistory ? `${user.readHistory.length} read` : 'Getting started'}
+              </Badge>
             </div>
           </div>
+          
+          {/* Title and Description */}
+          <div className="mt-4">
+            <p className="text-gray-600">
+              {hasReadHistory 
+                ? 'Recommendations based on your reading history and preferences'
+                : 'Featuring popular and highly-rated manga titles'
+              }
+            </p>
+          </div>
         </div>
+      </header>
 
-        {/* 統計パネル */}
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto px-4 py-8">
+
+        {/* Stats Panel */}
         {showStats && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Card>
@@ -184,7 +171,7 @@ export default function DashboardPage() {
                 <div className="flex items-center">
                   <BookOpen className="h-8 w-8 text-blue-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">読書履歴</p>
+                    <p className="text-sm font-medium text-gray-600">Reading History</p>
                     <p className="text-2xl font-bold">{user.readHistory.length}</p>
                   </div>
                 </div>
@@ -196,7 +183,7 @@ export default function DashboardPage() {
                 <div className="flex items-center">
                   <Heart className="h-8 w-8 text-red-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">好きなジャンル</p>
+                    <p className="text-sm font-medium text-gray-600">Favorite Genres</p>
                     <p className="text-2xl font-bold">{user.favoriteGenres.length}</p>
                   </div>
                 </div>
@@ -208,7 +195,7 @@ export default function DashboardPage() {
                 <div className="flex items-center">
                   <TrendingUp className="h-8 w-8 text-green-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">推薦数</p>
+                    <p className="text-sm font-medium text-gray-600">Recommendations</p>
                     <p className="text-2xl font-bold">{recommendations.length}</p>
                   </div>
                 </div>
@@ -220,7 +207,7 @@ export default function DashboardPage() {
                 <div className="flex items-center">
                   <Star className="h-8 w-8 text-yellow-600" />
                   <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">平均スコア</p>
+                    <p className="text-sm font-medium text-gray-600">Average Score</p>
                     <p className="text-2xl font-bold">
                       {recommendations.length > 0 
                         ? Math.round(recommendations.reduce((sum, rec) => sum + rec.score, 0) / recommendations.length)
@@ -234,7 +221,7 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* メインコンテンツ */}
+        {/* Main Content */}
         <div className="space-y-12">
           {/* パーソナライズ推薦 */}
           {hasReadHistory && recommendations.length > 0 && (
@@ -242,14 +229,14 @@ export default function DashboardPage() {
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                    あなたへのおすすめ
+                    Recommended for You
                   </h2>
                   <p className="text-gray-600">
-                    読書履歴に基づくパーソナライズ推薦
+                    Personalized recommendations based on your reading history
                   </p>
                 </div>
                 <Badge variant="primary">
-                  {recommendations.length}件
+                  {recommendations.length} items
                 </Badge>
               </div>
               
@@ -265,7 +252,7 @@ export default function DashboardPage() {
           {Object.keys(genreRecommendations).length > 0 && (
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                ジャンル別おすすめ
+                Recommendations by Genre
               </h2>
               
               <div className="space-y-8">
@@ -274,7 +261,7 @@ export default function DashboardPage() {
                     <div className="flex items-center mb-4">
                       <h3 className="text-xl font-semibold text-gray-900">{genre}</h3>
                       <Badge variant="secondary" className="ml-3">
-                        {recs.length}件
+                        {recs.length} items
                       </Badge>
                     </div>
                     <RecommendationGrid
@@ -293,10 +280,10 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  高評価漫画
+                  Top Rated Manga
                 </h2>
                 <p className="text-gray-600">
-                  読者と評論家から愛される名作
+                  Masterpieces loved by readers and critics
                 </p>
               </div>
               <Award className="h-6 w-6 text-yellow-600" />
@@ -310,10 +297,10 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  人気漫画
+                  Popular Manga
                 </h2>
                 <p className="text-gray-600">
-                  今話題の作品
+                  Currently trending titles
                 </p>
               </div>
               <TrendingUp className="h-6 w-6 text-green-600" />
@@ -327,10 +314,10 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  最近追加された漫画
+                  Recently Added Manga
                 </h2>
                 <p className="text-gray-600">
-                  新しく追加された作品
+                  Newly added titles to our collection
                 </p>
               </div>
               <Clock className="h-6 w-6 text-blue-600" />
@@ -343,30 +330,30 @@ export default function DashboardPage() {
           </section>
         </div>
 
-        {/* CTA セクション */}
+        {/* CTA Section */}
         {!hasReadHistory && (
           <div className="mt-16 text-center bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-8 text-white">
             <BookOpen className="h-12 w-12 mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-4">
-              もっと良い推薦を受けませんか？
+              Want better recommendations?
             </h3>
             <p className="text-blue-200 mb-6 max-w-2xl mx-auto">
-              あなたの読書履歴と好みを教えることで、より精度の高いパーソナライズ推薦を提供できます。
+              By sharing your reading history and preferences, we can provide more accurate personalized recommendations.
             </p>
             <Link href="/onboarding">
               <Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100">
-                好みを設定する
+                Set Preferences
               </Button>
             </Link>
           </div>
         )}
 
-        {/* フッター情報 */}
+        {/* Footer Info */}
         <div className="mt-12 text-center text-sm text-gray-500">
           <p>
-            推薦は定期的に更新されます • 
-            設定はいつでも変更可能です • 
-            データはローカルに保存されています
+            Recommendations are updated regularly • 
+            Settings can be changed anytime • 
+            Your data is stored locally
           </p>
         </div>
       </div>
