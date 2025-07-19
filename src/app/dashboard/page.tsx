@@ -58,6 +58,7 @@ export default function DashboardPage() {
       let userData = null;
       if (onboardingData) {
         userData = {
+          id: 'demo-user', // デモ用のユーザーID
           readHistory: onboardingData.selectedManga || [],
           favoriteGenres: onboardingData.favoriteGenres || [],
           preferences: onboardingData.preferences || {
