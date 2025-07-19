@@ -51,8 +51,22 @@ export default function DashboardPage() {
         return;
       }
       
-      const savedUser = localStorage.getItem('mangacompass_user');
-      const userData = savedUser ? JSON.parse(savedUser) : null;
+      const savedUserData = localStorage.getItem('mangacompass_user_data');
+      const onboardingData = savedUserData ? JSON.parse(savedUserData) : null;
+      
+      // OnboardingDataをUser形式に変換
+      let userData = null;
+      if (onboardingData) {
+        userData = {
+          readHistory: onboardingData.selectedManga || [],
+          favoriteGenres: onboardingData.favoriteGenres || [],
+          preferences: onboardingData.preferences || {
+            preferredStatus: ['ongoing', 'completed'],
+            minRating: 3.0,
+            excludeGenres: []
+          }
+        };
+      }
       
       setUser(userData);
       
