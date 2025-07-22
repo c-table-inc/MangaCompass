@@ -37,6 +37,7 @@ export default function OnboardingPage() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
+  const [randomizedManga, setRandomizedManga] = useState<Manga[]>([]);
   const [onboardingData, setOnboardingData] = useState<OnboardingData>({
     selectedManga: [],
     favoriteGenres: [],
@@ -50,6 +51,10 @@ export default function OnboardingPage() {
   useEffect(() => {
     setIsMounted(true);
     trackPageView('/onboarding', 'Onboarding Page');
+    
+    // Randomize manga order on mount
+    const shuffled = [...MOCK_MANGA].sort(() => Math.random() - 0.5);
+    setRandomizedManga(shuffled);
   }, []);
 
   // Handle step navigation
@@ -59,7 +64,7 @@ export default function OnboardingPage() {
       
       // Auto-populate genres when moving from manga selection to genre preferences
       if (currentStep === 0 && nextStep === 1) {
-        const selectedMangaObjects = MOCK_MANGA.filter(manga => 
+        const selectedMangaObjects = randomizedManga.filter(manga => 
           onboardingData.selectedManga.includes(manga.id)
         );
         
@@ -221,7 +226,7 @@ export default function OnboardingPage() {
             {currentStep === 0 && (
               <div>
                 <MangaSelector
-                  manga={MOCK_MANGA}
+                  manga={randomizedManga}
                   selectedManga={onboardingData.selectedManga}
                   onSelectionChange={handleMangaSelection}
                   maxSelections={ONBOARDING_STEPS[0].maxSelection}
