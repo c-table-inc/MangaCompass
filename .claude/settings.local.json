@@ -12,7 +12,9 @@
       "Bash(rm:*)",
       "WebFetch(domain:m.media-amazon.com)",
       "WebFetch(domain:www.amazon.com)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(true)",
+      "Bash(npx tsc:*)"
     ],
     "deny": []
   },

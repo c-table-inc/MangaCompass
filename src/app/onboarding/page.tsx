@@ -52,9 +52,10 @@ export default function OnboardingPage() {
     setIsMounted(true);
     trackPageView('/onboarding', 'Onboarding Page');
     
-    // Randomize manga order on mount
+    // Randomize manga order and select only 20 items
     const shuffled = [...MOCK_MANGA].sort(() => Math.random() - 0.5);
-    setRandomizedManga(shuffled);
+    const selectedManga = shuffled.slice(0, 20);
+    setRandomizedManga(selectedManga);
   }, []);
 
   // Handle step navigation
