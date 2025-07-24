@@ -3,6 +3,7 @@
  */
 
 import { Manga, User, Recommendation } from '../lib/types';
+import { event as gtag } from '@/lib/analytics';
 
 /**
  * ユーザー行動追跡イベント
@@ -110,6 +111,13 @@ class AnalyticsManager {
   trackPageView(path: string, userId?: string): void {
     this.track('page_view', { path }, userId);
     this.session.pageViews++;
+    
+    // GA4にも送信
+    gtag({
+      action: 'page_view',
+      category: 'engagement',
+      label: path
+    });
   }
 
   /**
@@ -123,6 +131,14 @@ class AnalyticsManager {
       rating: manga.rating,
       source
     }, userId);
+    
+    // GA4にも送信
+    gtag({
+      action: 'view_item',
+      category: 'manga',
+      label: manga.title,
+      value: manga.rating
+    });
   }
 
   /**
@@ -141,6 +157,14 @@ class AnalyticsManager {
       reason: recommendation.reason,
       factors: recommendation.factors
     }, userId);
+    
+    // GA4にも送信
+    gtag({
+      action: 'select_item',
+      category: 'recommendation',
+      label: recommendation.manga.title,
+      value: position
+    });
   }
 
   /**
@@ -148,6 +172,14 @@ class AnalyticsManager {
    */
   trackOnboardingStep(step: string, data: Record<string, any> = {}, userId?: string): void {
     this.track('onboarding_step', { step, ...data }, userId);
+    
+    // GA4にも送信
+    gtag({
+      action: 'tutorial_progress',
+      category: 'onboarding',
+      label: step,
+      value: parseInt(step, 10) || 0
+    });
   }
 
   /**

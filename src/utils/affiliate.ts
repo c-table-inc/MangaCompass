@@ -2,6 +2,8 @@
  * Amazonアフィリエイトリンク生成ユーティリティ
  */
 
+import { event as gtag } from '@/lib/analytics';
+
 export const AFFILIATE_TAG = 'mangacompass-20';
 
 /**
@@ -189,6 +191,14 @@ export function trackAffiliateClick(event: Omit<AffiliateClickEvent, 'timestamp'
   } catch (error) {
     console.warn('Failed to track affiliate click:', error);
   }
+  
+  // GA4にも送信
+  gtag({
+    action: 'affiliate_click',
+    category: 'ecommerce',
+    label: clickEvent.title,
+    value: 1
+  });
   
   // 外部分析サービスに送信（プロダクション環境でのみ）
   if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {

@@ -36,7 +36,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     setIsMounted(true);
-    trackPageView('/dashboard');
+    trackPageView('/dashboard', user?.id);
     loadUserData();
   }, []);
 
@@ -101,7 +101,7 @@ export default function DashboardPage() {
   };
 
   const handleRecommendationClick = (recommendation: Recommendation, position: number) => {
-    trackRecommendationClick(recommendation, position);
+    trackRecommendationClick(recommendation, position, user?.id);
   };
 
   const handleRefreshRecommendations = () => {

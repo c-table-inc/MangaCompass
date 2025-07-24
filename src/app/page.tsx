@@ -15,7 +15,7 @@ export default function HomePage() {
 
   useEffect(() => {
     setIsMounted(true);
-    trackPageView('/');
+    trackPageView('/', undefined);
   }, []);
 
   // SSR/hydration issues を防ぐため、マウント後まで待機
