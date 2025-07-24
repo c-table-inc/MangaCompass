@@ -78,7 +78,12 @@ export default function OnboardingPage() {
         // Extract unique genres from selected manga
         const genresFromSelectedManga = new Set<string>();
         selectedMangaObjects.forEach(manga => {
-          manga.genres.forEach(genre => genresFromSelectedManga.add(genre));
+          manga.genres.forEach(genre => {
+            // Only add genres that exist in MANGA_GENRES
+            if (MANGA_GENRES.includes(genre as any)) {
+              genresFromSelectedManga.add(genre);
+            }
+          });
         });
         
         // Update favorite genres with extracted genres (limit to max selection)
