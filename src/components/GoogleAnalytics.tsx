@@ -16,7 +16,14 @@ function GoogleAnalyticsContent() {
     pageview(url)
   }, [pathname, searchParams])
 
+  // デバッグログを追加
+  useEffect(() => {
+    console.log('GA_MEASUREMENT_ID:', GA_MEASUREMENT_ID)
+    console.log('window.gtag:', typeof window !== 'undefined' ? window.gtag : 'undefined')
+  }, [])
+
   if (!GA_MEASUREMENT_ID) {
+    console.warn('GA_MEASUREMENT_ID is not set')
     return null
   }
 
@@ -25,6 +32,9 @@ function GoogleAnalyticsContent() {
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
         strategy="afterInteractive"
+        onLoad={() => {
+          console.log('Google Analytics script loaded')
+        }}
       />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
@@ -32,6 +42,7 @@ function GoogleAnalyticsContent() {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', '${GA_MEASUREMENT_ID}');
+          console.log('Google Analytics initialized with ID:', '${GA_MEASUREMENT_ID}');
         `}
       </Script>
     </>
