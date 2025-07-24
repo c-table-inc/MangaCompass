@@ -65,6 +65,12 @@ export default function OnboardingPage() {
       
       // Auto-populate genres when moving from manga selection to genre preferences
       if (currentStep === 0 && nextStep === 1) {
+        // Safety check: ensure we have selected manga before proceeding
+        if (onboardingData.selectedManga.length === 0) {
+          console.warn('No manga selected, cannot proceed to genre selection');
+          return;
+        }
+        
         const selectedMangaObjects = randomizedManga.filter(manga => 
           onboardingData.selectedManga.includes(manga.id)
         );
@@ -75,11 +81,23 @@ export default function OnboardingPage() {
           manga.genres.forEach(genre => genresFromSelectedManga.add(genre));
         });
         
-        // Update favorite genres with extracted genres
-        setOnboardingData(prev => ({
-          ...prev,
-          favoriteGenres: Array.from(genresFromSelectedManga)
-        }));
+        // Update favorite genres with extracted genres (limit to max selection)
+        const genresArray = Array.from(genresFromSelectedManga);
+        
+        // If no genres were extracted (edge case), don't pre-select any
+        if (genresArray.length === 0) {
+          console.warn('No genres found in selected manga');
+          setOnboardingData(prev => ({
+            ...prev,
+            favoriteGenres: []
+          }));
+        } else {
+          const limitedGenres = genresArray.slice(0, ONBOARDING_STEPS[1].maxSelection);
+          setOnboardingData(prev => ({
+            ...prev,
+            favoriteGenres: limitedGenres
+          }));
+        }
       }
       
       setCurrentStep(nextStep);
@@ -105,12 +123,25 @@ export default function OnboardingPage() {
 
   // Handle genre selection
   const handleGenreToggle = (genre: string) => {
-    setOnboardingData(prev => ({
-      ...prev,
-      favoriteGenres: prev.favoriteGenres.includes(genre)
-        ? prev.favoriteGenres.filter(g => g !== genre)
-        : [...prev.favoriteGenres, genre]
-    }));
+    setOnboardingData(prev => {
+      if (prev.favoriteGenres.includes(genre)) {
+        // Remove genre
+        return {
+          ...prev,
+          favoriteGenres: prev.favoriteGenres.filter(g => g !== genre)
+        };
+      } else {
+        // Add genre only if under max selection limit
+        if (prev.favoriteGenres.length < ONBOARDING_STEPS[1].maxSelection) {
+          return {
+            ...prev,
+            favoriteGenres: [...prev.favoriteGenres, genre]
+          };
+        }
+        // Don't add if already at max
+        return prev;
+      }
+    });
   };
 
   // Handle preference updates

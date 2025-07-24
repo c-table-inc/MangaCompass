@@ -14,7 +14,8 @@
       "WebFetch(domain:www.amazon.com)",
       "Bash(pkill:*)",
       "Bash(true)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   },
