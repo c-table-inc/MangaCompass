@@ -25,7 +25,8 @@
       "Bash(chmod:*)",
       "Bash(python3:*)",
       "Bash(grep:*)",
-      "Bash(pip3 install:*)"
+      "Bash(pip3 install:*)",
+      "Bash(node:*)"
     ],
     "deny": []
   },
