@@ -23,13 +23,27 @@ const RecommendationCardComponent: React.FC<RecommendationCardProps> = ({
   const [imageError, setImageError] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Amazon画像URLの複数パターンを取得
+  // 画像URLの優先順位: imageUrl > coverImage > Amazon生成URL
   const getImageUrls = () => {
+    const urls = [];
+    
+    // 最優先: imageUrl (新しく追加された画像URL)
+    if (manga.imageUrl) {
+      urls.push(manga.imageUrl);
+    }
+    
+    // 次優先: coverImage (既存の表紙画像)
+    if (manga.coverImage) {
+      urls.push(manga.coverImage);
+    }
+    
+    // 最後の手段: Amazon生成URL
     if (manga.asin) {
       const amazonUrls = getAmazonImageUrls(manga.asin, 'L');
-      return manga.coverImage ? [...amazonUrls, manga.coverImage] : amazonUrls;
+      urls.push(...amazonUrls);
     }
-    return manga.coverImage ? [manga.coverImage] : [];
+    
+    return urls;
   };
 
   const imageUrls = getImageUrls();

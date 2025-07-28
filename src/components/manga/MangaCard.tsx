@@ -24,13 +24,27 @@ const MangaCardComponent: React.FC<MangaCardProps> = ({
   const [imageError, setImageError] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-  // Amazon画像URLの複数パターンを取得
+  // 画像URLの優先順位: imageUrl > coverImage > Amazon生成URL
   const getImageUrls = () => {
-    if (manga.asin) {
-      const amazonUrls = getAmazonImageUrls(manga.asin, 'L'); // Lサイズ(500px)に変更
-      return manga.coverImage ? [...amazonUrls, manga.coverImage] : amazonUrls;
+    const urls = [];
+    
+    // 最優先: imageUrl (新しく追加された画像URL)
+    if (manga.imageUrl) {
+      urls.push(manga.imageUrl);
     }
-    return manga.coverImage ? [manga.coverImage] : [];
+    
+    // 次優先: coverImage (既存の表紙画像)
+    if (manga.coverImage) {
+      urls.push(manga.coverImage);
+    }
+    
+    // 最後の手段: Amazon生成URL
+    if (manga.asin) {
+      const amazonUrls = getAmazonImageUrls(manga.asin, 'L');
+      urls.push(...amazonUrls);
+    }
+    
+    return urls;
   };
 
   const imageUrls = getImageUrls();
