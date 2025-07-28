@@ -10,6 +10,7 @@ export interface Manga {
   rating: number; // 1-10スケール
   description?: string;
   coverImage?: string;
+  imageUrl?: string; // Amazon商品画像URL
   amazonLink: string;
   asin?: string; // Amazon商品識別子
   popularity: number; // 1-100スケール

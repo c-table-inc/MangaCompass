@@ -12,6 +12,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.2,
     description: 'Follow Monkey D. Luffy and his Straw Hat Pirates as they search for the ultimate treasure.',
     amazonLink: 'https://amazon.com/dp/1421536250/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/619EiBmeBPL._SY445_SX342_.jpg',
     asin: '1421536250',
     popularity: 98,
     year: 1997
@@ -26,6 +27,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.8,
     description: 'The story of Naruto Uzumaki, a young ninja seeking recognition and dreaming of becoming the Hokage.',
     amazonLink: 'https://amazon.com/dp/1569319006/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51BucomQlHL._SY445_SX342_.jpg',
     asin: '1569319006',
     popularity: 95,
     year: 1999
@@ -40,6 +42,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.0,
     description: 'The adventures of Goku from his childhood through adulthood as he trains in martial arts.',
     amazonLink: 'https://amazon.com/dp/1421526158/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51tJ7v+2+TL._SX342_SY445_.jpg',
     asin: '1421526158',
     popularity: 97,
     year: 1984
@@ -54,6 +57,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'In a world where most people have superpowers, a powerless boy enrolls in a prestigious hero academy.',
     amazonLink: 'https://amazon.com/dp/1421582694/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51FAgOL-1bL._SY445_SX342_.jpg',
     asin: '1421582694',
     popularity: 92,
     year: 2014
@@ -68,6 +72,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.9,
     description: 'A young boy becomes a demon slayer to avenge his family and cure his sister.',
     amazonLink: 'https://amazon.com/dp/1974700526/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/61RLgk2k-1L._SY445_SX342_.jpg',
     asin: '1974700526',
     popularity: 94,
     year: 2016
@@ -82,6 +87,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.1,
     description: 'Humanity fights for survival against giant humanoid creatures known as Titans.',
     amazonLink: 'https://amazon.com/dp/1612620248/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51ywmxi7JVL._SY445_SX342_.jpg',
     asin: '1612620248',
     popularity: 96,
     year: 2009
@@ -96,6 +102,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.6,
     description: 'A high school student joins a secret organization of Jujutsu Sorcerers.',
     amazonLink: 'https://amazon.com/dp/1974710025/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51CcaF9O78L._SY445_SX342_.jpg',
     asin: '1974710025',
     popularity: 91,
     year: 2018
@@ -110,6 +117,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.3,
     description: 'A young boy named Gon discovers his father is a legendary Hunter.',
     amazonLink: 'https://amazon.com/dp/1421501848/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51nzpxaR5wL._SY445_SX342_.jpg',
     asin: '1421501848',
     popularity: 89,
     year: 1998
@@ -124,6 +132,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.4,
     description: 'A teenager gains the powers of a Soul Reaper and must protect the living world.',
     amazonLink: 'https://amazon.com/dp/1591164419/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/516WLV8lFCL._SY445_SX342_.jpg',
     asin: '1591164419',
     popularity: 88,
     year: 2001
@@ -138,6 +147,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.4,
     description: 'Two brothers use alchemy in their quest to find the Philosopher\'s Stone.',
     amazonLink: 'https://amazon.com/dp/1591169208/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51ZiqOI8-ML._SY445_SX342_.jpg',
     asin: '1591169208',
     popularity: 93,
     year: 2001
@@ -152,6 +162,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.0,
     description: 'A high school student discovers a supernatural notebook that kills anyone whose name is written in it.',
     amazonLink: 'https://amazon.com/dp/1421501686/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51ngj2MltoL._SY445_SX342_.jpg',
     asin: '1421501686',
     popularity: 90,
     year: 2003
@@ -166,6 +177,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.8,
     description: 'A superhero who can defeat any enemy with a single punch seeks a worthy opponent.',
     amazonLink: 'https://amazon.com/dp/1421585642/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51tpho9reUL._SY445_SX342_.jpg',
     asin: '1421585642',
     popularity: 87,
     year: 2009
@@ -180,6 +192,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'A middle school boy with psychic powers tries to live a normal life.',
     amazonLink: 'https://amazon.com/dp/1506709877/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51F8aK9fjdL._SY445_SX342_.jpg',
     asin: '1506709877',
     popularity: 85,
     year: 2012
@@ -194,6 +207,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.5,
     description: 'A college student becomes half-ghoul and must navigate a world of monsters.',
     amazonLink: 'https://amazon.com/dp/1421580357/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/61k9MYmfX8L._SY445_SX342_.jpg',
     asin: '1421580357',
     popularity: 86,
     year: 2011
@@ -208,6 +222,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.9,
     description: 'A young man merges with a devil to become Chainsaw Man.',
     amazonLink: 'https://amazon.com/dp/1974709949/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51PekA4q1zL._SY445_SX342_.jpg',
     asin: '1974709949',
     popularity: 88,
     year: 2018
@@ -222,6 +237,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.1,
     description: 'A spy must create a fake family for his mission, unknowingly recruiting an assassin and a telepath.',
     amazonLink: 'https://amazon.com/dp/1974715493/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51VWreCWgyL._SY445_SX342_.jpg',
     asin: '1974715493',
     popularity: 93,
     year: 2019
@@ -236,6 +252,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.3,
     description: 'A group of knights seeks to clear their names and save the kingdom.',
     amazonLink: 'https://amazon.com/dp/1612629296/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51tjufxq39L._SY445_SX342_.jpg',
     asin: '1612629296',
     popularity: 82,
     year: 2012
@@ -250,6 +267,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.1,
     description: 'A young wizard joins a magical guild and goes on adventures with his new friends.',
     amazonLink: 'https://amazon.com/dp/1612622771/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51iVm12ZNBL._SY445_SX342_.jpg',
     asin: '1612622771',
     popularity: 80,
     year: 2006
@@ -264,6 +282,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.2,
     description: 'A boy born without magic aims to become the Wizard King.',
     amazonLink: 'https://amazon.com/dp/1421587181/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/61j7niGu2DL._SY445_SX342_.jpg',
     asin: '1421587181',
     popularity: 81,
     year: 2015
@@ -278,6 +297,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.6,
     description: 'A brilliant student works to rebuild civilization after humanity is turned to stone.',
     amazonLink: 'https://amazon.com/dp/1974702618/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51kT1dhoLHL._SY445_SX342_.jpg',
     asin: '1974702618',
     popularity: 84,
     year: 2017
@@ -292,6 +312,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.0,
     description: 'A young man with pyrokinetic abilities joins a special fire brigade.',
     amazonLink: 'https://amazon.com/dp/1632363305/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51Qd0guwRHL._SY445_SX342_.jpg',
     asin: '1632363305',
     popularity: 78,
     year: 2015
@@ -306,6 +327,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.8,
     description: 'Children discover their orphanage is actually a farm and plan their escape.',
     amazonLink: 'https://amazon.com/dp/1421597128/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/61gJ4CMCtuL._SY445_SX342_.jpg',
     asin: '1421597128',
     popularity: 87,
     year: 2016
@@ -320,6 +342,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.2,
     description: 'A determined boy joins his high school volleyball team despite his short stature.',
     amazonLink: 'https://amazon.com/dp/1421587661/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51fVy5dQQcL._SY445_SX342_.jpg',
     asin: '1421587661',
     popularity: 89,
     year: 2012
@@ -334,6 +357,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.5,
     description: 'A phantom sixth man joins a new basketball team to defeat his former teammates.',
     amazonLink: 'https://amazon.com/dp/1421587718/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51vxWD6Sp-L._SY445_SX342_.jpg',
     asin: '1421587718',
     popularity: 83,
     year: 2008
@@ -348,6 +372,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.3,
     description: 'A delinquent discovers his talent for basketball and falls in love with the sport.',
     amazonLink: 'https://amazon.com/dp/1421533251/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51bCZV0sGYL._SY445_SX342_.jpg',
     asin: '1421533251',
     popularity: 91,
     year: 1990
@@ -362,6 +387,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.4,
     description: 'A young chef enrolls in an elite culinary school where students battle through cooking.',
     amazonLink: 'https://amazon.com/dp/1421572540/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51PCavRPU5L._SY445_SX342_.jpg',
     asin: '1421572540',
     popularity: 82,
     year: 2012
@@ -376,6 +402,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'A schoolgirl discovers she is a magical warrior destined to save the world.',
     amazonLink: 'https://amazon.com/dp/1612620000/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/41CVC1h8HdL._SY445_SX342_.jpg',
     asin: '1612620000',
     popularity: 85,
     year: 1991
@@ -390,6 +417,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.9,
     description: 'A girl discovers a family cursed to transform into zodiac animals.',
     amazonLink: 'https://amazon.com/dp/1427807876/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51O5OEU4sOL._SY445_SX342_.jpg',
     asin: '1427807876',
     popularity: 86,
     year: 1998
@@ -404,6 +432,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.6,
     description: 'A scholarship student accidentally joins an elite school\'s host club.',
     amazonLink: 'https://amazon.com/dp/1421505843/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51UqIpQ7BcL._SY445_SX342_.jpg',
     asin: '1421505843',
     popularity: 79,
     year: 2002
@@ -418,6 +447,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.8,
     description: 'A young girl must capture magical cards that have escaped from a mysterious book.',
     amazonLink: 'https://amazon.com/dp/1632367513/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51PMgEdKh3L._SY445_SX342_.jpg',
     asin: '1632367513',
     popularity: 84,
     year: 1996
@@ -432,23 +462,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.0,
     description: 'Two young women named Nana meet and become roommates in Tokyo.',
     amazonLink: 'https://amazon.com/dp/1421510499/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/512kVUjahnL._SY445_SX342_.jpg',
     asin: '1421510499',
     popularity: 88,
     year: 2000
-  },
-  {
-    id: 'your-name-1',
-    title: 'Your Name, Vol. 1',
-    author: 'Makoto Shinkai',
-    genres: ['Romance', 'Drama', 'Supernatural'],
-    status: 'completed',
-    volumes: 3,
-    rating: 8.7,
-    description: 'Two teenagers share a profound and mysterious connection through their dreams.',
-    amazonLink: 'https://amazon.com/dp/1975383117/?tag=mangacompass-20',
-    asin: '1975383117',
-    popularity: 83,
-    year: 2016
   },
   {
     id: 'akira-1',
@@ -460,6 +477,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.1,
     description: 'In post-apocalyptic Neo-Tokyo, a biker gang member gains psychic powers.',
     amazonLink: 'https://amazon.com/dp/1935429000/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51WB2qZLFWL._SY445_SX342_.jpg',
     asin: '1935429000',
     popularity: 90,
     year: 1982
@@ -474,6 +492,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.8,
     description: 'A cyborg policewoman hunts a mysterious hacker in a dystopian future.',
     amazonLink: 'https://amazon.com/dp/1935429019/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/513MBcTGFuL._SY445_SX342_.jpg',
     asin: '1935429019',
     popularity: 87,
     year: 1989
@@ -488,23 +507,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.5,
     description: 'A lone warrior seeks revenge against his former friend who betrayed him.',
     amazonLink: 'https://amazon.com/dp/1506711987/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51IrW578SQL._SY445_SX342_.jpg',
     asin: '1506711987',
     popularity: 92,
     year: 1989
-  },
-  {
-    id: 'monster-1',
-    title: 'Monster, Vol. 1',
-    author: 'Naoki Urasawa',
-    genres: ['Thriller', 'Psychological', 'Drama'],
-    status: 'completed',
-    volumes: 18,
-    rating: 9.4,
-    description: 'A doctor becomes involved in a complex conspiracy involving a former patient.',
-    amazonLink: 'https://amazon.com/dp/1421569051/?tag=mangacompass-20',
-    asin: '1421569051',
-    popularity: 89,
-    year: 1994
   },
   {
     id: 'vinland-saga-1',
@@ -516,6 +522,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.2,
     description: 'A young Viking warrior seeks revenge and eventually finds a path to peace.',
     amazonLink: 'https://amazon.com/dp/1612624200/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51stD1wi6AL._SY445_SX342_.jpg',
     asin: '1612624200',
     popularity: 88,
     year: 2005
@@ -530,6 +537,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.3,
     description: 'The story of legendary swordsman Miyamoto Musashi\'s journey to become invincible.',
     amazonLink: 'https://amazon.com/dp/1421520540/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51zxhFjkk3L._SY445_SX342_.jpg',
     asin: '1421520540',
     popularity: 87,
     year: 1998
@@ -544,6 +552,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.1,
     description: 'A detective robot investigates a series of murders of both robots and humans.',
     amazonLink: 'https://amazon.com/dp/1421519186/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51um0nnstQL._SY445_SX342_.jpg',
     asin: '1421519186',
     popularity: 86,
     year: 2003
@@ -558,6 +567,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.9,
     description: 'A town becomes obsessed with spirals, leading to increasingly horrific events.',
     amazonLink: 'https://amazon.com/dp/1421561328/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51Ef1f4UnqL._SY445_SX342_.jpg',
     asin: '1421561328',
     popularity: 85,
     year: 1998
@@ -572,6 +582,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'The story of an immortal girl who brings out the darkest impulses in those around her.',
     amazonLink: 'https://amazon.com/dp/1421590573/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51FnWKCNWUL._SY445_SX342_.jpg',
     asin: '1421590573',
     popularity: 82,
     year: 1987
@@ -586,6 +597,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.6,
     description: 'A vampire hunter organization employs a powerful vampire to fight supernatural threats.',
     amazonLink: 'https://amazon.com/dp/1593070209/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/515Q8MEzmTL._SY445_SX342_.jpg',
     asin: '1593070209',
     popularity: 81,
     year: 1997
@@ -600,6 +612,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.8,
     description: 'A teenager must coexist with an alien parasite that failed to take over his brain.',
     amazonLink: 'https://amazon.com/dp/1632360721/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51FjuhcWnLL._SY445_SX342_.jpg',
     asin: '1632360721',
     popularity: 84,
     year: 1988
@@ -614,6 +627,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.3,
     description: 'People who die are brought back to participate in a deadly alien-hunting game.',
     amazonLink: 'https://amazon.com/dp/1506714951/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51AVON-6UzL._SY445_SX342_.jpg',
     asin: '1506714951',
     popularity: 80,
     year: 2000
@@ -628,6 +642,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.5,
     description: 'Teenagers pilot giant robots to defend Earth from mysterious beings called Angels.',
     amazonLink: 'https://amazon.com/dp/1421518406/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51xXf9hVT8L._SX342_SY445_.jpg',
     asin: '1421518406',
     popularity: 83,
     year: 1994
@@ -642,23 +657,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'Bounty hunters travel through space in 2071, hunting criminals across the solar system.',
     amazonLink: 'https://amazon.com/dp/1427807892/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51-mWko6oTL._SY445_SX342_.jpg',
     asin: '1427807892',
     popularity: 82,
     year: 1997
-  },
-  {
-    id: 'trigun-1',
-    title: 'Trigun, Vol. 1',
-    author: 'Yasuhiro Nightow',
-    genres: ['Action', 'Sci-Fi', 'Adventure'],
-    status: 'completed',
-    volumes: 14,
-    rating: 8.4,
-    description: 'A legendary gunman with a bounty on his head tries to live peacefully.',
-    amazonLink: 'https://amazon.com/dp/1506705928/?tag=mangacompass-20',
-    asin: '1506705928',
-    popularity: 79,
-    year: 1995
   },
   {
     id: 'battle-angel-alita-1',
@@ -670,6 +672,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.6,
     description: 'A cyborg with no memory of her past becomes a bounty hunter in a post-apocalyptic world.',
     amazonLink: 'https://amazon.com/dp/1632360802/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51XkjnehHjL._SY445_SX342_.jpg',
     asin: '1632360802',
     popularity: 81,
     year: 1990
@@ -684,6 +687,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.9,
     description: 'A self-proclaimed mad scientist accidentally discovers time travel.',
     amazonLink: 'https://amazon.com/dp/1927925665/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51xMpLcpMxL._SY445_SX342_.jpg',
     asin: '1927925665',
     popularity: 85,
     year: 2009
@@ -698,23 +702,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'An exiled prince gains the power to command anyone to obey.',
     amazonLink: 'https://amazon.com/dp/1594099731/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/517gIIay53L._SY445_SX342_.jpg',
     asin: '1594099731',
     popularity: 84,
     year: 2006
-  },
-  {
-    id: 'gurren-lagann-1',
-    title: 'Gurren Lagann, Vol. 1',
-    author: 'Kazuki Nakashima',
-    genres: ['Mecha', 'Action', 'Adventure'],
-    status: 'completed',
-    volumes: 10,
-    rating: 8.8,
-    description: 'Humans living underground fight to reach the surface.',
-    amazonLink: 'https://amazon.com/dp/1421529122/?tag=mangacompass-20',
-    asin: '1421529122',
-    popularity: 83,
-    year: 2007
   },
   {
     id: 'made-in-abyss-1',
@@ -726,6 +717,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.0,
     description: 'A girl descends into a mysterious abyss to find her mother.',
     amazonLink: 'https://amazon.com/dp/1626927731/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/611sl2sM9bL._SY445_SX342_.jpg',
     asin: '1626927731',
     popularity: 86,
     year: 2012
@@ -740,6 +732,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.2,
     description: 'A man dedicated to exterminating goblins meets a priestess.',
     amazonLink: 'https://amazon.com/dp/031650159X/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/515zJNkTOuL._SY445_SX342_.jpg',
     asin: '031650159X',
     popularity: 80,
     year: 2016
@@ -754,6 +747,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.4,
     description: 'A player trapped in a game world becomes an undead overlord.',
     amazonLink: 'https://amazon.com/dp/0316272191/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51p1Wx72AJL._SY445_SX342_.jpg',
     asin: '0316272191',
     popularity: 82,
     year: 2010
@@ -768,6 +762,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.5,
     description: 'A shut-in dies and is reincarnated in a fantasy world with a useless goddess.',
     amazonLink: 'https://amazon.com/dp/0316468703/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51m-EE0bRzL._SY445_SX342_.jpg',
     asin: '0316468703',
     popularity: 81,
     year: 2013
@@ -782,6 +777,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'A young man gains the ability to return to a save point when he dies.',
     amazonLink: 'https://amazon.com/dp/0316315303/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51rY7YtM8jL._SY445_SX342_.jpg',
     asin: '0316315303',
     popularity: 85,
     year: 2012
@@ -796,6 +792,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.3,
     description: 'Players trapped in a virtual reality game must clear it to survive.',
     amazonLink: 'https://amazon.com/dp/0316371246/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51XPAnB4dsL._SY445_SX342_.jpg',
     asin: '0316371246',
     popularity: 84,
     year: 2009
@@ -810,6 +807,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.1,
     description: 'A hero summoned to another world is falsely accused and must fight alone.',
     amazonLink: 'https://amazon.com/dp/1935548727/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/513PCLmcFWL._SY445_SX342_.jpg',
     asin: '1935548727',
     popularity: 79,
     year: 2013
@@ -824,6 +822,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.6,
     description: 'A man reincarnated as a slime gains powerful abilities.',
     amazonLink: 'https://amazon.com/dp/1632365065/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51qE3QxcwiL._SY445_SX342_.jpg',
     asin: '1632365065',
     popularity: 83,
     year: 2013
@@ -838,6 +837,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.4,
     description: 'A jobless man gets a second chance at life in a fantasy world.',
     amazonLink: 'https://amazon.com/dp/1626926395/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51V0ISE96GL._SY445_SX342_.jpg',
     asin: '1626926395',
     popularity: 82,
     year: 2012
@@ -852,23 +852,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.3,
     description: 'Players trapped in an MMORPG must adapt to their new reality.',
     amazonLink: 'https://amazon.com/dp/0316383058/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/513Sv3QLz2L._SY445_SX342_.jpg',
     asin: '0316383058',
     popularity: 78,
     year: 2010
-  },
-  {
-    id: 'no-game-no-life-1',
-    title: 'No Game No Life, Vol. 1',
-    author: 'Yuu Kamiya',
-    genres: ['Fantasy', 'Comedy', 'Strategy'],
-    status: 'ongoing',
-    volumes: 12,
-    rating: 8.5,
-    description: 'Gaming siblings are transported to a world where everything is decided by games.',
-    amazonLink: 'https://amazon.com/dp/0316383112/?tag=mangacompass-20',
-    asin: '0316383112',
-    popularity: 81,
-    year: 2012
   },
   {
     id: 'danmachi-1',
@@ -880,6 +867,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.2,
     description: 'A young adventurer dreams of becoming a hero in a dungeon-filled world.',
     amazonLink: 'https://amazon.com/dp/0316339156/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51l2HkEWX1L._SY445_SX342_.jpg',
     asin: '0316339156',
     popularity: 80,
     year: 2013
@@ -894,6 +882,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'A cynical high school student is forced to join a service club.',
     amazonLink: 'https://amazon.com/dp/0316312290/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51uSU6JWxCL._SY445_SX342_.jpg',
     asin: '0316312290',
     popularity: 84,
     year: 2011
@@ -908,23 +897,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.8,
     description: 'Two students with crushes on each other\'s best friends team up.',
     amazonLink: 'https://amazon.com/dp/1626927952/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51yB1k81WaL._SY445_SX342_.jpg',
     asin: '1626927952',
     popularity: 85,
     year: 2006
-  },
-  {
-    id: 'clannad-1',
-    title: 'Clannad, Vol. 1',
-    author: 'Key',
-    genres: ['Romance', 'Drama', 'School'],
-    status: 'completed',
-    volumes: 4,
-    rating: 8.9,
-    description: 'A delinquent helps a girl restart the drama club.',
-    amazonLink: 'https://amazon.com/dp/1596975555/?tag=mangacompass-20',
-    asin: '1596975555',
-    popularity: 86,
-    year: 2004
   },
   {
     id: 'angel-beats-1',
@@ -936,37 +912,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.6,
     description: 'Students in the afterlife rebel against their fate.',
     amazonLink: 'https://amazon.com/dp/1626920974/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51FYzb1scxS._SY445_SX342_.jpg',
     asin: '1626920974',
     popularity: 83,
     year: 2010
-  },
-  {
-    id: 'charlotte-1',
-    title: 'Charlotte, Vol. 1',
-    author: 'Key',
-    genres: ['Supernatural', 'Drama', 'School'],
-    status: 'completed',
-    volumes: 6,
-    rating: 8.3,
-    description: 'Teenagers with special abilities try to live normal lives.',
-    amazonLink: 'https://amazon.com/dp/1975303458/?tag=mangacompass-20',
-    asin: '1975303458',
-    popularity: 79,
-    year: 2015
-  },
-  {
-    id: 'violet-evergarden-1',
-    title: 'Violet Evergarden, Vol. 1',
-    author: 'Kana Akatsuki',
-    genres: ['Drama', 'Romance', 'Historical'],
-    status: 'completed',
-    volumes: 4,
-    rating: 9.0,
-    description: 'A former child soldier becomes an Auto Memory Doll to understand emotions.',
-    amazonLink: 'https://amazon.com/dp/1974703258/?tag=mangacompass-20',
-    asin: '1974703258',
-    popularity: 87,
-    year: 2015
   },
   {
     id: 'bunny-girl-senpai-1',
@@ -978,6 +927,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'A high school student helps girls suffering from supernatural phenomena.',
     amazonLink: 'https://amazon.com/dp/1975399358/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51lvPRF5QSL._SY445_SX342_.jpg',
     asin: '1975399358',
     popularity: 84,
     year: 2014
@@ -992,6 +942,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.8,
     description: 'A former vampire helps girls afflicted by supernatural oddities.',
     amazonLink: 'https://amazon.com/dp/1942993889/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/41hV1kamc3L._SY445_SX342_.jpg',
     asin: '1942993889',
     popularity: 85,
     year: 2006
@@ -1006,6 +957,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.5,
     description: 'Strange events unfold in Tokyo\'s Ikebukuro district.',
     amazonLink: 'https://amazon.com/dp/0316039020/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/410S3MGpbgL._SY445_SX342_.jpg',
     asin: '0316039020',
     popularity: 82,
     year: 2004
@@ -1020,6 +972,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'Immortals and alchemists clash in 1930s America.',
     amazonLink: 'https://amazon.com/dp/0316552518/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/61Hv-5DXg5L._SY445_SX342_.jpg',
     asin: '0316552518',
     popularity: 81,
     year: 2003
@@ -1034,6 +987,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.9,
     description: 'A merchant travels with a wolf deity in medieval times.',
     amazonLink: 'https://amazon.com/dp/0316336610/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51e-uKBSXZL._SY445_SX342_.jpg',
     asin: '0316336610',
     popularity: 86,
     year: 2006
@@ -1048,6 +1002,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.4,
     description: 'A high school student unknowingly has reality-warping powers.',
     amazonLink: 'https://amazon.com/dp/0316039020/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/410S3MGpbgL._SY445_SX342_.jpg',
     asin: '0316039020',
     popularity: 83,
     year: 2003
@@ -1062,23 +1017,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.3,
     description: 'A student with the power to nullify abilities protects a girl with forbidden knowledge.',
     amazonLink: 'https://amazon.com/dp/0316359920/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51-5xhKLjaL._SY445_SX342_.jpg',
     asin: '0316359920',
     popularity: 80,
     year: 2004
-  },
-  {
-    id: 'railgun-1',
-    title: 'A Certain Scientific Railgun, Vol. 1',
-    author: 'Kazuma Kamachi',
-    genres: ['Supernatural', 'Action', 'Sci-Fi'],
-    status: 'ongoing',
-    volumes: 17,
-    rating: 8.5,
-    description: 'An electromaster navigates life in Academy City.',
-    amazonLink: 'https://amazon.com/dp/1937867005/?tag=mangacompass-20',
-    asin: '1937867005',
-    popularity: 82,
-    year: 2007
   },
   {
     id: 'date-a-live-1',
@@ -1090,6 +1032,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.2,
     description: 'A boy must date spirits to save the world from destruction.',
     amazonLink: 'https://amazon.com/dp/0316442143/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51VlfTEs72L._SY445_SX342_.jpg',
     asin: '0316442143',
     popularity: 78,
     year: 2011
@@ -1104,23 +1047,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.1,
     description: 'A boy enrolls in a magic academy to save his cousin.',
     amazonLink: 'https://amazon.com/dp/0316302198/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51l3yvPLKrL._SY445_SX342_.jpg',
     asin: '0316302198',
     popularity: 77,
     year: 2010
-  },
-  {
-    id: 'highschool-dxd-1',
-    title: 'High School DxD, Vol. 1',
-    author: 'Ichiei Ishibumi',
-    genres: ['Supernatural', 'Action', 'Romance'],
-    status: 'completed',
-    volumes: 25,
-    rating: 8.0,
-    description: 'A perverted student is reincarnated as a devil.',
-    amazonLink: 'https://amazon.com/dp/0316409235/?tag=mangacompass-20',
-    asin: '0316409235',
-    popularity: 76,
-    year: 2008
   },
   {
     id: 'infinite-stratos-1',
@@ -1132,23 +1062,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 7.8,
     description: 'The only male who can pilot an IS attends an all-girls academy.',
     amazonLink: 'https://amazon.com/dp/1937867722/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/519Qb++8biL._SY445_SX342_.jpg',
     asin: '1937867722',
     popularity: 74,
     year: 2009
-  },
-  {
-    id: 'strike-the-blood-1',
-    title: 'Strike the Blood, Vol. 1',
-    author: 'Gakuto Mikumo',
-    genres: ['Supernatural', 'Action', 'Romance'],
-    status: 'completed',
-    volumes: 22,
-    rating: 8.1,
-    description: 'A high school student becomes the world\'s most powerful vampire.',
-    amazonLink: 'https://amazon.com/dp/0316345466/?tag=mangacompass-20',
-    asin: '0316345466',
-    popularity: 77,
-    year: 2011
   },
   {
     id: 'accel-world-1',
@@ -1160,6 +1077,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.2,
     description: 'A bullied student enters a virtual reality fighting game.',
     amazonLink: 'https://amazon.com/dp/0316376736/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/410sUf6CbAL._SY445_SX342_.jpg',
     asin: '0316376736',
     popularity: 79,
     year: 2009
@@ -1174,6 +1092,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.3,
     description: 'A "weak" student hides his true magical abilities.',
     amazonLink: 'https://amazon.com/dp/0316348805/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51udgxUBD4L._SY445_SX342_.jpg',
     asin: '0316348805',
     popularity: 81,
     year: 2008
@@ -1188,6 +1107,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.6,
     description: 'Students compete in an elite school with a hidden class system.',
     amazonLink: 'https://amazon.com/dp/1642751375/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/516uhDiY73L._SY445_SX342_.jpg',
     asin: '1642751375',
     popularity: 84,
     year: 2015
@@ -1202,6 +1122,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.8,
     description: 'A handler commands child soldiers fighting an endless war.',
     amazonLink: 'https://amazon.com/dp/1975303121/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51WUXGblafL._SY445_SX342_.jpg',
     asin: '1975303121',
     popularity: 85,
     year: 2017
@@ -1216,6 +1137,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.4,
     description: 'People with no memories struggle to survive in a fantasy world.',
     amazonLink: 'https://amazon.com/dp/1626925208/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/512JmxoLnpL._SY445_SX342_.jpg',
     asin: '1626925208',
     popularity: 80,
     year: 2013
@@ -1230,6 +1152,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.1,
     description: 'A weak student becomes overpowered after falling into an abyss.',
     amazonLink: 'https://amazon.com/dp/1626929009/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51NfIiCZrUL._SY445_SX342_.jpg',
     asin: '1626929009',
     popularity: 78,
     year: 2013
@@ -1244,6 +1167,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.3,
     description: 'A goddess summons an extremely cautious hero to save a world.',
     amazonLink: 'https://amazon.com/dp/1975356829/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51jZ9ny16SL._SY445_SX342_.jpg',
     asin: '1975356829',
     popularity: 79,
     year: 2016
@@ -1258,6 +1182,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.5,
     description: 'A salaryman is reincarnated as a young girl in a war-torn magical world.',
     amazonLink: 'https://amazon.com/dp/0316512443/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51MQCUvviJL._SY445_SX342_.jpg',
     asin: '0316512443',
     popularity: 82,
     year: 2013
@@ -1272,6 +1197,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.2,
     description: 'Daily life adventures of Rimuru and friends.',
     amazonLink: 'https://amazon.com/dp/1632368854/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51hCAUxJlZL._SX342_SY445_.jpg',
     asin: '1632368854',
     popularity: 77,
     year: 2018
@@ -1286,6 +1212,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.4,
     description: 'A high school girl is reincarnated as a spider monster.',
     amazonLink: 'https://amazon.com/dp/0316412899/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51Jk7KiOa1L._SY445_SX342_.jpg',
     asin: '0316412899',
     popularity: 81,
     year: 2015
@@ -1300,22 +1227,9 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'A book lover is reborn in a world where books are scarce.',
     amazonLink: 'https://amazon.com/dp/1718372620/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51PcHn88W3L._SY445_SX342_.jpg',
     asin: '1718372620',
     popularity: 83,
-    year: 2013
-  },
-  {
-    id: 'death-march-1',
-    title: 'Death March to the Parallel World Rhapsody, Vol. 1',
-    author: 'Hiro Ainana',
-    genres: ['Fantasy', 'Fantasy', 'Adventure'],
-    status: 'ongoing',
-    volumes: 23,
-    rating: 8.0,
-    description: 'A programmer wakes up in a game world at max level.',
-    amazonLink: 'https://amazon.com/dp/0316439037/?tag=mangacompass-20',
-    asin: '0316439037',
-    popularity: 75,
     year: 2013
   },
   {
@@ -1328,6 +1242,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 7.9,
     description: 'A boy is accidentally killed and reborn with his smartphone.',
     amazonLink: 'https://amazon.com/dp/1718355025/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/61qk3g37XTL._SY445_SX342_.jpg',
     asin: '1718355025',
     popularity: 74,
     year: 2013
@@ -1342,6 +1257,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 7.8,
     description: 'A game administrator is transported to another world as the demon lord.',
     amazonLink: 'https://amazon.com/dp/1718352042/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51wCCjixvBL._SY445_SX342_.jpg',
     asin: '1718352042',
     popularity: 73,
     year: 2016
@@ -1356,51 +1272,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.1,
     description: 'A former agent is reborn in a fantasy world and becomes a teacher.',
     amazonLink: 'https://amazon.com/dp/1626929742/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51tk74WggqL._SY445_SX342_.jpg',
     asin: '1626929742',
     popularity: 76,
     year: 2013
-  },
-  {
-    id: 'kaguya-sama-1',
-    title: 'Kaguya-sama: Love is War, Vol. 1',
-    author: 'Aka Akasaka',
-    genres: ['Romance', 'Comedy', 'School'],
-    status: 'completed',
-    volumes: 28,
-    rating: 9.0,
-    description: 'Two student council members engage in a war of love and pride.',
-    amazonLink: 'https://amazon.com/dp/1421589041/?tag=mangacompass-20',
-    asin: '1421589041',
-    popularity: 90,
-    year: 2015
-  },
-  {
-    id: 'komi-san-1',
-    title: 'Komi Can\'t Communicate, Vol. 1',
-    author: 'Tomohito Oda',
-    genres: ['Romance', 'Comedy', 'School'],
-    status: 'ongoing',
-    volumes: 31,
-    rating: 8.6,
-    description: 'A beautiful girl with communication disorder tries to make 100 friends.',
-    amazonLink: 'https://amazon.com/dp/1974707126/?tag=mangacompass-20',
-    asin: '1974707126',
-    popularity: 86,
-    year: 2016
-  },
-  {
-    id: 'horimiya-1',
-    title: 'Horimiya, Vol. 1',
-    author: 'HERO',
-    genres: ['Romance', 'School', 'Slice of Life'],
-    status: 'completed',
-    volumes: 16,
-    rating: 8.8,
-    description: 'Two students with hidden sides discover each other\'s secrets.',
-    amazonLink: 'https://amazon.com/dp/0316336017/?tag=mangacompass-20',
-    asin: '0316336017',
-    popularity: 87,
-    year: 2011
   },
   {
     id: 'quintessential-quintuplets-1',
@@ -1412,6 +1287,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.4,
     description: 'A poor student tutors five identical sisters.',
     amazonLink: 'https://amazon.com/dp/1632368196/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/516CcnA4usL._SY445_SX342_.jpg',
     asin: '1632368196',
     popularity: 84,
     year: 2017
@@ -1426,6 +1302,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 7.9,
     description: 'A college student rents a girlfriend and complications ensue.',
     amazonLink: 'https://amazon.com/dp/1646510674/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51B2UDG5t0L._SY445_SX342_.jpg',
     asin: '1646510674',
     popularity: 78,
     year: 2017
@@ -1440,6 +1317,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.1,
     description: 'A war veteran searches for hidden Ainu gold in Hokkaido.',
     amazonLink: 'https://amazon.com/dp/1421594889/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51zcqbZW-fL._SY445_SX342_.jpg',
     asin: '1421594889',
     popularity: 88,
     year: 2014
@@ -1454,23 +1332,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 9.2,
     description: 'A war orphan aims to become the greatest general in ancient China.',
     amazonLink: 'https://amazon.com/dp/1642750069/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/41-fHIao8TL._SY445_SX342_.jpg',
     asin: '1642750069',
     popularity: 89,
     year: 2006
-  },
-  {
-    id: 'real-1',
-    title: 'Real, Vol. 1',
-    author: 'Takehiko Inoue',
-    genres: ['Sports', 'Drama', 'Slice of Life'],
-    status: 'ongoing',
-    volumes: 15,
-    rating: 9.0,
-    description: 'Three young men find purpose through wheelchair basketball.',
-    amazonLink: 'https://amazon.com/dp/1421519893/?tag=mangacompass-20',
-    asin: '1421519893',
-    popularity: 85,
-    year: 1999
   },
   {
     id: 'blue-lock-1',
@@ -1485,20 +1350,6 @@ export const MOCK_MANGA: Manga[] = [
     asin: '1646516575',
     popularity: 85,
     year: 2018
-  },
-  {
-    id: 'yowamushi-pedal-1',
-    title: 'Yowamushi Pedal, Vol. 1',
-    author: 'Wataru Watanabe',
-    genres: ['Sports', 'School', 'Drama'],
-    status: 'ongoing',
-    volumes: 81,
-    rating: 8.4,
-    description: 'An otaku discovers his talent for competitive cycling.',
-    amazonLink: 'https://amazon.com/dp/1975328012/?tag=mangacompass-20',
-    asin: '1975328012',
-    popularity: 81,
-    year: 2008
   },
   {
     id: 'diamond-no-ace-1',
@@ -1524,6 +1375,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.3,
     description: 'A studious teen discovers tennis and aims for the top.',
     amazonLink: 'https://amazon.com/dp/1632362724/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/510aKDxLkyL._SY445_SX342_.jpg',
     asin: '1632362724',
     popularity: 79,
     year: 2007
@@ -1552,6 +1404,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.5,
     description: 'An unconventional coach takes over a struggling soccer team.',
     amazonLink: 'https://amazon.com/dp/1646512871/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/518QfSIKYXL._SY445_SX342_.jpg',
     asin: '1646512871',
     popularity: 80,
     year: 2007
@@ -1585,20 +1438,6 @@ export const MOCK_MANGA: Manga[] = [
     year: 1995
   },
   {
-    id: 'wangan-midnight-1',
-    title: 'Wangan Midnight, Vol. 1',
-    author: 'Michiharu Kusunoki',
-    genres: ['Sports', 'Racing', 'Drama'],
-    status: 'completed',
-    volumes: 42,
-    rating: 8.4,
-    description: 'Street racers battle on Tokyo\'s highways at midnight.',
-    amazonLink: 'https://amazon.com/dp/1646514784/?tag=mangacompass-20',
-    asin: '1646514784',
-    popularity: 81,
-    year: 1990
-  },
-  {
     id: 'eyeshield-21-1',
     title: 'Eyeshield 21, Vol. 1',
     author: 'Riichiro Inagaki',
@@ -1608,6 +1447,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.7,
     description: 'A timid student becomes a star American football player.',
     amazonLink: 'https://amazon.com/dp/1591168066/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/517PYRBWVML._SY445_SX342_.jpg',
     asin: '1591168066',
     popularity: 84,
     year: 2002
@@ -1622,6 +1462,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.2,
     description: 'A tennis prodigy joins his school team to become the best.',
     amazonLink: 'https://amazon.com/dp/1591163358/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/21T79jr48JL.jpg',
     asin: '1591163358',
     popularity: 80,
     year: 1999
@@ -1697,34 +1538,6 @@ export const MOCK_MANGA: Manga[] = [
     year: 1998
   },
   {
-    id: 'march-comes-in-like-a-lion-1',
-    title: 'March Comes in Like a Lion, Vol. 1',
-    author: 'Chica Umino',
-    genres: ['Drama', 'Slice of Life', 'Sports'],
-    status: 'ongoing',
-    volumes: 17,
-    rating: 9.0,
-    description: 'A teenage professional shogi player finds family and warmth.',
-    amazonLink: 'https://amazon.com/dp/1634429893/?tag=mangacompass-20',
-    asin: '1634429893',
-    popularity: 87,
-    year: 2007
-  },
-  {
-    id: 'bakuman-1',
-    title: 'Bakuman, Vol. 1',
-    author: 'Tsugumi Ohba',
-    genres: ['Drama', 'Romance', 'Slice of Life'],
-    status: 'completed',
-    volumes: 20,
-    rating: 8.7,
-    description: 'Two students pursue their dream of becoming manga creators.',
-    amazonLink: 'https://amazon.com/dp/1421535137/?tag=mangacompass-20',
-    asin: '1421535137',
-    popularity: 84,
-    year: 2008
-  },
-  {
     id: 'beck-1',
     title: 'BECK: Mongolian Chop Squad, Vol. 1',
     author: 'Harold Sakuishi',
@@ -1764,48 +1577,6 @@ export const MOCK_MANGA: Manga[] = [
     amazonLink: 'https://amazon.com/dp/1421549263/?tag=mangacompass-20',
     asin: '1421549263',
     popularity: 81,
-    year: 2007
-  },
-  {
-    id: 'blue-giant-1',
-    title: 'Blue Giant, Vol. 1',
-    author: 'Shinichi Ishizuka',
-    genres: ['Music', 'Drama', 'Coming of Age'],
-    status: 'completed',
-    volumes: 10,
-    rating: 8.9,
-    description: 'A young man pursues his dream of becoming a jazz saxophonist.',
-    amazonLink: 'https://amazon.com/dp/1626929878/?tag=mangacompass-20',
-    asin: '1626929878',
-    popularity: 84,
-    year: 2013
-  },
-  {
-    id: 'given-1',
-    title: 'Given, Vol. 1',
-    author: 'Natsuki Kizu',
-    genres: ['Music', 'Romance', 'Drama'],
-    status: 'ongoing',
-    volumes: 8,
-    rating: 8.5,
-    description: 'High school students form a band and discover love.',
-    amazonLink: 'https://amazon.com/dp/197470968X/?tag=mangacompass-20',
-    asin: '197470968X',
-    popularity: 82,
-    year: 2013
-  },
-  {
-    id: 'k-on-1',
-    title: 'K-ON!, Vol. 1',
-    author: 'Kakifly',
-    genres: ['Music', 'Comedy', 'School'],
-    status: 'completed',
-    volumes: 6,
-    rating: 8.2,
-    description: 'Four high school girls save their light music club.',
-    amazonLink: 'https://amazon.com/dp/0316188492/?tag=mangacompass-20',
-    asin: '0316188492',
-    popularity: 80,
     year: 2007
   },
   {
@@ -1879,20 +1650,6 @@ export const MOCK_MANGA: Manga[] = [
     year: 2005
   },
   {
-    id: 'piano-no-mori-1',
-    title: 'Piano Forest, Vol. 1',
-    author: 'Makoto Isshiki',
-    genres: ['Music', 'Drama', 'Coming of Age'],
-    status: 'completed',
-    volumes: 26,
-    rating: 8.7,
-    description: 'A boy from the wrong side of town becomes a piano prodigy.',
-    amazonLink: 'https://amazon.com/dp/1632365719/?tag=mangacompass-20',
-    asin: '1632365719',
-    popularity: 81,
-    year: 1998
-  },
-  {
     id: 'ballroom-e-youkoso-1',
     title: 'Welcome to the Ballroom, Vol. 1',
     author: 'Tomo Takeuchi',
@@ -1944,6 +1701,7 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.9,
     description: 'Two actresses compete for the ultimate role.',
     amazonLink: 'https://amazon.com/dp/1421541505/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/519urVkKj-L._SY445_SX342_.jpg',
     asin: '1421541505',
     popularity: 83,
     year: 1976
@@ -1977,20 +1735,6 @@ export const MOCK_MANGA: Manga[] = [
     year: 2000
   },
   {
-    id: 'paradise-kiss-1',
-    title: 'Paradise Kiss, Vol. 1',
-    author: 'Ai Yazawa',
-    genres: ['Romance', 'Drama', 'Fashion'],
-    status: 'completed',
-    volumes: 5,
-    rating: 8.6,
-    description: 'A studious girl enters the world of fashion design.',
-    amazonLink: 'https://amazon.com/dp/1591169011/?tag=mangacompass-20',
-    asin: '1591169011',
-    popularity: 82,
-    year: 1999
-  },
-  {
     id: 'ao-haru-ride-1',
     title: 'Ao Haru Ride, Vol. 1',
     author: 'Io Sakisaka',
@@ -2005,20 +1749,6 @@ export const MOCK_MANGA: Manga[] = [
     year: 2011
   },
   {
-    id: 'strobe-edge-1',
-    title: 'Strobe Edge, Vol. 1',
-    author: 'Io Sakisaka',
-    genres: ['Romance', 'School', 'Drama'],
-    status: 'completed',
-    volumes: 10,
-    rating: 8.3,
-    description: 'A naive girl experiences first love with complications.',
-    amazonLink: 'https://amazon.com/dp/1421550334/?tag=mangacompass-20',
-    asin: '1421550334',
-    popularity: 79,
-    year: 2007
-  },
-  {
     id: 'lovely-complex-1',
     title: 'Love Com, Vol. 1',
     author: 'Aya Nakahara',
@@ -2031,20 +1761,6 @@ export const MOCK_MANGA: Manga[] = [
     asin: '1421519844',
     popularity: 80,
     year: 2001
-  },
-  {
-    id: 'maid-sama-1',
-    title: 'Maid Sama!, Vol. 1',
-    author: 'Hiro Fujiwara',
-    genres: ['Romance', 'Comedy', 'School'],
-    status: 'completed',
-    volumes: 18,
-    rating: 8.4,
-    description: 'A student council president hides her job at a maid cafe.',
-    amazonLink: 'https://amazon.com/dp/1427818307/?tag=mangacompass-20',
-    asin: '1427818307',
-    popularity: 82,
-    year: 2005
   },
   {
     id: 'special-a-1',
@@ -2098,23 +1814,10 @@ export const MOCK_MANGA: Manga[] = [
     rating: 8.2,
     description: 'Rival gang heirs fake a relationship to prevent war.',
     amazonLink: 'https://amazon.com/dp/1421557991/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/51629VeV7OL._SY445_SX342_.jpg',
     asin: '1421557991',
     popularity: 80,
     year: 2011
-  },
-  {
-    id: 'we-never-learn-1',
-    title: 'We Never Learn, Vol. 1',
-    author: 'Taishi Tsutsui',
-    genres: ['Romance', 'Comedy', 'School'],
-    status: 'completed',
-    volumes: 21,
-    rating: 8.1,
-    description: 'A poor student tutors geniuses in their weakest subjects.',
-    amazonLink: 'https://amazon.com/dp/1421535137/?tag=mangacompass-20',
-    asin: '1421535137',
-    popularity: 79,
-    year: 2017
   },
   {
     id: 'domestic-girlfriend-1',
@@ -2143,20 +1846,6 @@ export const MOCK_MANGA: Manga[] = [
     asin: '1632362945',
     popularity: 77,
     year: 2009
-  },
-  {
-    id: 'suzuka-1',
-    title: 'Suzuka, Vol. 1',
-    author: 'Kouji Seo',
-    genres: ['Romance', 'Sports', 'Drama'],
-    status: 'completed',
-    volumes: 18,
-    rating: 8.1,
-    description: 'A boy joins track to get closer to his crush.',
-    amazonLink: 'https://amazon.com/dp/0345492684/?tag=mangacompass-20',
-    asin: '0345492684',
-    popularity: 76,
-    year: 2004
   },
   {
     id: 'fuuka-1',
@@ -2199,20 +1888,6 @@ export const MOCK_MANGA: Manga[] = [
     asin: '1632360594',
     popularity: 81,
     year: 2012
-  },
-  {
-    id: 'trinity-soul-1',
-    title: 'Sankarea: Undying Love, Vol. 1',
-    author: 'Mitsuru Hattori',
-    genres: ['Romance', 'Horror', 'Comedy'],
-    status: 'completed',
-    volumes: 11,
-    rating: 8.1,
-    description: 'A zombie-obsessed boy\'s crush becomes undead.',
-    amazonLink: 'https://amazon.com/dp/1612629113/?tag=mangacompass-20',
-    asin: '1612629113',
-    popularity: 78,
-    year: 2009
   },
   {
     id: 'mysterious-girlfriend-x-1',
@@ -2299,20 +1974,6 @@ export const MOCK_MANGA: Manga[] = [
     year: 2019
   },
   {
-    id: 'wotakoi-1',
-    title: 'Wotakoi: Love is Hard for Otaku, Vol. 1',
-    author: 'Fujita',
-    genres: ['Romance', 'Comedy', 'Office'],
-    status: 'ongoing',
-    volumes: 11,
-    rating: 8.5,
-    description: 'Adult otaku navigate work and relationships.',
-    amazonLink: 'https://amazon.com/dp/1632367602/?tag=mangacompass-20',
-    asin: '1632367602',
-    popularity: 84,
-    year: 2014
-  },
-  {
     id: 'sweat-and-soap-1',
     title: 'Sweat and Soap, Vol. 1',
     author: 'Kintetsu Yamada',
@@ -2327,20 +1988,6 @@ export const MOCK_MANGA: Manga[] = [
     year: 2018
   },
   {
-    id: 'love-is-war-2',
-    title: 'An Incurable Case of Love, Vol. 1',
-    author: 'Maki Enjoji',
-    genres: ['Romance', 'Medical', 'Drama'],
-    status: 'completed',
-    volumes: 7,
-    rating: 8.2,
-    description: 'A nurse pursues a cold-hearted doctor who saved her.',
-    amazonLink: 'https://amazon.com/dp/1974714632/?tag=mangacompass-20',
-    asin: '1974714632',
-    popularity: 79,
-    year: 2016
-  },
-  {
     id: 'kiss-him-not-me-1',
     title: 'Kiss Him, Not Me, Vol. 1',
     author: 'Junko',
@@ -2353,20 +2000,6 @@ export const MOCK_MANGA: Manga[] = [
     asin: '1632362996',
     popularity: 78,
     year: 2013
-  },
-  {
-    id: 'monthly-girls-nozaki-1',
-    title: 'Monthly Girls\' Nozaki-kun, Vol. 1',
-    author: 'Izumi Tsubaki',
-    genres: ['Romance', 'Comedy', 'School'],
-    status: 'ongoing',
-    volumes: 14,
-    rating: 8.7,
-    description: 'A girl discovers her crush is a shoujo manga artist.',
-    amazonLink: 'https://amazon.com/dp/031626874X/?tag=mangacompass-20',
-    asin: '031626874X',
-    popularity: 85,
-    year: 2011
   },
   {
     id: 'tomo-chan-1',
@@ -2509,34 +2142,6 @@ export const MOCK_MANGA: Manga[] = [
     year: 1980
   },
   {
-    id: 'video-girl-ai-1',
-    title: 'Video Girl Ai, Vol. 1',
-    author: 'Masakazu Katsura',
-    genres: ['Romance', 'Sci-Fi', 'Drama'],
-    status: 'completed',
-    volumes: 15,
-    rating: 8.2,
-    description: 'A girl emerges from a VCR to help with love problems.',
-    amazonLink: 'https://amazon.com/dp/1421502259/?tag=mangacompass-20',
-    asin: '1421502259',
-    popularity: 79,
-    year: 1989
-  },
-  {
-    id: 'is-1',
-    title: 'I"s, Vol. 1',
-    author: 'Masakazu Katsura',
-    genres: ['Romance', 'Drama', 'School'],
-    status: 'completed',
-    volumes: 15,
-    rating: 8.3,
-    description: 'A shy boy pursues his crush through high school.',
-    amazonLink: 'https://amazon.com/dp/1421500329/?tag=mangacompass-20',
-    asin: '1421500329',
-    popularity: 80,
-    year: 1997
-  },
-  {
     id: 'dna2-1',
     title: 'DNA², Vol. 1',
     author: 'Masakazu Katsura',
@@ -2591,20 +2196,6 @@ export const MOCK_MANGA: Manga[] = [
     asin: '1591823269',
     popularity: 79,
     year: 1992
-  },
-  {
-    id: 'peach-girl-1',
-    title: 'Peach Girl, Vol. 1',
-    author: 'Miwa Ueda',
-    genres: ['Romance', 'Drama', 'School'],
-    status: 'completed',
-    volumes: 18,
-    rating: 8.0,
-    description: 'A tanned girl faces prejudice and love triangles.',
-    amazonLink: 'https://amazon.com/dp/1427800405/?tag=mangacompass-20',
-    asin: '1427800405',
-    popularity: 77,
-    year: 1997
   },
   {
     id: 'kare-kano-1',
