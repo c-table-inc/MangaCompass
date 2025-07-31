@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { 
@@ -28,18 +28,7 @@ export default function SimplifiedDashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-    loadUserData();
-  }, []); // loadUserDataは初回のみ実行する想定なので、依存関係に追加しない
-
-  useEffect(() => {
-    if (isMounted && user) {
-      trackPageView('/dashboard', user.id);
-    }
-  }, [isMounted, user]);
-
-  const loadUserData = async () => {
+  const loadUserData = useCallback(async () => {
     setState('loading');
     
     try {
@@ -71,7 +60,18 @@ export default function SimplifiedDashboardPage() {
       setError('Failed to load user data.');
       setState('error');
     }
-  };
+  }, []); // Empty dependency array since this function doesn't depend on any state
+
+  useEffect(() => {
+    setIsMounted(true);
+    loadUserData();
+  }, [loadUserData]); // loadUserData dependency added
+
+  useEffect(() => {
+    if (isMounted && user) {
+      trackPageView('/dashboard', user.id);
+    }
+  }, [isMounted, user]);
 
   const generateRecommendation = async (userData: SimplifiedUser, mood: MoodType) => {
     setIsGenerating(true);

@@ -242,7 +242,7 @@ export default function OnboardingPage() {
                 icon={Check}
                 iconPosition="right"
               >
-Start Recommendations
+Start
               </Button>
             ) : (
               <Button

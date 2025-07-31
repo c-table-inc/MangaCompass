@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui';
+import { Button, MangaCoverBackground } from '@/components/ui';
 import { MangaGrid } from '@/components/manga';
 import { getTopRatedManga, getPopularManga } from '@/lib/mockData';
 import { trackPageView } from '@/utils/analytics';
@@ -31,28 +31,38 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 mb-6">
-            Discover Your
-            <span className="block text-blue-600">Next Favorite Manga</span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            AI-powered personalized recommendations based on your reading history and preferences.
-            The ultimate manga discovery platform designed for international readers.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/onboarding">
-              <Button size="lg" className="w-full sm:w-auto">
-                Get Started Free
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
+    <div className="min-h-screen">
+      {/* Hero Section with Manga Cover Background */}
+      <MangaCoverBackground count={25} className="min-h-screen">
+        <section className="relative py-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+          <div className="max-w-7xl mx-auto text-center">
+            <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 mb-6">
+              Discover Your
+              <span className="block text-blue-600">Next Favorite Manga</span>
+            </h1>
+            <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
+              AI-powered personalized recommendations based on your reading history and preferences.
+              The ultimate manga discovery platform designed for international readers.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/onboarding">
+                <Button size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white shadow-lg">
+                  Get Started Free
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
+            
+            {/* Floating call-to-action hint */}
+            <div className="mt-12 animate-bounce">
+              <div className="inline-flex items-center px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg text-sm text-gray-600">
+                <BookOpen className="w-4 h-4 mr-2 text-blue-600" />
+                Choose from 50+ curated manga titles
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </MangaCoverBackground>
 
       {/* Features Section */}
       <section className="py-16 bg-white">
