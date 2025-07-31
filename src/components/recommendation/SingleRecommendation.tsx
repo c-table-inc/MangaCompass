@@ -231,12 +231,19 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
         </div>
       </div>
 
-      {/* アクションボタンエリア */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-            {/* メインCTA - Amazon */}
-            <div className="md:col-span-2">
+      {/* アクションボタンエリア - PC: インライン表示、モバイル: 固定表示 */}
+      
+      {/* PC用アクションエリア（lg以上で表示） */}
+      <div className="hidden lg:block">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
+            <div className="text-center mb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">この作品はいかがですか？</h3>
+              <p className="text-gray-600">気に入ったらすぐに読み始めることができます</p>
+            </div>
+            
+            <div className="space-y-4">
+              {/* メインCTA - Amazon */}
               <Button
                 variant="primary"
                 size="lg"
@@ -244,41 +251,98 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
                 icon={ExternalLink}
                 iconPosition="right"
                 onClick={onAmazonClick}
-                className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-4"
+                className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-5 text-lg"
               >
                 Amazonで購入する
               </Button>
+              
+              {/* サブアクション */}
+              <div className="grid grid-cols-2 gap-4">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  fullWidth
+                  icon={RefreshCw}
+                  onClick={onTryAgain}
+                  className="py-4"
+                >
+                  他の作品を見る
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="lg"
+                  fullWidth
+                  icon={ArrowLeft}
+                  onClick={onChangeMood}
+                  className="py-4"
+                >
+                  気分を変更
+                </Button>
+              </div>
+              
+              {/* 追加オプション */}
+              <div className="text-center pt-4 border-t border-gray-100">
+                <button
+                  onClick={onStartOver}
+                  className="text-sm text-gray-500 hover:text-gray-700 underline transition-colors"
+                >
+                  最初からやり直す
+                </button>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
 
+      {/* モバイル用固定アクションエリア（lg未満で表示） */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+        <div className="px-4 py-4">
+          <div className="space-y-3">
+            {/* メインCTA - Amazon */}
+            <Button
+              variant="primary"
+              size="lg"
+              fullWidth
+              icon={ExternalLink}
+              iconPosition="right"
+              onClick={onAmazonClick}
+              className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-4"
+            >
+              Amazonで購入する
+            </Button>
+            
             {/* サブアクション */}
-            <Button
-              variant="outline"
-              size="lg"
-              fullWidth
-              icon={RefreshCw}
-              onClick={onTryAgain}
-              className="py-4"
-            >
-              他の作品を見る
-            </Button>
+            <div className="grid grid-cols-2 gap-3">
+              <Button
+                variant="outline"
+                size="md"
+                fullWidth
+                icon={RefreshCw}
+                onClick={onTryAgain}
+                className="py-3"
+              >
+                他の作品
+              </Button>
 
-            <Button
-              variant="ghost"
-              size="lg"
-              fullWidth
-              icon={ArrowLeft}
-              onClick={onChangeMood}
-              className="py-4"
-            >
-              気分を変更
-            </Button>
+              <Button
+                variant="ghost"
+                size="md"
+                fullWidth
+                icon={ArrowLeft}
+                onClick={onChangeMood}
+                className="py-3"
+              >
+                気分変更
+              </Button>
+            </div>
           </div>
 
           {/* 追加オプション */}
-          <div className="flex justify-center mt-3">
+          <div className="text-center mt-3">
             <button
               onClick={onStartOver}
-              className="text-sm text-gray-500 hover:text-gray-700 underline"
+              className="text-xs text-gray-500 hover:text-gray-700 underline"
             >
               最初からやり直す
             </button>
@@ -286,8 +350,8 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
         </div>
       </div>
 
-      {/* 底面の余白（固定ボタンのため） */}
-      <div className="h-32"></div>
+      {/* モバイル用底面の余白（固定ボタンのため） */}
+      <div className="lg:hidden h-40"></div>
     </div>
   );
 };
