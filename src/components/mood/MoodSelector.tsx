@@ -142,35 +142,6 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
         ))}
       </div>
 
-      {/* Selection status description */}
-      {selectedMood && (
-        <div className="mt-6 p-4 rounded-lg bg-gray-50 border-l-4 max-w-4xl mx-auto"
-             style={{ borderLeftColor: selectedMood.color }}>
-          <div className="flex items-start">
-            <div className="text-2xl mr-3">{selectedMood.emoji}</div>
-            <div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-1">
-                {selectedMood.name}
-              </h4>
-              <p className="text-gray-600 text-sm">
-                {selectedMood.description}
-              </p>
-              
-              {/* Related genres display */}
-              <div className="mt-2">
-                <span className="text-xs text-gray-500">Related genres: </span>
-                <span className="text-xs text-gray-700">
-                  {Object.entries(selectedMood.genreWeights)
-                    .filter(([_, weight]) => weight >= 0.7)
-                    .map(([genre, _]) => genre)
-                    .join(', ')
-                  }
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Hidden text for accessibility */}
       <div className="sr-only" aria-live="polite">

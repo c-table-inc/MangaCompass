@@ -159,7 +159,7 @@ export default function OnboardingPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-8" role="main">
+      <main className="max-w-4xl mx-auto px-4 py-8 pb-32" role="main">
         <div className="bg-white rounded-lg shadow-lg p-6">
           {/* Step Header */}
           <div className="text-center mb-8">
@@ -205,8 +205,13 @@ export default function OnboardingPage() {
 
           </div>
 
-          {/* Navigation */}
-          <div className="flex justify-between items-center">
+          {/* Navigation - Hidden when floating buttons are shown */}
+          <div className={`flex justify-between items-center ${
+            (currentStep === 0 && onboardingData.selectedManga.length >= 3) ||
+            (currentStep === 1 && onboardingData.selectedMood)
+              ? 'hidden' 
+              : ''
+          }`}>
             <Button
               variant="outline"
               onClick={goToPreviousStep}
@@ -242,7 +247,7 @@ export default function OnboardingPage() {
                 icon={Check}
                 iconPosition="right"
               >
-Start
+                Start Recommendations
               </Button>
             ) : (
               <Button
@@ -259,19 +264,84 @@ Start
         </div>
       </main>
 
-      {/* Floating Next Button */}
+      {/* Enhanced Floating Next Button with Frame */}
       {currentStep === 0 && onboardingData.selectedManga.length >= 3 && (
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={goToNextStep}
-            className="shadow-lg bg-blue-600 hover:bg-blue-700 px-8 py-3"
-            icon={ArrowRight}
-            iconPosition="right"
-          >
-            Next ({onboardingData.selectedManga.length} selected)
-          </Button>
+        <div className="fixed bottom-0 left-0 right-0 z-50">
+          {/* Background Frame */}
+          <div className="bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-2xl">
+            <div className="max-w-4xl mx-auto px-4 py-6">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                {/* Progress Info */}
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Check className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">
+                      {onboardingData.selectedManga.length} manga selected
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Ready to proceed to mood selection
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Next Button */}
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={goToNextStep}
+                  className="shadow-lg bg-blue-600 hover:bg-blue-700 px-8 py-4 text-lg font-semibold w-full sm:w-auto"
+                  icon={ArrowRight}
+                  iconPosition="right"
+                >
+                  <span className="hidden sm:inline">Next ({onboardingData.selectedManga.length} selected)</span>
+                  <span className="sm:hidden">Next</span>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Enhanced Floating Start Button with Frame for Mood Selection */}
+      {currentStep === 1 && onboardingData.selectedMood && (
+        <div className="fixed bottom-0 left-0 right-0 z-50">
+          {/* Background Frame */}
+          <div className="bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-2xl">
+            <div className="max-w-4xl mx-auto px-4 py-6">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                {/* Mood Info */}
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" 
+                       style={{ backgroundColor: `${onboardingData.selectedMood.color}20` }}>
+                    <span className="text-2xl">{onboardingData.selectedMood.emoji}</span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">
+                      {onboardingData.selectedMood.name} mood selected
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Ready to get your personalized recommendations
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Start Button */}
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={finishOnboarding}
+                  className="shadow-lg bg-blue-600 hover:bg-blue-700 px-8 py-4 text-lg font-semibold w-full sm:w-auto"
+                  icon={Check}
+                  iconPosition="right"
+                >
+                  <span className="hidden sm:inline">Start Recommendations</span>
+                  <span className="sm:hidden">Start</span>
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
