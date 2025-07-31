@@ -1,0 +1,54 @@
+# MangaCompass Data Manager - Security Configuration
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Protect sensitive files
+<FilesMatch "\.(env|log|md|txt)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect directories
+<DirectoryMatch "(logs|cache|backups|vendor|config|src)">
+    Order allow,deny
+    Deny from all
+</DirectoryMatch>
+
+# Basic Authentication (can be enabled if needed)
+# AuthType Basic
+# AuthName "MangaCompass Data Manager"
+# AuthUserFile /path/to/.htpasswd
+# Require valid-user
+
+# Security Headers
+<IfModule mod_headers.c>
+    # Prevent clickjacking
+    Header always append X-Frame-Options SAMEORIGIN
+    
+    # XSS Protection
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Content Type Options
+    Header set X-Content-Type-Options nosniff
+    
+    # Referrer Policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (basic)
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
+</IfModule>
+
+# Disable server signature
+ServerSignature Off
+
+# Hide PHP version
+<IfModule mod_headers.c>
+    Header unset X-Powered-By
+</IfModule>
+
+# Prevent access to backup files
+<FilesMatch "\.(bak|backup|old|tmp)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

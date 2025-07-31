@@ -38,7 +38,10 @@
       "mcp__serena__write_memory",
       "mcp__serena__search_for_pattern",
       "WebFetch(domain:amazon.com)",
-      "mcp__serena__replace_regex"
+      "mcp__serena__replace_regex",
+      "Bash(find:*)",
+      "Bash(php:*)",
+      "Bash(REQUEST_METHOD=GET php public/api/list.php)"
     ],
     "deny": []
   },
