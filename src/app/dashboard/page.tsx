@@ -1,139 +1,226 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Button, Badge, Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
-import { RecommendationGrid } from '@/components/recommendation';
-import { MangaGrid } from '@/components/manga';
-import { generateUserRecommendations, getGenreRecommendations, getSimilarManga } from '@/lib/recommendations';
-import { getTopRatedManga, getPopularManga, MOCK_USER } from '@/lib/mockData';
-import { User, Recommendation, Manga } from '@/lib/types';
-import { trackPageView, trackRecommendationClick, generateDashboardStats } from '@/utils/analytics';
-import { generateDemoRevenueData } from '@/utils/affiliate';
 import { 
-  BookOpen, 
-  TrendingUp, 
-  Star, 
-  Users, 
-  Settings, 
-  BarChart3, 
-  Filter,
-  RefreshCw,
-  Heart,
-  Clock,
-  Award
-} from 'lucide-react';
+  SimplifiedUser, 
+  MoodType, 
+  SingleRecommendation as SingleRecommendationType,
+  RecommendationRecord 
+} from '@/lib/types';
+import { SingleRecommendation } from '@/components/recommendation';
+import { MoodSelector, QuickMoodSelector } from '@/components/mood';
+import { Button } from '@/components/ui';
+import { moodBasedEngine, generateMoodRecommendation, recordUserRecommendation } from '@/lib/moodEngine';
+import { trackPageView, trackRecommendationAction, trackMoodSelection } from '@/utils/analytics';
+import { BookOpen, RefreshCw, ArrowLeft, Settings } from 'lucide-react';
 
-export default function DashboardPage() {
-  const [user, setUser] = useState<User | null>(null);
-  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
-  const [genreRecommendations, setGenreRecommendations] = useState<Record<string, Recommendation[]>>({});
-  const [similarRecommendations, setSimilarRecommendations] = useState<Recommendation[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedGenre, setSelectedGenre] = useState<string>('');
-  const [showStats, setShowStats] = useState(true);
+type DashboardState = 'loading' | 'no-user' | 'mood-selection' | 'recommendation' | 'error';
+
+export default function SimplifiedDashboardPage() {
+  const router = useRouter();
+  const [state, setState] = useState<DashboardState>('loading');
+  const [user, setUser] = useState<SimplifiedUser | null>(null);
+  const [currentMood, setCurrentMood] = useState<MoodType | undefined>(undefined);
+  const [recommendation, setRecommendation] = useState<SingleRecommendationType | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    trackPageView('/dashboard', user?.id);
     loadUserData();
-  }, []);
+  }, []); // loadUserDataは初回のみ実行する想定なので、依存関係に追加しない
 
-  const loadUserData = () => {
-    setIsLoading(true);
+  useEffect(() => {
+    if (isMounted && user) {
+      trackPageView('/dashboard', user.id);
+    }
+  }, [isMounted, user]);
+
+  const loadUserData = async () => {
+    setState('loading');
     
     try {
-      // クライアントサイドでのみローカルストレージにアクセス
       if (typeof window === 'undefined') {
-        setUser(null);
-        setIsLoading(false);
+        setState('no-user');
         return;
       }
       
-      const savedUserData = localStorage.getItem('mangacompass_user_data');
-      const onboardingData = savedUserData ? JSON.parse(savedUserData) : null;
+      const savedUserData = localStorage.getItem('mangacompass_simplified_user');
+      const onboardingCompleted = localStorage.getItem('mangacompass_onboarding_completed');
       
-      // OnboardingDataをUser形式に変換
-      let userData = null;
-      if (onboardingData) {
-        userData = {
-          id: 'demo-user', // デモ用のユーザーID
-          readHistory: onboardingData.selectedManga || [],
-          favoriteGenres: onboardingData.favoriteGenres || [],
-          preferences: onboardingData.preferences || {
-            preferredStatus: ['ongoing', 'completed'],
-            minRating: 3.0,
-            excludeGenres: []
-          }
-        };
+      if (!savedUserData || !onboardingCompleted) {
+        setState('no-user');
+        return;
       }
       
+      const userData: SimplifiedUser = JSON.parse(savedUserData);
       setUser(userData);
       
-      // 推薦を生成（ユーザーデータがある場合のみ）
-      if (userData && userData.readHistory && userData.readHistory.length > 0) {
-        const userRecs = generateUserRecommendations(userData, 12);
-        setRecommendations(userRecs);
-        
-        // ジャンル別推薦
-        const genreRecs: Record<string, Recommendation[]> = {};
-        userData.favoriteGenres.slice(0, 3).forEach((genre: string) => {
-          genreRecs[genre] = getGenreRecommendations(genre, userData, 4);
-        });
-        setGenreRecommendations(genreRecs);
-        
-        // 類似漫画推薦（最近読んだ漫画から）
-        if (userData.readHistory.length > 0) {
-          const recentManga = userData.readHistory[0]; // 最新の読書
-          // TODO: 実際の実装では漫画IDから漫画オブジェクトを取得
-          // const manga = getMangaById(recentManga);
-          // const similar = getSimilarManga(manga, userData, 4);
-          // setSimilarRecommendations(similar);
-        }
+      // 既に気分が選択されている場合は推薦を生成
+      if (userData.selectedMood && userData.selectedMood) {
+        setCurrentMood(userData.selectedMood);
+        await generateRecommendation(userData, userData.selectedMood);
+      } else {
+        setState('mood-selection');
       }
     } catch (error) {
       console.error('Failed to load user data:', error);
-      setUser(null);
-    } finally {
-      setIsLoading(false);
+      setError('ユーザーデータの読み込みに失敗しました。');
+      setState('error');
     }
   };
 
-  const handleRecommendationClick = (recommendation: Recommendation, position: number) => {
-    trackRecommendationClick(recommendation, position, user?.id);
+  const generateRecommendation = async (userData: SimplifiedUser, mood: MoodType) => {
+    setIsGenerating(true);
+    setState('loading');
+    
+    try {
+      // 短い遅延で推薦生成の体験を向上
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      const newRecommendation = generateMoodRecommendation(userData, mood);
+      setRecommendation(newRecommendation);
+      
+      // 推薦を記録
+      const record = recordUserRecommendation(userData, newRecommendation, 'viewed');
+      
+      // ユーザーデータを更新して保存
+      const updatedUser = { ...userData, selectedMood: mood };
+      setUser(updatedUser);
+      localStorage.setItem('mangacompass_simplified_user', JSON.stringify(updatedUser));
+      
+      setState('recommendation');
+      trackMoodSelection(mood, userData.id);
+    } catch (error) {
+      console.error('Failed to generate recommendation:', error);
+      setError('推薦の生成に失敗しました。もう一度お試しください。');
+      setState('error');
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
-  const handleRefreshRecommendations = () => {
+  const handleMoodSelect = async (mood: MoodType) => {
+    if (!user) return;
+    
+    setCurrentMood(mood);
+    await generateRecommendation(user, mood);
+  };
+
+  const handleAmazonClick = () => {
+    if (!user || !recommendation) return;
+    
+    // Amazon遷移をトラッキング
+    recordUserRecommendation(user, recommendation, 'clicked_amazon');
+    trackRecommendationAction('amazon_click', {
+      manga_id: recommendation.manga.id,
+      mood_id: recommendation.mood.id,
+      user_id: user.id
+    });
+    
+    // Amazon リンクを開く
+    window.open(recommendation.manga.amazonLink, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleTryAgain = async () => {
+    if (!user || !currentMood) return;
+    
+    try {
+      // 既に推薦済みの作品を除外して再推薦
+      const excludeIds = recommendation ? [recommendation.manga.id] : [];
+      const newRecommendation = moodBasedEngine.generateAlternativeRecommendation(
+        user, 
+        currentMood, 
+        excludeIds
+      );
+      
+      setRecommendation(newRecommendation);
+      recordUserRecommendation(user, newRecommendation, 'viewed');
+      
+      trackRecommendationAction('try_again', {
+        manga_id: newRecommendation.manga.id,
+        mood_id: currentMood.id,
+        user_id: user.id
+      });
+    } catch (error) {
+      console.error('Failed to generate alternative recommendation:', error);
+      setError('他の推薦の生成に失敗しました。');
+    }
+  };
+
+  const handleChangeMood = () => {
+    setState('mood-selection');
+    setRecommendation(null);
+  };
+
+  const handleStartOver = () => {
+    router.push('/onboarding');
+  };
+
+  const handleRetry = () => {
+    setError(null);
     loadUserData();
   };
 
   // SSR/hydration issues を防ぐため、マウント後まで待機
-  if (!isMounted || isLoading) {
+  if (!isMounted) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
-          <RefreshCw className="h-8 w-8 animate-spin text-blue-600 mx-auto mb-4" />
-          <p className="text-gray-600">Generating recommendations...</p>
+          <BookOpen className="h-12 w-12 text-blue-600 animate-pulse mx-auto mb-4" />
+          <p className="text-gray-600">読み込み中...</p>
         </div>
       </div>
     );
   }
 
-  if (!user) {
+  // エラー状態
+  if (state === 'error') {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-100 flex items-center justify-center">
         <div className="text-center max-w-md">
-          <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+          <div className="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <BookOpen className="h-8 w-8 text-red-600" />
+          </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Welcome to MangaCompass
+            エラーが発生しました
           </h2>
           <p className="text-gray-600 mb-6">
-            To receive personalized recommendations, please set up your preferences first.
+            {error || '予期しないエラーが発生しました。'}
+          </p>
+          <div className="space-y-3">
+            <Button onClick={handleRetry} size="lg" className="w-full">
+              再試行
+            </Button>
+            <Link href="/onboarding">
+              <Button variant="outline" size="lg" className="w-full">
+                設定をやり直す
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ユーザーデータなし
+  if (state === 'no-user') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center max-w-md">
+          <BookOpen className="h-16 w-16 text-blue-600 mx-auto mb-6" />
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            MangaCompassへようこそ
+          </h2>
+          <p className="text-gray-600 mb-8 text-lg">
+            あなたにピッタリの漫画を見つけるために、まずは簡単な設定から始めましょう。
           </p>
           <Link href="/onboarding">
-            <Button size="lg">
-              Start Setup
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 px-8 py-4 text-lg">
+              今すぐ始める
             </Button>
           </Link>
         </div>
@@ -141,237 +228,122 @@ export default function DashboardPage() {
     );
   }
 
-  const hasReadHistory = user.readHistory.length > 0;
-  const topRatedManga = getTopRatedManga(6);
-  const popularManga = getPopularManga(6);
-  const stats = generateDashboardStats();
-  const revenueData = generateDemoRevenueData();
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Header */}
-      <header className="bg-white shadow-sm" role="banner">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <h1 className="text-xl font-bold text-gray-900">
-                MangaCompass Dashboard
-              </h1>
-              <Badge variant="primary" size="sm">
-                {hasReadHistory ? `${user.readHistory.length} read` : 'Getting started'}
-              </Badge>
+  // 気分選択状態
+  if (state === 'mood-selection') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        {/* Header */}
+        <header className="bg-white shadow-sm">
+          <div className="max-w-4xl mx-auto px-4 py-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">
+                  今の気分を教えてください
+                </h1>
+                <p className="text-gray-600 mt-2">
+                  あなたの気分に合わせて、最適な漫画を1作品お薦めします
+                </p>
+              </div>
+              <Link href="/onboarding">
+                <Button variant="ghost" icon={Settings}>
+                  設定
+                </Button>
+              </Link>
             </div>
           </div>
-          
-          {/* Title and Description */}
-          <div className="mt-4">
-            <p className="text-gray-600">
-              {hasReadHistory 
-                ? 'Recommendations based on your reading history and preferences'
-                : 'Featuring popular and highly-rated manga titles'
-              }
-            </p>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 py-8">
-
-        {/* Stats Panel */}
-        {showStats && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <BookOpen className="h-8 w-8 text-blue-600" />
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Reading History</p>
-                    <p className="text-2xl font-bold">{user.readHistory.length}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <Heart className="h-8 w-8 text-red-600" />
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Favorite Genres</p>
-                    <p className="text-2xl font-bold">{user.favoriteGenres.length}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <TrendingUp className="h-8 w-8 text-green-600" />
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Recommendations</p>
-                    <p className="text-2xl font-bold">{recommendations.length}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <Star className="h-8 w-8 text-yellow-600" />
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Average Score</p>
-                    <p className="text-2xl font-bold">
-                      {recommendations.length > 0 
-                        ? Math.round(recommendations.reduce((sum, rec) => sum + rec.score, 0) / recommendations.length)
-                        : 0
-                      }
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
+        </header>
 
         {/* Main Content */}
-        <div className="space-y-12">
-          {/* パーソナライズ推薦 */}
-          {hasReadHistory && recommendations.length > 0 && (
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                    Recommended for You
-                  </h2>
-                  <p className="text-gray-600">
-                    Personalized recommendations based on your reading history
-                  </p>
-                </div>
-                <Badge variant="primary">
-                  {recommendations.length} items
-                </Badge>
+        <main className="max-w-4xl mx-auto px-4 py-12">
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            {/* Quick Mood Selector */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+                人気の気分から選ぶ
+              </h3>
+              <QuickMoodSelector onMoodSelect={handleMoodSelect} />
+            </div>
+
+            <div className="relative my-8">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
               </div>
-              
-              <RecommendationGrid
-                recommendations={recommendations}
-                variant="default"
-                showFactors={true}
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">または</span>
+              </div>
+            </div>
+
+            {/* Full Mood Selector */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-6 text-center">
+                すべての気分から選ぶ
+              </h3>
+              <MoodSelector
+                selectedMood={currentMood}
+                onMoodSelect={handleMoodSelect}
               />
-            </section>
-          )}
-
-          {/* ジャンル別推薦 */}
-          {Object.keys(genreRecommendations).length > 0 && (
-            <section>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                Recommendations by Genre
-              </h2>
-              
-              <div className="space-y-8">
-                {Object.entries(genreRecommendations).map(([genre, recs]) => (
-                  <div key={genre}>
-                    <div className="flex items-center mb-4">
-                      <h3 className="text-xl font-semibold text-gray-900">{genre}</h3>
-                      <Badge variant="secondary" className="ml-3">
-                        {recs.length} items
-                      </Badge>
-                    </div>
-                    <RecommendationGrid
-                      recommendations={recs}
-                      variant="compact"
-                      showFactors={false}
-                    />
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* 高評価漫画 */}
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Top Rated Manga
-                </h2>
-                <p className="text-gray-600">
-                  Masterpieces loved by readers and critics
-                </p>
-              </div>
-              <Award className="h-6 w-6 text-yellow-600" />
             </div>
-            
-            <MangaGrid manga={topRatedManga} showAmazonLink={true} />
-          </section>
-
-          {/* 人気漫画 */}
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Popular Manga
-                </h2>
-                <p className="text-gray-600">
-                  Currently trending titles
-                </p>
-              </div>
-              <TrendingUp className="h-6 w-6 text-green-600" />
-            </div>
-            
-            <MangaGrid manga={popularManga} showAmazonLink={true} />
-          </section>
-
-          {/* 最近追加 */}
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Recently Added Manga
-                </h2>
-                <p className="text-gray-600">
-                  Newly added titles to our collection
-                </p>
-              </div>
-              <Clock className="h-6 w-6 text-blue-600" />
-            </div>
-            
-            <MangaGrid 
-              manga={topRatedManga.slice(0, 4)} 
-              showAmazonLink={true}
-            />
-          </section>
-        </div>
-
-        {/* CTA Section */}
-        {!hasReadHistory && (
-          <div className="mt-16 text-center bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-8 text-white">
-            <BookOpen className="h-12 w-12 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold mb-4">
-              Want better recommendations?
-            </h3>
-            <p className="text-blue-200 mb-6 max-w-2xl mx-auto">
-              By sharing your reading history and preferences, we can provide more accurate personalized recommendations.
-            </p>
-            <Link href="/onboarding">
-              <Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100">
-                Set Preferences
-              </Button>
-            </Link>
           </div>
-        )}
 
-        {/* Footer Info */}
-        <div className="mt-12 text-center text-sm text-gray-500">
-          <p>
-            Recommendations are updated regularly • 
-            Settings can be changed anytime • 
-            Your data is stored locally
-          </p>
+          {/* User Stats */}
+          {user && (
+            <div className="mt-8 bg-white rounded-xl shadow-sm p-6">
+              <h4 className="text-sm font-medium text-gray-700 mb-4">あなたの読書データ</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-blue-600">{user.readHistory.length}</div>
+                  <div className="text-sm text-gray-600">読了作品</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-green-600">{user.recommendationHistory.length}</div>
+                  <div className="text-sm text-gray-600">推薦履歴</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-purple-600">
+                    {user.lastRecommendation ? user.lastRecommendation.mood.name : '-'}
+                  </div>
+                  <div className="text-sm text-gray-600">前回の気分</div>
+                </div>
+              </div>
+            </div>
+          )}
+        </main>
+      </div>
+    );
+  }
+
+  // 推薦表示状態
+  if (state === 'recommendation' && recommendation) {
+    return (
+      <SingleRecommendation
+        recommendation={recommendation}
+        onAmazonClick={handleAmazonClick}
+        onTryAgain={handleTryAgain}
+        onChangeMood={handleChangeMood}
+        onStartOver={handleStartOver}
+      />
+    );
+  }
+  
+  // ローディング状態（推薦生成中）
+  if (state === 'loading' || isGenerating) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mb-4 mx-auto"></div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            あなたにピッタリの漫画を探しています...
+          </h2>
+          {currentMood && (
+            <p className="text-lg text-gray-600">
+              {currentMood.emoji} {currentMood.name}な気分に合わせて
+            </p>
+          )}
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  // フォールバック
+  return null;
 }

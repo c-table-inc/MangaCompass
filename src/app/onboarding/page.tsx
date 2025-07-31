@@ -5,31 +5,25 @@ import { useRouter } from 'next/navigation';
 import { Button, Badge } from '@/components/ui';
 import { MangaSelector } from '@/components/manga';
 import { MOCK_MANGA } from '@/lib/mockData';
-import { MANGA_GENRES, Manga, OnboardingData } from '@/lib/types';
+import { Manga, SimplifiedOnboardingData, SimplifiedUser, MoodType, MOOD_CATEGORIES } from '@/lib/types';
+import { MoodSelector } from '@/components/mood';
 import { trackPageView, trackOnboardingStep } from '@/utils/analytics';
 import { ArrowLeft, ArrowRight, Check, BookOpen } from 'lucide-react';
 
-const ONBOARDING_STEPS = [
+const SIMPLIFIED_ONBOARDING_STEPS = [
   {
     id: 'manga-selection',
-    title: 'Select manga you have read',
-    description: 'Choose 3-10 manga titles. We\'ll analyze your preferences based on these selections.',
+    title: '読んだことのある漫画を選択',
+    description: '3-5作品を選んで、あなたの好みを教えてください',
     minSelection: 3,
-    maxSelection: 10
+    maxSelection: 5
   },
   {
-    id: 'genre-preferences',
-    title: 'Choose your favorite genres',
-    description: 'Select genres you enjoy. This will improve our recommendation accuracy.',
+    id: 'mood-selection',
+    title: '今の気分を選択',
+    description: 'どんな気分で漫画を読みたいですか？',
     minSelection: 1,
-    maxSelection: 8
-  },
-  {
-    id: 'preferences',
-    title: 'Set your reading preferences',
-    description: 'Configure settings related to your reading style.',
-    minSelection: 0,
-    maxSelection: 0
+    maxSelection: 1
   }
 ];
 
@@ -38,14 +32,9 @@ export default function OnboardingPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const [randomizedManga, setRandomizedManga] = useState<Manga[]>([]);
-  const [onboardingData, setOnboardingData] = useState<OnboardingData>({
+  const [onboardingData, setOnboardingData] = useState<SimplifiedOnboardingData>({
     selectedManga: [],
-    favoriteGenres: [],
-    preferences: {
-      preferredStatus: ['ongoing', 'completed'],
-      minRating: 3.0,
-      excludeGenres: []
-    }
+    selectedMood: MOOD_CATEGORIES[0] // デフォルトで最初の気分を選択
   });
 
   useEffect(() => {
@@ -60,53 +49,10 @@ export default function OnboardingPage() {
 
   // Handle step navigation
   const goToNextStep = () => {
-    if (currentStep < ONBOARDING_STEPS.length - 1) {
+    if (currentStep < SIMPLIFIED_ONBOARDING_STEPS.length - 1) {
       const nextStep = currentStep + 1;
-      
-      // Auto-populate genres when moving from manga selection to genre preferences
-      if (currentStep === 0 && nextStep === 1) {
-        // Safety check: ensure we have selected manga before proceeding
-        if (onboardingData.selectedManga.length === 0) {
-          console.warn('No manga selected, cannot proceed to genre selection');
-          return;
-        }
-        
-        const selectedMangaObjects = randomizedManga.filter(manga => 
-          onboardingData.selectedManga.includes(manga.id)
-        );
-        
-        // Extract unique genres from selected manga
-        const genresFromSelectedManga = new Set<string>();
-        selectedMangaObjects.forEach(manga => {
-          manga.genres.forEach(genre => {
-            // Only add genres that exist in MANGA_GENRES
-            if (MANGA_GENRES.includes(genre as any)) {
-              genresFromSelectedManga.add(genre);
-            }
-          });
-        });
-        
-        // Update favorite genres with extracted genres (limit to max selection)
-        const genresArray = Array.from(genresFromSelectedManga);
-        
-        // If no genres were extracted (edge case), don't pre-select any
-        if (genresArray.length === 0) {
-          console.warn('No genres found in selected manga');
-          setOnboardingData(prev => ({
-            ...prev,
-            favoriteGenres: []
-          }));
-        } else {
-          const limitedGenres = genresArray.slice(0, ONBOARDING_STEPS[1].maxSelection);
-          setOnboardingData(prev => ({
-            ...prev,
-            favoriteGenres: limitedGenres
-          }));
-        }
-      }
-      
       setCurrentStep(nextStep);
-      trackOnboardingStep(nextStep.toString(), { stepId: ONBOARDING_STEPS[nextStep].id });
+      trackOnboardingStep(nextStep.toString(), { stepId: SIMPLIFIED_ONBOARDING_STEPS[nextStep].id });
     }
   };
 
@@ -114,7 +60,7 @@ export default function OnboardingPage() {
     if (currentStep > 0) {
       const prevStep = currentStep - 1;
       setCurrentStep(prevStep);
-      trackOnboardingStep(prevStep.toString(), { stepId: ONBOARDING_STEPS[prevStep].id });
+      trackOnboardingStep(prevStep.toString(), { stepId: SIMPLIFIED_ONBOARDING_STEPS[prevStep].id });
     }
   };
 
@@ -126,57 +72,27 @@ export default function OnboardingPage() {
     }));
   };
 
-  // Handle genre selection
-  const handleGenreToggle = (genre: string) => {
-    setOnboardingData(prev => {
-      if (prev.favoriteGenres.includes(genre)) {
-        // Remove genre
-        return {
-          ...prev,
-          favoriteGenres: prev.favoriteGenres.filter(g => g !== genre)
-        };
-      } else {
-        // Add genre only if under max selection limit
-        if (prev.favoriteGenres.length < ONBOARDING_STEPS[1].maxSelection) {
-          return {
-            ...prev,
-            favoriteGenres: [...prev.favoriteGenres, genre]
-          };
-        }
-        // Don't add if already at max
-        return prev;
-      }
-    });
-  };
-
-  // Handle preference updates
-  const handlePreferenceUpdate = (key: string, value: any) => {
+  // Handle mood selection
+  const handleMoodSelection = (mood: MoodType) => {
     setOnboardingData(prev => ({
       ...prev,
-      preferences: {
-        ...prev.preferences,
-        [key]: value
-      }
+      selectedMood: mood
     }));
   };
 
-  // Handle exclude genre toggle
-  const handleExcludeGenreToggle = (genre: string) => {
-    setOnboardingData(prev => ({
-      ...prev,
-      preferences: {
-        ...prev.preferences,
-        excludeGenres: (prev.preferences.excludeGenres || []).includes(genre)
-          ? (prev.preferences.excludeGenres || []).filter(g => g !== genre)
-          : [...(prev.preferences.excludeGenres || []), genre]
-      }
-    }));
-  };
 
   // Finish onboarding
   const finishOnboarding = () => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('mangacompass_user_data', JSON.stringify(onboardingData));
+      // Create SimplifiedUser object
+      const simplifiedUser: SimplifiedUser = {
+        id: `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        readHistory: onboardingData.selectedManga,
+        selectedMood: onboardingData.selectedMood,
+        recommendationHistory: []
+      };
+      
+      localStorage.setItem('mangacompass_simplified_user', JSON.stringify(simplifiedUser));
       localStorage.setItem('mangacompass_onboarding_completed', 'true');
     }
     router.push('/dashboard');
@@ -184,17 +100,14 @@ export default function OnboardingPage() {
 
   // Validation functions
   const isCurrentStepValid = () => {
-    const step = ONBOARDING_STEPS[currentStep];
+    const step = SIMPLIFIED_ONBOARDING_STEPS[currentStep];
     
     switch (step.id) {
       case 'manga-selection':
         return onboardingData.selectedManga.length >= step.minSelection && 
                onboardingData.selectedManga.length <= step.maxSelection;
-      case 'genre-preferences':
-        return onboardingData.favoriteGenres.length >= step.minSelection && 
-               onboardingData.favoriteGenres.length <= step.maxSelection;
-      case 'preferences':
-        return true; // Optional step
+      case 'mood-selection':
+        return onboardingData.selectedMood !== undefined;
       default:
         return false;
     }
@@ -211,8 +124,8 @@ export default function OnboardingPage() {
     );
   }
 
-  const currentStepData = ONBOARDING_STEPS[currentStep];
-  const progressPercentage = ((currentStep + 1) / ONBOARDING_STEPS.length) * 100;
+  const currentStepData = SIMPLIFIED_ONBOARDING_STEPS[currentStep];
+  const progressPercentage = ((currentStep + 1) / SIMPLIFIED_ONBOARDING_STEPS.length) * 100;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -225,7 +138,7 @@ export default function OnboardingPage() {
                 MangaCompass Setup
               </h1>
               <Badge variant="primary" size="sm">
-                Step {currentStep + 1} of {ONBOARDING_STEPS.length}
+                Step {currentStep + 1} of {SIMPLIFIED_ONBOARDING_STEPS.length}
               </Badge>
             </div>
             <div className="text-sm text-gray-600">
@@ -266,15 +179,15 @@ export default function OnboardingPage() {
                   manga={randomizedManga}
                   selectedManga={onboardingData.selectedManga}
                   onSelectionChange={handleMangaSelection}
-                  maxSelections={ONBOARDING_STEPS[0].maxSelection}
-                  minSelections={ONBOARDING_STEPS[0].minSelection}
+                  maxSelections={SIMPLIFIED_ONBOARDING_STEPS[0].maxSelection}
+                  minSelections={SIMPLIFIED_ONBOARDING_STEPS[0].minSelection}
                 />
                 
                 <div className="mt-4 text-center">
                   <p className="text-sm text-gray-600">
-                    Selected: {onboardingData.selectedManga.length} / {ONBOARDING_STEPS[0].maxSelection}
-                    {onboardingData.selectedManga.length < ONBOARDING_STEPS[0].minSelection && 
-                      ` (minimum: ${ONBOARDING_STEPS[0].minSelection})`}
+                    選択数: {onboardingData.selectedManga.length} / {SIMPLIFIED_ONBOARDING_STEPS[0].maxSelection}
+                    {onboardingData.selectedManga.length < SIMPLIFIED_ONBOARDING_STEPS[0].minSelection && 
+                      ` (最低: ${SIMPLIFIED_ONBOARDING_STEPS[0].minSelection}作品)`}
                   </p>
                 </div>
               </div>
@@ -282,104 +195,14 @@ export default function OnboardingPage() {
 
             {currentStep === 1 && (
               <div>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {MANGA_GENRES.map((genre) => (
-                    <Button
-                      key={genre}
-                      variant={onboardingData.favoriteGenres.includes(genre) ? 'primary' : 'outline'}
-                      size="sm"
-                      fullWidth
-                      onClick={() => handleGenreToggle(genre)}
-                      className="justify-center"
-                      aria-pressed={onboardingData.favoriteGenres.includes(genre)}
-                    >
-                      {onboardingData.favoriteGenres.includes(genre) && (
-                        <Check className="h-4 w-4 mr-2" />
-                      )}
-                      {genre}
-                    </Button>
-                  ))}
-                </div>
-                
-                <div className="mt-6 text-center">
-                  <p className="text-sm text-gray-600">
-                    Selected genres: {onboardingData.favoriteGenres.length} / {ONBOARDING_STEPS[1].maxSelection}
-                  </p>
-                </div>
+                <MoodSelector
+                  selectedMood={onboardingData.selectedMood}
+                  onMoodSelect={handleMoodSelection}
+                  className="mb-6"
+                />
               </div>
             )}
 
-            {currentStep === 2 && (
-              <div className="space-y-6">
-                {/* Preferred Status */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Preferred manga status:
-                  </label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {(['ongoing', 'completed', 'hiatus'] as const).map((status) => (
-                      <Button
-                        key={status}
-                        variant={(onboardingData.preferences.preferredStatus || []).includes(status) ? 'primary' : 'outline'}
-                        size="sm"
-                        onClick={() => {
-                          const current = onboardingData.preferences.preferredStatus || [];
-                          const updated = current.includes(status)
-                            ? current.filter(s => s !== status)
-                            : [...current, status];
-                          handlePreferenceUpdate('preferredStatus', updated);
-                        }}
-                        aria-pressed={(onboardingData.preferences.preferredStatus || []).includes(status)}
-                      >
-                        {status.charAt(0).toUpperCase() + status.slice(1)}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Minimum Rating */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Minimum rating: {(onboardingData.preferences.minRating || 3.0).toFixed(1)}
-                  </label>
-                  <input
-                    type="range"
-                    min="1"
-                    max="5"
-                    step="0.5"
-                    value={onboardingData.preferences.minRating || 3.0}
-                    onChange={(e) => handlePreferenceUpdate('minRating', parseFloat(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    aria-label={`Minimum rating: ${(onboardingData.preferences.minRating || 3.0).toFixed(1)} stars`}
-                  />
-                  <div className="flex justify-between text-sm text-gray-600 mt-1">
-                    <span>1.0</span>
-                    <span>5.0</span>
-                  </div>
-                </div>
-
-                {/* Exclude Genres */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Genres to exclude (optional):
-                  </label>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                    {MANGA_GENRES.map((genre) => (
-                      <Button
-                        key={genre}
-                        variant={(onboardingData.preferences.excludeGenres || []).includes(genre) ? 'secondary' : 'ghost'}
-                        size="sm"
-                        onClick={() => handleExcludeGenreToggle(genre)}
-                        className="text-xs justify-center"
-                        aria-pressed={(onboardingData.preferences.excludeGenres || []).includes(genre)}
-                      >
-                        {genre}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Navigation */}
@@ -395,7 +218,7 @@ export default function OnboardingPage() {
             </Button>
 
             <div className="flex space-x-2">
-              {ONBOARDING_STEPS.map((_, index) => (
+              {SIMPLIFIED_ONBOARDING_STEPS.map((_, index) => (
                 <div
                   key={index}
                   className={`w-2 h-2 rounded-full transition-colors ${
@@ -411,7 +234,7 @@ export default function OnboardingPage() {
               ))}
             </div>
 
-            {currentStep === ONBOARDING_STEPS.length - 1 ? (
+            {currentStep === SIMPLIFIED_ONBOARDING_STEPS.length - 1 ? (
               <Button
                 variant="primary"
                 onClick={finishOnboarding}
@@ -419,7 +242,7 @@ export default function OnboardingPage() {
                 icon={Check}
                 iconPosition="right"
               >
-                Complete Setup
+推薦を開始
               </Button>
             ) : (
               <Button
@@ -447,7 +270,7 @@ export default function OnboardingPage() {
             icon={ArrowRight}
             iconPosition="right"
           >
-            Continue ({onboardingData.selectedManga.length} selected)
+            次へ ({onboardingData.selectedManga.length}作品選択済み)
           </Button>
         </div>
       )}

@@ -10,7 +10,7 @@ import { event as gtag } from '@/lib/analytics';
  */
 export interface AnalyticsEvent {
   id: string;
-  type: 'page_view' | 'manga_view' | 'recommendation_click' | 'onboarding_step' | 'search' | 'genre_filter';
+  type: 'page_view' | 'manga_view' | 'recommendation_click' | 'onboarding_step' | 'search' | 'genre_filter' | 'mood_selection' | 'recommendation_action';
   userId?: string;
   timestamp: number;
   data: Record<string, any>;
@@ -464,4 +464,33 @@ export const generateDashboardStats = () => {
     userBehavior: analytics.generateUserBehaviorStats(),
     recommendations: analytics.generateRecommendationStats()
   };
+};
+
+// 気分ベース推薦システム用の追加関数
+export const trackMoodSelection = (mood: { id: string; name: string }, userId?: string) => {
+  analytics.track('mood_selection', {
+    moodId: mood.id,
+    moodName: mood.name
+  }, userId);
+  
+  // GA4にも送信
+  gtag({
+    action: 'select_content',
+    category: 'mood',
+    label: mood.name
+  });
+};
+
+export const trackRecommendationAction = (action: string, data: Record<string, any>) => {
+  analytics.track('recommendation_action', {
+    action,
+    ...data
+  }, data.user_id);
+  
+  // GA4にも送信
+  gtag({
+    action: action,
+    category: 'recommendation',
+    label: data.manga_id || 'unknown'
+  });
 };
