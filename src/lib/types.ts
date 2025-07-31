@@ -5,7 +5,7 @@ export interface Manga {
   title: string;
   author: string;
   genres: string[];
-  status: 'ongoing' | 'completed' | 'hiatus';
+  status: 'ongoing' | 'completed' | 'hiatus' | 'cancelled' | 'incomplete';
   volumes: number;
   rating: number; // 1-10スケール
   description?: string;
@@ -25,7 +25,7 @@ export interface User {
 }
 
 export interface UserPreferences {
-  preferredStatus: ('ongoing' | 'completed' | 'hiatus')[];
+  preferredStatus: ('ongoing' | 'completed' | 'hiatus' | 'cancelled' | 'incomplete')[];
   minRating: number;
   maxVolumes?: number;
   excludeGenres?: string[];

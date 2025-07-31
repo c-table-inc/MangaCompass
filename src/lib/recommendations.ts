@@ -139,6 +139,21 @@ export class RecommendationEngine {
       return 30; // 完結を好むが継続中は低評価
     }
 
+    // 新しいステータスタイプの処理
+    if (preferredStatus.includes('cancelled') && manga.status === 'incomplete') {
+      return 60; // 打ち切り作品を好む場合、未完作品も一定程度許容
+    }
+
+    if (preferredStatus.includes('incomplete') && manga.status === 'cancelled') {
+      return 60; // 未完作品を好む場合、打ち切り作品も一定程度許容
+    }
+
+    // ハイエータス作品の処理
+    if (preferredStatus.includes('hiatus')) {
+      if (manga.status === 'ongoing') return 40; // 継続中作品は低めの評価
+      if (manga.status === 'cancelled' || manga.status === 'incomplete') return 30; // 終了作品は更に低評価
+    }
+
     return 20; // 一致しない場合
   }
 

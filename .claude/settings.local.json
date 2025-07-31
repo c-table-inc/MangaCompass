@@ -41,7 +41,8 @@
       "mcp__serena__replace_regex",
       "Bash(find:*)",
       "Bash(php:*)",
-      "Bash(REQUEST_METHOD=GET php public/api/list.php)"
+      "Bash(REQUEST_METHOD=GET php public/api/list.php)",
+      "mcp__serena__replace_symbol_body"
     ],
     "deny": []
   },

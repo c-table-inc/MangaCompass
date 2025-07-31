@@ -116,6 +116,8 @@ $mangaGenres = [
                                         <option value="completed">Completed</option>
                                         <option value="ongoing">Ongoing</option>
                                         <option value="hiatus">Hiatus</option>
+                                        <option value="cancelled">Cancelled</option>
+                                        <option value="incomplete">Incomplete</option>
                                     </select>
                                 </div>
                             </div>
