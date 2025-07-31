@@ -64,7 +64,7 @@ const MoodCard: React.FC<MoodCardProps> = ({
       tabIndex={disabled ? -1 : 0}
     >
       <div className="flex flex-col items-center justify-center h-full text-center">
-        {/* 絵文字 */}
+        {/* Emoji */}
         <div 
           className={`
             text-2xl md:text-3xl lg:text-4xl mb-1 md:mb-2 
@@ -75,7 +75,7 @@ const MoodCard: React.FC<MoodCardProps> = ({
           {mood.emoji}
         </div>
         
-        {/* タイトル */}
+        {/* Title */}
         <h3 
           className={`
             text-xs md:text-sm lg:text-base font-semibold mb-1 
@@ -86,7 +86,7 @@ const MoodCard: React.FC<MoodCardProps> = ({
           {mood.name}
         </h3>
         
-        {/* 説明文 */}
+        {/* Description */}
         <p 
           className={`
             text-xs md:text-xs lg:text-sm leading-tight
@@ -98,7 +98,7 @@ const MoodCard: React.FC<MoodCardProps> = ({
         </p>
       </div>
 
-      {/* 選択状態インジケーター */}
+      {/* Selection indicator */}
       {selected && (
         <div 
           className="absolute top-2 right-2 w-3 h-3 rounded-full"
@@ -121,7 +121,7 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
 }) => {
   return (
     <div className={`w-full ${className}`}>
-      {/* グリッドコンテナ */}
+      {/* Grid container */}
       <div 
         className="
           grid grid-cols-2 gap-3 md:gap-4 lg:gap-6
@@ -129,7 +129,7 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
           max-w-4xl mx-auto
         "
         role="radiogroup"
-        aria-label="気分を選択してください"
+        aria-label="Select your mood"
       >
         {MOOD_CATEGORIES.map((mood) => (
           <MoodCard
@@ -142,7 +142,7 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
         ))}
       </div>
 
-      {/* 選択状態の説明 */}
+      {/* Selection status description */}
       {selectedMood && (
         <div className="mt-6 p-4 rounded-lg bg-gray-50 border-l-4 max-w-4xl mx-auto"
              style={{ borderLeftColor: selectedMood.color }}>
@@ -156,9 +156,9 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
                 {selectedMood.description}
               </p>
               
-              {/* 関連ジャンル表示 */}
+              {/* Related genres display */}
               <div className="mt-2">
-                <span className="text-xs text-gray-500">関連ジャンル: </span>
+                <span className="text-xs text-gray-500">Related genres: </span>
                 <span className="text-xs text-gray-700">
                   {Object.entries(selectedMood.genreWeights)
                     .filter(([_, weight]) => weight >= 0.7)
@@ -172,18 +172,18 @@ export const MoodSelector: React.FC<MoodSelectorProps> = ({
         </div>
       )}
 
-      {/* アクセシビリティ用の隠しテキスト */}
+      {/* Hidden text for accessibility */}
       <div className="sr-only" aria-live="polite">
         {selectedMood 
-          ? `${selectedMood.name}が選択されています: ${selectedMood.description}`
-          : '気分が選択されていません'
+          ? `${selectedMood.name} is selected: ${selectedMood.description}`
+          : 'No mood selected'
         }
       </div>
     </div>
   );
 };
 
-// プリセット気分選択用のヘルパーコンポーネント
+// Helper component for preset mood selection
 interface QuickMoodSelectorProps {
   onMoodSelect: (mood: MoodType) => void;
   disabled?: boolean;
@@ -195,7 +195,7 @@ export const QuickMoodSelector: React.FC<QuickMoodSelectorProps> = ({
   disabled = false,
   limit = 4
 }) => {
-  // 人気の気分を抽出
+  // Extract popular moods
   const popularMoods = MOOD_CATEGORIES.slice(0, limit);
 
   return (

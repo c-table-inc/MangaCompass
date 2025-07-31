@@ -1,4 +1,4 @@
-// MangaCompass - TypeScript型定義
+// MangaCompass - TypeScript Type Definitions
 
 export interface Manga {
   id: string;
@@ -7,19 +7,19 @@ export interface Manga {
   genres: string[];
   status: 'ongoing' | 'completed' | 'hiatus' | 'cancelled' | 'incomplete';
   volumes: number;
-  rating: number; // 1-10スケール
+  rating: number; // 1-10 scale
   description?: string;
   coverImage?: string;
-  imageUrl?: string; // Amazon商品画像URL
+  imageUrl?: string; // Amazon product image URL
   amazonLink: string;
-  asin?: string; // Amazon商品識別子
-  popularity: number; // 1-100スケール
+  asin?: string; // Amazon product identifier
+  popularity: number; // 1-100 scale
   year?: number;
 }
 
 export interface User {
   id: string;
-  readHistory: string[]; // Manga IDsの配列
+  readHistory: string[]; // Array of Manga IDs
   favoriteGenres: string[];
   preferences: UserPreferences;
 }
@@ -33,26 +33,26 @@ export interface UserPreferences {
 
 export interface Recommendation {
   manga: Manga;
-  score: number; // 0-100スケール
+  score: number; // 0-100 scale
   reason: string;
-  matchPercentage: number; // 0-100スケール
+  matchPercentage: number; // 0-100 scale
   factors: RecommendationFactors;
 }
 
 export interface RecommendationFactors {
-  genreMatch: number; // 0-100スケール
-  ratingScore: number; // 0-100スケール
-  popularityScore: number; // 0-100スケール
-  statusMatch: number; // 0-100スケール
+  genreMatch: number; // 0-100 scale
+  ratingScore: number; // 0-100 scale
+  popularityScore: number; // 0-100 scale
+  statusMatch: number; // 0-100 scale
 }
 
 export interface OnboardingData {
-  selectedManga: string[]; // 読んだことのある漫画ID
+  selectedManga: string[]; // IDs of manga you've read
   favoriteGenres: string[];
   preferences: Partial<UserPreferences>;
 }
 
-// 利用可能なジャンル一覧
+// Available genre list
 export const MANGA_GENRES = [
   'Action',
   'Adventure',
@@ -78,14 +78,14 @@ export const MANGA_GENRES = [
 
 export type MangaGenre = typeof MANGA_GENRES[number];
 
-// ナビゲーション用の型
+// Navigation type
 export interface NavItem {
   label: string;
   href: string;
   icon?: string;
 }
 
-// レスポンス型（将来のAPI用）
+// Response type (for future API)
 export interface ApiResponse<T> {
   data: T;
   success: boolean;
@@ -93,7 +93,7 @@ export interface ApiResponse<T> {
   error?: string;
 }
 
-// ページネーション型
+// Pagination type
 export interface PaginatedResponse<T> {
   items: T[];
   total: number;
@@ -103,9 +103,9 @@ export interface PaginatedResponse<T> {
   hasPrev: boolean;
 }
 
-// === 気分ベース推薦システム用の新しい型定義 ===
+// === New type definitions for mood-based recommendation system ===
 
-// 気分カテゴリー
+// Mood category
 export interface MoodType {
   id: 'adventure' | 'relax' | 'excitement' | 'emotional' | 
       'thoughtful' | 'thrilling' | 'nostalgic' | 'light';
@@ -116,16 +116,16 @@ export interface MoodType {
   genreWeights: Record<string, number>;
 }
 
-// 簡略化されたユーザーデータ
+// Simplified user data
 export interface SimplifiedUser {
   id: string;
-  readHistory: string[];           // 3-5作品に制限
-  selectedMood?: MoodType;         // 現在選択中の気分
+  readHistory: string[];           // Limited to 3-5 titles
+  selectedMood?: MoodType;         // Currently selected mood
   lastRecommendation?: RecommendationRecord;
   recommendationHistory: RecommendationRecord[];
 }
 
-// 推薦記録
+// Recommendation record
 export interface RecommendationRecord {
   id: string;
   manga: Manga;
@@ -137,7 +137,7 @@ export interface RecommendationRecord {
   userAction?: 'viewed' | 'clicked_amazon' | 'bookmarked' | 'dismissed';
 }
 
-// 単一推薦結果
+// Single recommendation result
 export interface SingleRecommendation {
   manga: Manga;
   mood: MoodType;
@@ -145,22 +145,22 @@ export interface SingleRecommendation {
   reason: string;
   matchPercentage: number;
   confidenceLevel: 'high' | 'medium' | 'low';
-  alternativeCount: number;  // 他の候補数
+  alternativeCount: number;  // Number of alternative candidates
 }
 
-// 簡略化されたオンボーディングデータ
+// Simplified onboarding data
 export interface SimplifiedOnboardingData {
-  selectedManga: string[];     // 3-5作品
-  selectedMood: MoodType;      // 単一の気分
+  selectedManga: string[];     // 3-5 titles
+  selectedMood: MoodType;      // Single mood
 }
 
-// 気分カテゴリー定数
+// Mood category constants
 export const MOOD_CATEGORIES: MoodType[] = [
   {
     id: 'adventure',
-    name: '冒険気分',
+    name: 'Adventure',
     emoji: '🗺️',
-    description: '新しい世界を探検したい',
+    description: 'Want to explore new worlds',
     color: '#10B981',
     genreWeights: {
       'Adventure': 1.0,
@@ -172,9 +172,9 @@ export const MOOD_CATEGORIES: MoodType[] = [
   },
   {
     id: 'relax',
-    name: 'リラックス',
+    name: 'Relax',
     emoji: '😌',
-    description: '心穏やかに読みたい',
+    description: 'Want to read peacefully',
     color: '#6366F1',
     genreWeights: {
       'Slice of Life': 1.0,
@@ -186,9 +186,9 @@ export const MOOD_CATEGORIES: MoodType[] = [
   },
   {
     id: 'excitement',
-    name: 'エキサイティング',
+    name: 'Exciting',
     emoji: '⚡',
-    description: 'スリル満点で読みたい',
+    description: 'Want thrilling excitement',
     color: '#F59E0B',
     genreWeights: {
       'Action': 1.0,
@@ -200,9 +200,9 @@ export const MOOD_CATEGORIES: MoodType[] = [
   },
   {
     id: 'emotional',
-    name: '感動したい',
+    name: 'Emotional',
     emoji: '💝',
-    description: '心を動かされたい',
+    description: 'Want to be moved emotionally',
     color: '#EF4444',
     genreWeights: {
       'Drama': 1.0,
@@ -214,9 +214,9 @@ export const MOOD_CATEGORIES: MoodType[] = [
   },
   {
     id: 'thoughtful',
-    name: '考えさせられる',
+    name: 'Thoughtful',
     emoji: '🤔',
-    description: '深く考えながら読みたい',
+    description: 'Want to read while thinking deeply',
     color: '#8B5CF6',
     genreWeights: {
       'Psychological': 1.0,
@@ -228,9 +228,9 @@ export const MOOD_CATEGORIES: MoodType[] = [
   },
   {
     id: 'thrilling',
-    name: 'ハラハラドキドキ',
+    name: 'Thrilling',
     emoji: '😰',
-    description: '緊張感を楽しみたい',
+    description: 'Want to enjoy suspense',
     color: '#DC2626',
     genreWeights: {
       'Horror': 1.0,
@@ -242,9 +242,9 @@ export const MOOD_CATEGORIES: MoodType[] = [
   },
   {
     id: 'nostalgic',
-    name: 'ノスタルジック',
+    name: 'Nostalgic',
     emoji: '🌅',
-    description: '懐かしい気持ちになりたい',
+    description: 'Want to feel nostalgic',
     color: '#F97316',
     genreWeights: {
       'Historical': 1.0,
@@ -256,9 +256,9 @@ export const MOOD_CATEGORIES: MoodType[] = [
   },
   {
     id: 'light',
-    name: '軽やかに',
+    name: 'Light',
     emoji: '☀️',
-    description: '気軽に楽しく読みたい',
+    description: 'Want to read casually and enjoyably',
     color: '#22D3EE',
     genreWeights: {
       'Comedy': 1.0,

@@ -68,7 +68,7 @@ export default function SimplifiedDashboardPage() {
       }
     } catch (error) {
       console.error('Failed to load user data:', error);
-      setError('ユーザーデータの読み込みに失敗しました。');
+      setError('Failed to load user data.');
       setState('error');
     }
   };
@@ -96,7 +96,7 @@ export default function SimplifiedDashboardPage() {
       trackMoodSelection(mood, userData.id);
     } catch (error) {
       console.error('Failed to generate recommendation:', error);
-      setError('推薦の生成に失敗しました。もう一度お試しください。');
+      setError('Failed to generate recommendation. Please try again.');
       setState('error');
     } finally {
       setIsGenerating(false);
@@ -147,7 +147,7 @@ export default function SimplifiedDashboardPage() {
       });
     } catch (error) {
       console.error('Failed to generate alternative recommendation:', error);
-      setError('他の推薦の生成に失敗しました。');
+      setError('Failed to generate alternative recommendation.');
     }
   };
 
@@ -171,7 +171,7 @@ export default function SimplifiedDashboardPage() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
           <BookOpen className="h-12 w-12 text-blue-600 animate-pulse mx-auto mb-4" />
-          <p className="text-gray-600">読み込み中...</p>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -186,18 +186,18 @@ export default function SimplifiedDashboardPage() {
             <BookOpen className="h-8 w-8 text-red-600" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            エラーが発生しました
+            An Error Occurred
           </h2>
           <p className="text-gray-600 mb-6">
-            {error || '予期しないエラーが発生しました。'}
+            {error || 'An unexpected error occurred.'}
           </p>
           <div className="space-y-3">
             <Button onClick={handleRetry} size="lg" className="w-full">
-              再試行
+              Retry
             </Button>
             <Link href="/onboarding">
               <Button variant="outline" size="lg" className="w-full">
-                設定をやり直す
+                Reset Settings
               </Button>
             </Link>
           </div>
@@ -213,14 +213,14 @@ export default function SimplifiedDashboardPage() {
         <div className="text-center max-w-md">
           <BookOpen className="h-16 w-16 text-blue-600 mx-auto mb-6" />
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            MangaCompassへようこそ
+            Welcome to MangaCompass
           </h2>
           <p className="text-gray-600 mb-8 text-lg">
-            あなたにピッタリの漫画を見つけるために、まずは簡単な設定から始めましょう。
+            To find the perfect manga for you, let's start with a simple setup.
           </p>
           <Link href="/onboarding">
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700 px-8 py-4 text-lg">
-              今すぐ始める
+              Get Started Now
             </Button>
           </Link>
         </div>
@@ -238,15 +238,15 @@ export default function SimplifiedDashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">
-                  今の気分を教えてください
+                  Tell us your current mood
                 </h1>
                 <p className="text-gray-600 mt-2">
-                  あなたの気分に合わせて、最適な漫画を1作品お薦めします
+                  We'll recommend the perfect manga based on your mood
                 </p>
               </div>
               <Link href="/onboarding">
                 <Button variant="ghost" icon={Settings}>
-                  設定
+                  Settings
                 </Button>
               </Link>
             </div>
@@ -259,7 +259,7 @@ export default function SimplifiedDashboardPage() {
             {/* Quick Mood Selector */}
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
-                人気の気分から選ぶ
+                Choose from popular moods
               </h3>
               <QuickMoodSelector onMoodSelect={handleMoodSelect} />
             </div>
@@ -269,14 +269,14 @@ export default function SimplifiedDashboardPage() {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">または</span>
+                <span className="px-2 bg-white text-gray-500">or</span>
               </div>
             </div>
 
             {/* Full Mood Selector */}
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-6 text-center">
-                すべての気分から選ぶ
+                Choose from all moods
               </h3>
               <MoodSelector
                 selectedMood={currentMood}
@@ -288,21 +288,21 @@ export default function SimplifiedDashboardPage() {
           {/* User Stats */}
           {user && (
             <div className="mt-8 bg-white rounded-xl shadow-sm p-6">
-              <h4 className="text-sm font-medium text-gray-700 mb-4">あなたの読書データ</h4>
+              <h4 className="text-sm font-medium text-gray-700 mb-4">Your Reading Data</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                 <div>
                   <div className="text-2xl font-bold text-blue-600">{user.readHistory.length}</div>
-                  <div className="text-sm text-gray-600">読了作品</div>
+                  <div className="text-sm text-gray-600">Completed</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-green-600">{user.recommendationHistory.length}</div>
-                  <div className="text-sm text-gray-600">推薦履歴</div>
+                  <div className="text-sm text-gray-600">Recommendations</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-purple-600">
                     {user.lastRecommendation ? user.lastRecommendation.mood.name : '-'}
                   </div>
-                  <div className="text-sm text-gray-600">前回の気分</div>
+                  <div className="text-sm text-gray-600">Last Mood</div>
                 </div>
               </div>
             </div>
@@ -332,11 +332,11 @@ export default function SimplifiedDashboardPage() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mb-4 mx-auto"></div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            あなたにピッタリの漫画を探しています...
+            Finding the perfect manga for you...
           </h2>
           {currentMood && (
             <p className="text-lg text-gray-600">
-              {currentMood.emoji} {currentMood.name}な気分に合わせて
+              {currentMood.emoji} Based on your {currentMood.name} mood
             </p>
           )}
         </div>

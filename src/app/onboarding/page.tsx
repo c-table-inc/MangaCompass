@@ -13,15 +13,15 @@ import { ArrowLeft, ArrowRight, Check, BookOpen } from 'lucide-react';
 const SIMPLIFIED_ONBOARDING_STEPS = [
   {
     id: 'manga-selection',
-    title: '読んだことのある漫画を選択',
-    description: '3-5作品を選んで、あなたの好みを教えてください',
+    title: 'Select Manga You\'ve Read',
+    description: 'Select 3-5 titles to help us understand your preferences',
     minSelection: 3,
     maxSelection: 5
   },
   {
     id: 'mood-selection',
-    title: '今の気分を選択',
-    description: 'どんな気分で漫画を読みたいですか？',
+    title: 'Select Your Current Mood',
+    description: 'What mood are you in for reading manga?',
     minSelection: 1,
     maxSelection: 1
   }
@@ -34,7 +34,7 @@ export default function OnboardingPage() {
   const [randomizedManga, setRandomizedManga] = useState<Manga[]>([]);
   const [onboardingData, setOnboardingData] = useState<SimplifiedOnboardingData>({
     selectedManga: [],
-    selectedMood: MOOD_CATEGORIES[0] // デフォルトで最初の気分を選択
+    selectedMood: MOOD_CATEGORIES[0] // Default to first mood selection
   });
 
   useEffect(() => {
@@ -185,9 +185,9 @@ export default function OnboardingPage() {
                 
                 <div className="mt-4 text-center">
                   <p className="text-sm text-gray-600">
-                    選択数: {onboardingData.selectedManga.length} / {SIMPLIFIED_ONBOARDING_STEPS[0].maxSelection}
+                    Selected: {onboardingData.selectedManga.length} / {SIMPLIFIED_ONBOARDING_STEPS[0].maxSelection}
                     {onboardingData.selectedManga.length < SIMPLIFIED_ONBOARDING_STEPS[0].minSelection && 
-                      ` (最低: ${SIMPLIFIED_ONBOARDING_STEPS[0].minSelection}作品)`}
+                      ` (Minimum: ${SIMPLIFIED_ONBOARDING_STEPS[0].minSelection})`}
                   </p>
                 </div>
               </div>
@@ -242,7 +242,7 @@ export default function OnboardingPage() {
                 icon={Check}
                 iconPosition="right"
               >
-推薦を開始
+Start Recommendations
               </Button>
             ) : (
               <Button
@@ -270,7 +270,7 @@ export default function OnboardingPage() {
             icon={ArrowRight}
             iconPosition="right"
           >
-            次へ ({onboardingData.selectedManga.length}作品選択済み)
+            Next ({onboardingData.selectedManga.length} selected)
           </Button>
         </div>
       )}

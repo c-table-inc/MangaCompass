@@ -44,7 +44,7 @@ const MatchPercentageBar: React.FC<MatchPercentageBarProps> = ({
   return (
     <div className="w-full">
       <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-gray-700">適合度</span>
+        <span className="text-sm font-medium text-gray-700">Match</span>
         <span className="text-sm font-bold text-gray-900">{percentage}%</span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-3">
@@ -55,10 +55,10 @@ const MatchPercentageBar: React.FC<MatchPercentageBarProps> = ({
       </div>
       <div className="flex justify-between items-center mt-1">
         <span className="text-xs text-gray-500">
-          信頼度: {confidenceLevel === 'high' ? '高' : confidenceLevel === 'medium' ? '中' : '低'}
+          Confidence: {confidenceLevel === 'high' ? 'High' : confidenceLevel === 'medium' ? 'Medium' : 'Low'}
         </span>
         <span className="text-xs text-gray-500">
-          {alternativeCount}個の候補から選択
+          Selected from {alternativeCount} candidates
         </span>
       </div>
     </div>
@@ -120,7 +120,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
               style={{ backgroundColor: `${mood.color}15`, color: mood.color }}
             >
               <span className="text-lg mr-2">{mood.emoji}</span>
-              {mood.name}な気分にピッタリ
+              Perfect for {mood.name} mood
             </div>
           </div>
 
@@ -176,7 +176,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
                   <div className="flex items-center space-x-2">
                     <TrendingUp className="h-5 w-5 text-blue-500" />
                     <span className="text-lg font-semibold">{manga.popularity}%</span>
-                    <span className="text-sm text-gray-500">人気</span>
+                    <span className="text-sm text-gray-500">Popular</span>
                   </div>
                 </div>
 
@@ -195,7 +195,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
                 <div className="flex items-start space-x-3">
                   <Target className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-blue-900 mb-2">なぜこの作品がおすすめ？</h3>
+                    <h3 className="font-semibold text-blue-900 mb-2">Why is this recommended?</h3>
                     <p className="text-blue-800 leading-relaxed">{reason}</p>
                   </div>
                 </div>
@@ -211,19 +211,19 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
               {/* ステータス情報 */}
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-gray-500">状態:</span>
+                  <span className="text-gray-500">Status:</span>
                   <Badge 
                     variant={manga.status === 'completed' ? 'success' : 'primary'} 
                     size="sm" 
                     className="ml-2"
                   >
-                    {manga.status === 'completed' ? '完結' : 
-                     manga.status === 'ongoing' ? '連載中' : manga.status}
+                    {manga.status === 'completed' ? 'Completed' : 
+                     manga.status === 'ongoing' ? 'Ongoing' : manga.status}
                   </Badge>
                 </div>
                 <div>
-                  <span className="text-gray-500">巻数:</span>
-                  <span className="ml-2 font-medium">{manga.volumes}巻</span>
+                  <span className="text-gray-500">Volumes:</span>
+                  <span className="ml-2 font-medium">{manga.volumes} vols</span>
                 </div>
               </div>
             </div>
@@ -238,8 +238,8 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
             <div className="text-center mb-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">この作品はいかがですか？</h3>
-              <p className="text-gray-600">気に入ったらすぐに読み始めることができます</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">How about this title?</h3>
+              <p className="text-gray-600">If you like it, you can start reading right away</p>
             </div>
             
             <div className="space-y-4">
@@ -253,7 +253,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
                 onClick={onAmazonClick}
                 className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-5 text-lg"
               >
-                Amazonで購入する
+                Buy on Amazon
               </Button>
               
               {/* サブアクション */}
@@ -266,7 +266,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
                   onClick={onTryAgain}
                   className="py-4"
                 >
-                  他の作品を見る
+                  See Other Titles
                 </Button>
 
                 <Button
@@ -277,7 +277,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
                   onClick={onChangeMood}
                   className="py-4"
                 >
-                  気分を変更
+                  Change Mood
                 </Button>
               </div>
               
@@ -287,7 +287,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
                   onClick={onStartOver}
                   className="text-sm text-gray-500 hover:text-gray-700 underline transition-colors"
                 >
-                  最初からやり直す
+                  Start Over
                 </button>
               </div>
             </div>
@@ -309,7 +309,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
               onClick={onAmazonClick}
               className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-4"
             >
-              Amazonで購入する
+              Buy on Amazon
             </Button>
             
             {/* サブアクション */}
@@ -322,7 +322,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
                 onClick={onTryAgain}
                 className="py-3"
               >
-                他の作品
+                Other Titles
               </Button>
 
               <Button
@@ -333,7 +333,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
                 onClick={onChangeMood}
                 className="py-3"
               >
-                気分変更
+                Change Mood
               </Button>
             </div>
           </div>
@@ -344,7 +344,7 @@ export const SingleRecommendation: React.FC<SingleRecommendationProps> = ({
               onClick={onStartOver}
               className="text-xs text-gray-500 hover:text-gray-700 underline"
             >
-              最初からやり直す
+              Start Over
             </button>
           </div>
         </div>

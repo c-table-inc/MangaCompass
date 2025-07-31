@@ -1,44 +1,44 @@
 import { Manga, MoodType, MOOD_CATEGORIES } from '@/lib/types';
 
 /**
- * 気分ベース推薦システムのマッピングとユーティリティクラス
+ * Mood-based recommendation system mapping and utility class
  */
 export class MoodMapper {
   /**
-   * 気分からジャンル重み付けを取得
+   * Get genre weights from mood
    */
   getGenreWeights(mood: MoodType): Record<string, number> {
     return mood.genreWeights;
   }
 
   /**
-   * 気分に基づく作品フィルタリング
-   * 気分に関連するジャンルを持つ作品を優先的に抽出
+   * Filter works based on mood
+   * Prioritize extraction of works with genres related to mood
    */
   filterMangaByMood(manga: Manga[], mood: MoodType, limit: number = 50): Manga[] {
     const weights = this.getGenreWeights(mood);
     
-    // 各漫画の気分適合度を計算
+    // Calculate mood compatibility for each manga
     const scoredManga = manga.map(m => ({
       manga: m,
       moodScore: this.calculateMoodMatch(m, mood)
     }))
-    .filter(item => item.moodScore > 0) // 全く関連がない作品を除外
-    .sort((a, b) => b.moodScore - a.moodScore); // 適合度順でソート
+    .filter(item => item.moodScore > 0) // Exclude completely unrelated works
+    .sort((a, b) => b.moodScore - a.moodScore); // Sort by compatibility score
 
     return scoredManga.slice(0, limit).map(item => item.manga);
   }
 
   /**
-   * 気分適合度計算
-   * 漫画のジャンルと選択された気分の重み付けに基づいてスコアを計算
+   * Calculate mood compatibility
+   * Calculate score based on manga genres and selected mood weighting
    */
   calculateMoodMatch(manga: Manga, mood: MoodType): number {
     const weights = this.getGenreWeights(mood);
     let totalScore = 0;
     let matchedGenres = 0;
 
-    // 漫画の各ジャンルについて重み付けスコアを計算
+    // Calculate weighted score for each manga genre
     for (const genre of manga.genres) {
       if (weights[genre]) {
         totalScore += weights[genre];
@@ -46,106 +46,106 @@ export class MoodMapper {
       }
     }
 
-    // ジャンルマッチがない場合は0を返す
+    // Return 0 if no genre match
     if (matchedGenres === 0) {
       return 0;
     }
 
-    // 平均スコアを計算（0-1の範囲）
+    // Calculate average score (0-1 range)
     const averageScore = totalScore / matchedGenres;
     
-    // 複数ジャンルマッチのボーナス（最大1.2倍）
+    // Multi-genre match bonus (max 1.2x)
     const genreBonus = Math.min(1.2, 1 + (matchedGenres - 1) * 0.1);
     
     return Math.min(1.0, averageScore * genreBonus);
   }
 
   /**
-   * 推薦理由生成
-   * 気分と漫画の特徴に基づいて自然な推薦理由を生成
+   * Generate recommendation reason
+   * Generate natural recommendation reasons based on mood and manga characteristics
    */
   generateMoodReason(manga: Manga, mood: MoodType, score: number): string {
     const weights = this.getGenreWeights(mood);
     const matchedGenres: string[] = [];
     
-    // マッチしたジャンルを抽出
+    // Extract matched genres
     for (const genre of manga.genres) {
       if (weights[genre] && weights[genre] > 0.5) {
         matchedGenres.push(genre);
       }
     }
 
-    // 気分別の理由テンプレート
+    // Reason templates by mood
     const reasonTemplates: Record<string, string[]> = {
       adventure: [
-        `${matchedGenres.join('・')}要素で新しい世界への冒険が楽しめます`,
-        `壮大な${matchedGenres[0]}ストーリーで冒険心を満たします`,
-        `未知の世界を探検する${matchedGenres.join('・')}が魅力的です`
+        `Adventure awaits with ${matchedGenres.join(' & ')} elements`,
+        `Epic ${matchedGenres[0]} story satisfies your adventurous spirit`,
+        `Exploring unknown worlds through ${matchedGenres.join(' & ')} is captivating`
       ],
       relax: [
-        `${matchedGenres.join('・')}の要素で心穏やかに読めます`,
-        `日常的な${matchedGenres[0]}で癒やされます`,
-        `ゆったりした${matchedGenres.join('・')}の雰囲気が魅力です`
+        `Relaxing read with ${matchedGenres.join(' & ')} elements`,
+        `Soothing ${matchedGenres[0]} for peaceful moments`,
+        `Gentle ${matchedGenres.join(' & ')} atmosphere is charming`
       ],
       excitement: [
-        `${matchedGenres.join('・')}のスリルで興奮できます`,
-        `迫力満点の${matchedGenres[0]}シーンが楽しめます`,
-        `熱血的な${matchedGenres.join('・')}展開が魅力です`
+        `Thrilling excitement with ${matchedGenres.join(' & ')}`,
+        `Action-packed ${matchedGenres[0]} scenes to enjoy`,
+        `Passionate ${matchedGenres.join(' & ')} development is captivating`
       ],
       emotional: [
-        `${matchedGenres.join('・')}の深い感動が味わえます`,
-        `心を揺さぶる${matchedGenres[0]}ストーリーです`,
-        `感情豊かな${matchedGenres.join('・')}が心に響きます`
+        `Deep emotional impact with ${matchedGenres.join(' & ')}`,
+        `Heart-touching ${matchedGenres[0]} story`,
+        `Emotionally rich ${matchedGenres.join(' & ')} resonates deeply`
       ],
       thoughtful: [
-        `${matchedGenres.join('・')}の深いテーマが考えさせられます`,
-        `哲学的な${matchedGenres[0]}要素が印象的です`,
-        `思索的な${matchedGenres.join('・')}内容が魅力です`
+        `Deep themes in ${matchedGenres.join(' & ')} make you think`,
+        `Philosophical ${matchedGenres[0]} elements are impressive`,
+        `Thoughtful ${matchedGenres.join(' & ')} content is appealing`
       ],
       thrilling: [
-        `${matchedGenres.join('・')}のサスペンスでハラハラします`,
-        `緊張感溢れる${matchedGenres[0]}展開が楽しめます`,
-        `スリリングな${matchedGenres.join('・')}が魅力的です`
+        `Heart-pounding suspense with ${matchedGenres.join(' & ')}`,
+        `Tension-filled ${matchedGenres[0]} development to enjoy`,
+        `Thrilling ${matchedGenres.join(' & ')} is captivating`
       ],
       nostalgic: [
-        `${matchedGenres.join('・')}の懐かしい雰囲気が楽しめます`,
-        `郷愁を誘う${matchedGenres[0]}設定が魅力です`,
-        `温かい${matchedGenres.join('・')}の世界観が心地よいです`
+        `Nostalgic atmosphere with ${matchedGenres.join(' & ')}`,
+        `Nostalgic ${matchedGenres[0]} setting is charming`,
+        `Warm ${matchedGenres.join(' & ')} world is comforting`
       ],
       light: [
-        `${matchedGenres.join('・')}で気軽に楽しめます`,
-        `軽やかな${matchedGenres[0]}で気分転換できます`,
-        `明るい${matchedGenres.join('・')}の雰囲気が魅力です`
+        `Light enjoyment with ${matchedGenres.join(' & ')}`,
+        `Light ${matchedGenres[0]} for a mood change`,
+        `Bright ${matchedGenres.join(' & ')} atmosphere is appealing`
       ]
     };
 
-    const templates = reasonTemplates[mood.id] || [`${matchedGenres.join('・')}が${mood.name}にぴったりです`];
+    const templates = reasonTemplates[mood.id] || [`${matchedGenres.join(' & ')} perfect for ${mood.name}`];
     const reasonIndex = Math.floor(Math.random() * templates.length);
     let reason = templates[reasonIndex];
 
-    // 高評価作品の場合は評価情報を追加
+    // Add rating info for highly rated works
     if (manga.rating >= 8.0) {
-      reason += `（評価${manga.rating}/10）`;
+      reason += ` (Rating ${manga.rating}/10)`;
     }
 
-    // 人気作品の場合は人気情報を追加
+    // Add popularity info for popular works
     if (manga.popularity >= 80) {
-      reason += '・人気作品';
+      reason += ' • Popular';
     }
 
     return reason;
   }
 
   /**
-   * 気分IDから気分オブジェクトを取得
+   * Get mood object from mood ID
    */
   getMoodById(moodId: string): MoodType | undefined {
     return MOOD_CATEGORIES.find(mood => mood.id === moodId);
   }
 
   /**
-   * 複数の気分の重み付けを統合
-   * 将来的な機能拡張用（複数気分選択対応）
+   * Integrate weighting of multiple moods
+   * For future feature expansion (multiple mood selection support)
    */
   combineGenreWeights(moods: MoodType[], weights: number[] = []): Record<string, number> {
     const defaultWeights = moods.map(() => 1 / moods.length);
@@ -166,7 +166,7 @@ export class MoodMapper {
   }
 
   /**
-   * 推薦精度の向上のため、読書履歴を考慮した気分マッチング
+   * Mood matching considering reading history to improve recommendation accuracy
    */
   calculateHistoryInfluencedMoodMatch(
     manga: Manga, 
@@ -179,7 +179,7 @@ export class MoodMapper {
       return baseMoodMatch;
     }
 
-    // 読書履歴の平均ジャンル分布を計算
+    // Calculate average genre distribution of reading history
     const historyGenres: Record<string, number> = {};
     let totalGenres = 0;
 
@@ -190,7 +190,7 @@ export class MoodMapper {
       });
     });
 
-    // 履歴ベースの適合度を計算
+    // Calculate history-based compatibility
     let historyMatch = 0;
     manga.genres.forEach(genre => {
       const historyFreq = (historyGenres[genre] || 0) / totalGenres;
@@ -199,10 +199,10 @@ export class MoodMapper {
 
     historyMatch = historyMatch / manga.genres.length;
 
-    // 気分マッチ70% + 履歴マッチ30%で統合
+    // Integrate with 70% mood match + 30% history match
     return baseMoodMatch * 0.7 + historyMatch * 0.3;
   }
 }
 
-// デフォルトインスタンスをエクスポート
+// Export default instance
 export const moodMapper = new MoodMapper();
