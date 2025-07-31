@@ -42,7 +42,11 @@
       "Bash(find:*)",
       "Bash(php:*)",
       "Bash(REQUEST_METHOD=GET php public/api/list.php)",
-      "mcp__serena__replace_symbol_body"
+      "mcp__serena__replace_symbol_body",
+      "mcp__serena__think_about_collected_information",
+      "mcp__serena__think_about_whether_you_are_done",
+      "mcp__serena__summarize_changes",
+      "mcp__serena__read_memory"
     ],
     "deny": []
   },
