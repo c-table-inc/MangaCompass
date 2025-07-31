@@ -416,9 +416,9 @@ export const MOCK_MANGA: Manga[] = [
     volumes: 23,
     rating: 8.9,
     description: 'A girl discovers a family cursed to transform into zodiac animals.',
-    amazonLink: 'https://amazon.com/dp/1427807876/?tag=mangacompass-20',
-    imageUrl: 'https://m.media-amazon.com/images/I/51O5OEU4sOL._SY445_SX342_.jpg',
-    asin: '1427807876',
+    amazonLink: 'https://amazon.com/dp/1591826039/?tag=mangacompass-20',
+    imageUrl: 'https://m.media-amazon.com/images/I/91H5ptmq5HL._SY466_.jpg',
+    asin: '1591826039',
     popularity: 86,
     year: 1998
   },
